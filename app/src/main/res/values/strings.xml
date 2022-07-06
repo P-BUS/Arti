@@ -1,0 +1,22 @@
+<resources>
+
+    <string name="app_name">Arti</string>
+    <string name="book_name_1">Sergey Lukyanenko. Genom.</string>
+    <string name="book_name_2">Oldos Haksli. Island.</string>
+    <string name="book_name_3">Aristotle. Rhetorica.</string>
+    <string name="book_name_4">Frank Herbert. Dune Messiah.</string>
+    <string name="book_name_5">Frank Herbert. Dune.</string>
+    <string name="book_name_6">Frank Herbert. Children of Dune.</string>
+    <string name="book_name_7">Sergey Lukyanenko. Spectr.</string>
+    <string name="book_name_8">Sergey Lukyanenko. Limit.</string>
+    <string name="book_name_9">Nassim Taleb. Antilibrary.</string>
+    <string name="book_name_10">Klaus Schwab. Fourth industrial revolution.</string>
+
+    <string name="book_author_1">Sergey Lukyanenko</string>
+    <string name="book_author_2">Oldos Haksli</string>
+    <string name="book_author_3">Aristotle</string>
+    <string name="book_author_4">Frank Herbert</string>
+    <string name="book_author_5">Nassim Taleb</string>
+    <string name="book_author_6">Klaus Schwab</string>
+
+  </resources>
