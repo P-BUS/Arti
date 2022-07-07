@@ -15,11 +15,11 @@
             android:id="@+id/item_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:layout_margin="4dp"
             android:drawable="@drawable/image1"
             android:importantForAccessibility="no"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/item_title"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="4dp"
-            android:text="@string/book1"
+            android:text="@string/book_name_1"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

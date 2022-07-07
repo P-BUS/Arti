@@ -14,6 +14,7 @@ class ListAdapter(
     private val context: Context,
     private val dataset: List<Book>
     ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+
     class ListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.item_title)
         val imageView: ImageView = view.findViewById(R.id.item_image)
@@ -28,8 +29,8 @@ class ListAdapter(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textView.text = context.resources.getString(item.stringResourceId)
-        holder.imageView.setImageResource(item.imageResourceId)
+        holder.textView.text = context.resources.getString(item.bookNameId)
+        holder.imageView.setImageResource(item.bookImageId)
         }
 
     override fun getItemCount() = dataset.size
