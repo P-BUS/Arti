@@ -19,4 +19,8 @@
     <string name="book_author_5">Nassim Taleb</string>
     <string name="book_author_6">Klaus Schwab</string>
 
-  </resources>
+    <string name="read">Read</string>
+    <string name="_200_uah">200 UAH</string>
+    <string name="description">One of the interesting books you want to read today</string>
+
+</resources>

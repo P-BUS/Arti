@@ -1,14 +1,14 @@
 package com.example.arti.ui.bookList
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.arti.R
 import com.example.arti.data.Datasource
 import com.example.arti.databinding.ListFragmentBinding
 
@@ -39,11 +39,18 @@ class ListFragment: Fragment() {
         val recyclerView = binding.recyclerView
         // this is for grid layout
         recyclerView.layoutManager = GridLayoutManager(context, 3)
-        recyclerView.adapter = ListAdapter(context!!, myDataset)
+        recyclerView.adapter = ListAdapter(context!!, myDataset) {
+            goToDetailsScreen()
+        }
+
 
         // Use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true)
+    }
+
+    fun goToDetailsScreen() {
+        findNavController().navigate(R.id.action_listFragment_to_detailsFragment)
     }
 }
 

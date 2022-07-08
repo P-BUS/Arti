@@ -1,6 +1,6 @@
 package com.example.arti.ui.bookList
-
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arti.R
 import com.example.arti.data.Book
+import com.example.arti.ui.bookDetails.DetailsFragment
 
 class ListAdapter(
     private val context: Context,
-    private val dataset: List<Book>
-    ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+    private val dataset: List<Book>,
+    private val goToDetails: () -> Unit
+) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     class ListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.item_title)
@@ -31,7 +33,12 @@ class ListAdapter(
         val item = dataset[position]
         holder.textView.text = context.resources.getString(item.bookNameId)
         holder.imageView.setImageResource(item.bookImageId)
+
+        holder.view.setOnClickListener {
+            goToDetails()
         }
+    }
 
     override fun getItemCount() = dataset.size
 }
+
