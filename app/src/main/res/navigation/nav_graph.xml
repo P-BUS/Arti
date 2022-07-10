@@ -6,7 +6,7 @@
     <fragment android:id="@+id/placeholder" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.arti.ui.bookList.ListFragment"
+        android:name="com.example.arti.ui.ListFragment"
         android:label="Books">
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.arti.ui.bookDetails.DetailsFragment"
+        android:name="com.example.arti.ui.DetailsFragment"
         android:label="DetailsFragment" >
         <action
             android:id="@+id/action_detailsFragment_to_orderDetailsFragment"

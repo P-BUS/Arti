@@ -1,6 +1,5 @@
-package com.example.arti.ui.bookList
+package com.example.arti.ui
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arti.R
 import com.example.arti.data.Book
-import com.example.arti.ui.bookDetails.DetailsFragment
 
 class ListAdapter(
     private val context: Context,
     private val dataset: List<Book>,
-    private val goToDetails: () -> Unit
+    private val goToDetails: () -> Unit,
+    private val clickListener: (Book) -> Unit
+
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     class ListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -36,6 +36,7 @@ class ListAdapter(
 
         holder.view.setOnClickListener {
             goToDetails()
+            clickListener(item)
         }
     }
 
