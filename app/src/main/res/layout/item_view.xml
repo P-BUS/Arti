@@ -22,7 +22,16 @@
             android:scaleType="fitCenter" />
 
         <TextView
-            android:id="@+id/item_title"
+            android:id="@+id/item_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="4dp"
+            android:text="@string/book_author_1"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Caption" />
+
+        <TextView
+            android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

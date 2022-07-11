@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.arti.ui.ListFragment"
-        android:label="Books">
+        android:label="@string/books">
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.arti.ui.DetailsFragment"
-        android:label="DetailsFragment" >
+        android:label="@string/book_details">
         <action
             android:id="@+id/action_detailsFragment_to_orderDetailsFragment"
             app:destination="@id/orderDetailsFragment" />
@@ -23,5 +23,9 @@
     <fragment
         android:id="@+id/orderDetailsFragment"
         android:name="com.example.arti.ui.OrderDetailsFragment"
-        android:label="OrderDetailsFragment" />
+        android:label="@string/order_details" >
+        <action
+            android:id="@+id/action_orderDetailsFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>

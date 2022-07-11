@@ -18,7 +18,8 @@ class ListAdapter(
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     class ListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.item_title)
+        val nameTextView: TextView = view.findViewById(R.id.item_name)
+        val authorTextView: TextView = view.findViewById(R.id.item_author)
         val imageView: ImageView = view.findViewById(R.id.item_image)
     }
 
@@ -31,8 +32,9 @@ class ListAdapter(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textView.text = context.resources.getString(item.bookNameId)
         holder.imageView.setImageResource(item.bookImageId)
+        holder.authorTextView.text = context.resources.getString(item.bookAuthorId)
+        holder.nameTextView.text = context.resources.getString(item.bookNameId)
 
         holder.view.setOnClickListener {
             goToDetails()

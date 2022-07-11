@@ -21,22 +21,6 @@
                 android:focusable="true"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/quantity_label"
-                    style="@style/Widget.Cupcake.TextView.OrderSummary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textAllCaps="true"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/quantity"
-                    style="@style/Widget.Cupcake.TextView.OrderSummary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/order_summary_margin" />
-
                 <View
                     android:id="@+id/divider1"
                     style="@style/Widget.Cupcake.Divider"
@@ -46,18 +30,19 @@
                     android:layout_marginBottom="@dimen/side_margin" />
 
                 <TextView
-                    android:id="@+id/flavor_label"
+                    android:id="@+id/author_label"
                     style="@style/Widget.Cupcake.TextView.Label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:text="@string/author" />
 
                 <TextView
-                    android:id="@+id/flavor"
+                    android:id="@+id/author_in_order"
                     style="@style/Widget.Cupcake.TextView.OrderSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/order_summary_margin" />
+                    android:layout_marginTop="@dimen/order_summary_margin"
+                    android:text="@string/book_author_1"/>
 
                 <View
                     android:id="@+id/divider2"
@@ -68,18 +53,19 @@
                     android:layout_marginBottom="@dimen/side_margin" />
 
                 <TextView
-                    android:id="@+id/pickup_label"
+                    android:id="@+id/book_name_label"
                     style="@style/Widget.Cupcake.TextView.Label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:text="@string/book" />
 
                 <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/book_in_order"
                     style="@style/Widget.Cupcake.TextView.OrderSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/order_summary_margin" />
+                    android:layout_marginTop="@dimen/order_summary_margin"
+                    android:text="@string/book_name_1"/>
 
                 <View
                     android:id="@+id/divider3"
@@ -90,12 +76,14 @@
                     android:layout_marginBottom="@dimen/margin_between_elements" />
 
                 <TextView
-                    android:id="@+id/total"
+                    android:id="@+id/price_in_order"
                     style="@style/Widget.Cupcake.TextView.FinalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/side_margin" />
+                    android:layout_marginTop="@dimen/side_margin"
+                    android:text="@string/_200_uah"
+                    />
 
             </LinearLayout>
 
@@ -105,8 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/side_margin"
-
-                android:text="" />
+                android:text="@string/send_order" />
 
             <Button
                 android:id="@+id/cancel_button"
@@ -114,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/side_margin"
-                android:text="" />
+                android:text="@string/cancel" />
 
         </LinearLayout>
     </ScrollView>

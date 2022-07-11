@@ -1,16 +1,16 @@
 <resources>
 
     <string name="app_name">Arti</string>
-    <string name="book_name_1">Sergey Lukyanenko. Genom.</string>
-    <string name="book_name_2">Oldos Haksli. Island.</string>
-    <string name="book_name_3">Aristotle. Rhetorica.</string>
-    <string name="book_name_4">Frank Herbert. Dune Messiah.</string>
-    <string name="book_name_5">Frank Herbert. Dune.</string>
-    <string name="book_name_6">Frank Herbert. Children of Dune.</string>
-    <string name="book_name_7">Sergey Lukyanenko. Spectr.</string>
-    <string name="book_name_8">Sergey Lukyanenko. Limit.</string>
-    <string name="book_name_9">Nassim Taleb. Antilibrary.</string>
-    <string name="book_name_10">Klaus Schwab. Fourth industrial revolution.</string>
+    <string name="book_name_1">Genom.</string>
+    <string name="book_name_2">Island.</string>
+    <string name="book_name_3">Rhetorica.</string>
+    <string name="book_name_4">Dune Messiah.</string>
+    <string name="book_name_5">Dune.</string>
+    <string name="book_name_6">Children of Dune.</string>
+    <string name="book_name_7">Spectr.</string>
+    <string name="book_name_8">Limit.</string>
+    <string name="book_name_9">Antilibrary.</string>
+    <string name="book_name_10">Fourth industrial revolution.</string>
 
     <string name="book_author_1">Sergey Lukyanenko</string>
     <string name="book_author_2">Oldos Haksli</string>
@@ -20,7 +20,17 @@
     <string name="book_author_6">Klaus Schwab</string>
 
     <string name="read">Read</string>
-    <string name="_200_uah">200 UAH</string>
-    <string name="description">One of the interesting books you want to read today</string>
+    <string name="_200_uah">Price: %1$s</string>
+    <string name="description">One of the interesting books you want to read today. Dune is a 1965 epic science fiction novel by American author Frank Herbert, originally published as two separate serials in Analog magazine. It tied with Roger Zelaznys This Immortal for the Hugo Award in 1966 and it won the inaugural Nebula Award for Best Novel. It is the first installment of the Dune saga. In 2003, it was described as the worlds best-selling science fiction novel.</string>
+    <string name="book_details">Book details</string>
+    <string name="buy_now">Buy now</string>
+    <string name="order_details">Order Details</string>
+    <string name="books">Books</string>
+    <string name="book">book</string>
+    <string name="author">author</string>
+    <string name="send_order">send order</string>
+    <string name="cancel">Cancel</string>
+    <string name="mail_subject">Your order</string>
+    <string name="mail_text">Hello, dear friend. \n\nYour journey with book %1$s of %2$s will start soon. \nYour book cost is %3$s \n\nThank you for order, enjoy! </string>
 
 </resources>

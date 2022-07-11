@@ -52,14 +52,14 @@ class ListFragment: Fragment() {
                 sharedViewModel.currentBookNameId = it.bookNameId
                 sharedViewModel.currentBookImageId = it.bookImageId
                 sharedViewModel.currentBookAuthorId = it.bookAuthorId
-                sharedViewModel.currentBookPrice = it.bookPrice
+                sharedViewModel.firstBookPrice = it.bookPrice
+                sharedViewModel.setPrice(it.bookPrice)
             })
 
         // Use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true)
     }
-
 
     fun goToDetailsScreen() {
         findNavController().navigate(R.id.action_listFragment_to_detailsFragment)

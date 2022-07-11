@@ -14,7 +14,16 @@
         android:layout_height="300dp"
         android:layout_marginTop="@dimen/side_margin"
         app:srcCompat="@drawable/image1"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:contentDescription="@string/book_name_1"/>
+
+    <TextView
+        android:id="@+id/book_author_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/side_margin"
+        android:text="@string/book_name_1"
+        android:padding="@dimen/side_margin" />
 
     <TextView
         android:id="@+id/book_detail_name"
@@ -23,6 +32,7 @@
         android:layout_marginTop="@dimen/side_margin"
         android:text="@string/book_name_1"
         android:padding="@dimen/side_margin" />
+
 
     <TextView
         android:id="@+id/book_detail_description"
@@ -42,13 +52,27 @@
         android:layout_gravity="end"
         android:padding="16dp" />
 
-    <Button
-        android:id="@+id/read_button"
-        android:layout_width="128dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/side_margin"
-        android:layout_gravity="end"
-         android:layout_marginEnd="@dimen/side_margin"
-        android:text="@string/read" />
+        android:orientation="horizontal"
+        android:gravity="end" >
+
+        <Button
+            android:id="@+id/buy_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:text="@string/buy_now" />
+
+        <Button
+            android:id="@+id/read_button"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:text="@string/read" />
+
+    </LinearLayout>
 
 </LinearLayout>
