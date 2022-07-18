@@ -13,7 +13,8 @@ class ListAdapter(
     private val context: Context,
     private val dataset: List<Book>,
     private val goToDetails: () -> Unit,
-    private val clickListener: (Book) -> Unit
+    private val clickListener: (Book) -> Unit,
+    private val updatePrice: () -> Unit
 
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
@@ -39,6 +40,7 @@ class ListAdapter(
         holder.view.setOnClickListener {
             goToDetails()
             clickListener(item)
+            updatePrice()
         }
     }
 

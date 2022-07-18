@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.arti.R
 import com.example.arti.databinding.DetailsFragmentBinding
@@ -24,6 +23,7 @@ class DetailsFragment : Fragment() {
     // Binding object instance with access to the views in the .xml layout
     private var binding: DetailsFragmentBinding? = null
 
+    // Implementing if LiveData in fragment
     private val sharedViewModel: OrderViewModel by activityViewModels()
 
     // Create a ViewModel
@@ -40,31 +40,34 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Create the observer which updates the UI.
-        val priceObserver = Observer<Int> {
-                newName -> binding?.bookPrice?.text = newName.toString()
+        sharedViewModel.currentBook.observe(this.viewLifecycleOwner) {
+            // Updates the UI of detailed fragment
+            binding?.bookDetailImage?.setImageResource(it.bookImageId)
+            binding?.bookAuthorName?.text = getString(it.bookAuthorId)
+            binding?.bookDetailName?.text = getString(it.bookNameId)
+            binding?.bookPrice?.text = getString(R.string._200_uah, sharedViewModel.currentBookPrice.value.toString())
         }
 
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        sharedViewModel.currentBookPrice.observe(viewLifecycleOwner, priceObserver)
-
-        binding?.bookDetailImage?.setImageResource(sharedViewModel.currentBookImageId)
-        binding?.bookAuthorName?.text = getString(sharedViewModel.currentBookAuthorId)
-        binding?.bookDetailName?.text = getString(sharedViewModel.currentBookNameId)
-        binding?.bookPrice?.text = getString(R.string._200_uah, sharedViewModel.currentBookPrice.value.toString())
-
+        // When push the button discount implemented and transfer to details screen
         binding?.buyButton?.setOnClickListener() {
-            if (sharedViewModel.currentBookPrice.value?.toInt() == sharedViewModel.firstBookPrice) {
-                sharedViewModel.currentBookPrice.value?.let {
-                        bookPrice -> sharedViewModel.makeDiscount(bookPrice) }
+            // Checks the price to avoid double discount implementation
+            if (sharedViewModel.currentBookPrice.value == sharedViewModel.currentBook.value?.bookPrice) {
+                sharedViewModel.currentBookPrice.value.let {
+                        bookPrice ->
+                    if (bookPrice != null) {
+                        sharedViewModel.makeDiscount(bookPrice)
+                    }
+                }
             }
             goToOrderScreen()
         }
 
+        // When push the button Google search opens in browser with request to open current book information
         binding?.readButton?.setOnClickListener() {
             val queryUrl: Uri = Uri.parse(
                     SEARCH_PREFIX +
-                            getString(sharedViewModel.currentBookAuthorId) + " " +
-                            getString(sharedViewModel.currentBookNameId)
+                            sharedViewModel.currentBook.value?.bookAuthorId?.let { it1 -> getString(it1) } + " " +
+                            sharedViewModel.currentBook.value?.bookNameId?.let { it1 -> getString(it1) }
             )
             val intent = Intent(Intent.ACTION_VIEW, queryUrl)
             if (activity?.packageManager?.resolveActivity(intent, 0) != null) {

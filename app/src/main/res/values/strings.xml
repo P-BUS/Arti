@@ -21,7 +21,7 @@
 
     <string name="read">Read</string>
     <string name="_200_uah">Price: %1$s</string>
-    <string name="description">One of the interesting books you want to read today. Dune is a 1965 epic science fiction novel by American author Frank Herbert, originally published as two separate serials in Analog magazine. It tied with Roger Zelaznys This Immortal for the Hugo Award in 1966 and it won the inaugural Nebula Award for Best Novel. It is the first installment of the Dune saga. In 2003, it was described as the worlds best-selling science fiction novel.</string>
+    <string name="description">One of the interesting books you want to read today. Dune is a 1965 epic science fiction novel by American author Frank Herbert, originally published as two separate serials in Analog magazine. </string>
     <string name="book_details">Book details</string>
     <string name="buy_now">Buy now</string>
     <string name="order_details">Order Details</string>

@@ -2,10 +2,10 @@ package com.example.arti.data
 
 import com.example.arti.R
 
-class Datasource {
+object Datasource {
 
-    fun loadBooks(): List<Book> {
-        return listOf<Book>(
+    fun loadBooks(): ArrayList<Book> {
+        return arrayListOf(
             Book(
                 bookNameId = R.string.book_name_1,
                 bookImageId = R.drawable.image1,

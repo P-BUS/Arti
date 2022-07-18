@@ -7,18 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.arti.R
 import com.example.arti.databinding.OrderDetailsFragmentBinding
 import com.example.arti.model.OrderViewModel
 
-class OrderDetailsFragment: Fragment() {
 
+class OrderDetailsFragment: Fragment() {
 
     // Binding object instance with access to the views in the .xml layout
     private var binding: OrderDetailsFragmentBinding? = null
 
+    // Implementing if LiveData in fragment
     private val sharedViewModel: OrderViewModel by activityViewModels()
 
     // Create a ViewModel
@@ -34,10 +34,16 @@ class OrderDetailsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.authorInOrder?.text = getText(sharedViewModel.currentBookAuthorId)
-        binding?.bookInOrder?.text = getText(sharedViewModel.currentBookNameId)
-        binding?.priceInOrder?.text = getString(R.string._200_uah, sharedViewModel.currentBookPrice.value.toString())
 
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        sharedViewModel.currentBook.observe(this.viewLifecycleOwner) {
+            // Updates the UI of detailed fragment
+            binding?.authorInOrder?.text = getString(it.bookAuthorId)
+            binding?.bookInOrder?.text = getString(it.bookNameId)
+            binding?.priceInOrder?.text = getString(R.string._200_uah, sharedViewModel.currentBookPrice.value)
+        }
+
+        // Back to start screen and reset the price value
         binding?.cancelButton?.setOnClickListener() {
             goToStartScreen()
             sharedViewModel.resetValues()
@@ -47,12 +53,12 @@ class OrderDetailsFragment: Fragment() {
             sendOrder()
         }
     }
-
+    // Opens e-mail and fulfill it with order information
     private fun sendOrder() {
         val orderSummary = getString(
             R.string.mail_text,
-            getString(sharedViewModel.currentBookNameId),
-            getString(sharedViewModel.currentBookAuthorId),
+            getString(sharedViewModel.currentBook.value?.bookNameId ?: 0),
+            getString(sharedViewModel.currentBook.value?.bookAuthorId ?: 0),
             sharedViewModel.currentBookPrice.value.toString()
         )
 
