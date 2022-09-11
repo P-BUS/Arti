@@ -1,4 +1,4 @@
-package com.example.arti.ui
+package com.example.arti.ui.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.arti.R
 import com.example.arti.databinding.DetailsFragmentBinding
-import com.example.arti.model.OrderViewModel
+import com.example.arti.ui.viewmodel.OrderViewModel
 
 
 class DetailsFragment : Fragment() {
@@ -31,9 +31,8 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragmentBinding = DetailsFragmentBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
-        return fragmentBinding.root
+        binding = DetailsFragmentBinding.inflate(inflater, container, false)
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

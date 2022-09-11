@@ -1,4 +1,4 @@
-package com.example.arti.ui
+package com.example.arti.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arti.R
-import com.example.arti.data.Book
+import com.example.arti.data.OpenLibraryBook
 
 class ListAdapter(
     private val context: Context,
-    private val dataset: List<Book>,
+    private val dataset: List<OpenLibraryBook>,
     private val goToDetails: () -> Unit,
-    private val clickListener: (Book) -> Unit,
+    private val clickListener: (OpenLibraryBook) -> Unit,
     private val updatePrice: () -> Unit
 
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {

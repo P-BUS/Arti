@@ -1,4 +1,4 @@
-package com.example.arti.ui
+package com.example.arti.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.arti.R
-import com.example.arti.data.Datasource
+import com.example.arti.data.model.Datasource
 import com.example.arti.databinding.ListFragmentBinding
-import com.example.arti.model.OrderViewModel
+import com.example.arti.ui.adapters.ListAdapter
+import com.example.arti.ui.viewmodel.OrderViewModel
 
 
 class ListFragment: Fragment() {

@@ -1,4 +1,4 @@
-package com.example.arti.ui
+package com.example.arti.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.arti.R
 import com.example.arti.databinding.OrderDetailsFragmentBinding
-import com.example.arti.model.OrderViewModel
+import com.example.arti.ui.viewmodel.OrderViewModel
 
 
 class OrderDetailsFragment: Fragment() {

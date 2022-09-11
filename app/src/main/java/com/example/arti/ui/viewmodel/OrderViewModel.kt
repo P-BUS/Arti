@@ -1,11 +1,11 @@
-package com.example.arti.model
+package com.example.arti.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.example.arti.data.Book
-import com.example.arti.data.Datasource
+import com.example.arti.data.OpenLibraryBook
+import com.example.arti.data.model.Datasource
 import java.text.NumberFormat
 
 private const val DISCOUNT: Double = 0.1
@@ -13,11 +13,11 @@ private const val DISCOUNT: Double = 0.1
 
 class OrderViewModel : ViewModel() {
 
-    private var _booksData: ArrayList<Book> = ArrayList()
-    val booksData: ArrayList<Book> = _booksData
+    private var _booksData: ArrayList<OpenLibraryBook> = ArrayList()
+    val booksData: ArrayList<OpenLibraryBook> = _booksData
 
-    private val _currentBook = MutableLiveData<Book>()
-    val currentBook: LiveData<Book> = _currentBook
+    private val _currentBook = MutableLiveData<OpenLibraryBook>()
+    val currentBook: LiveData<OpenLibraryBook> = _currentBook
 
     private val _currentBookPrice = MutableLiveData<Int>()
     val currentBookPrice: LiveData<Int> = _currentBookPrice
@@ -30,7 +30,7 @@ class OrderViewModel : ViewModel() {
     }
 
     // Updates current book LiveData property
-    fun updateCurrentBook(book: Book) {
+    fun updateCurrentBook(book: OpenLibraryBook) {
         _currentBook.value = book
     }
 

@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
     app:startDestination="@id/listFragment">
+
     <fragment android:id="@+id/placeholder" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.arti.ui.ListFragment"
+        android:name="com.example.arti.ui.fragments.ListFragment"
         android:label="@string/books">
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
@@ -14,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.arti.ui.DetailsFragment"
+        android:name="com.example.arti.ui.fragments.DetailsFragment"
         android:label="@string/book_details">
         <action
             android:id="@+id/action_detailsFragment_to_orderDetailsFragment"
@@ -22,10 +23,11 @@
     </fragment>
     <fragment
         android:id="@+id/orderDetailsFragment"
-        android:name="com.example.arti.ui.OrderDetailsFragment"
+        android:name="com.example.arti.ui.fragments.OrderDetailsFragment"
         android:label="@string/order_details" >
         <action
             android:id="@+id/action_orderDetailsFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
+
 </navigation>
