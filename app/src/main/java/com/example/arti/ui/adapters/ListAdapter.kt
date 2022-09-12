@@ -1,5 +1,6 @@
 package com.example.arti.ui.adapters
 import OpenLibraryBook
+import OpenLibrarySearchResponse
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,14 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arti.R
+import retrofit2.Response
 
 
 class ListAdapter(
-    private val context: Context,
-    private val dataset: List<OpenLibraryBook>,
-    private val goToDetails: () -> Unit,
+    private val dataset: Response<OpenLibrarySearchResponse>?,
     private val clickListener: (OpenLibraryBook) -> Unit,
-    private val updatePrice: () -> Unit
 
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
@@ -33,18 +32,19 @@ class ListAdapter(
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val item = dataset[position]
-        holder.imageView.setImageResource(item.bookImageId)
-        holder.authorTextView.text = context.resources.getString(item.bookAuthorId)
-        holder.nameTextView.text = context.resources.getString(item.bookNameId)
-
+        val item = dataset?.body()?.docs?.get(position)
+        if (item != null) {
+            holder.imageView.setImageResource(item.cover_i)
+            holder.authorTextView.text = item.author_name[0]
+            holder.nameTextView.text = item.title
+        }
         holder.view.setOnClickListener {
-            goToDetails()
-            clickListener(item)
-            updatePrice()
+            if (item != null) {
+                clickListener(item)
+            }
         }
     }
 
-    override fun getItemCount() = dataset.size
+    override fun getItemCount(): Int = dataset!!.body()!!.docs.size
 }
 

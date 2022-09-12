@@ -8,26 +8,6 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.arti.ui.fragments.ListFragment"
-        android:label="@string/books">
-        <action
-            android:id="@+id/action_listFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.example.arti.ui.fragments.DetailsFragment"
-        android:label="@string/book_details">
-        <action
-            android:id="@+id/action_detailsFragment_to_orderDetailsFragment"
-            app:destination="@id/orderDetailsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/orderDetailsFragment"
-        android:name="com.example.arti.ui.fragments.OrderDetailsFragment"
-        android:label="@string/order_details" >
-        <action
-            android:id="@+id/action_orderDetailsFragment_to_listFragment"
-            app:destination="@id/listFragment" />
-    </fragment>
+        android:label="@string/books"/>
 
 </navigation>

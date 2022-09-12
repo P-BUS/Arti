@@ -25,7 +25,6 @@ class OrderViewModel() : ViewModel() {
     private val _status = MutableLiveData<BooksApiStatus>()
     val status: LiveData<BooksApiStatus> = _status
 
-
     init {
         // Initialize the books on start search.
         getOpenLibrarySearchResponse()
@@ -41,22 +40,20 @@ class OrderViewModel() : ViewModel() {
             _status.value = BooksApiStatus.LOADING
             try {
                 _openLibrarySearchResponse.value = BooksApi.retrofitApiService.getSearchBooks(
+                    // TODO: to change hardcoded text to requests from user
                     "Кобзар",
                      Constants.UKRAINIAN,
                     true,
+                    // TODO: change hardcoded text to string link in res but needs context
                     "ebooks"
                 )
                 _status.value = BooksApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = BooksApiStatus.ERROR
-                // ToDo: Dont understand yet how to back unsuccessful Response from Retrofit API
+                // TODO: Dont understand yet how to back unsuccessful Response from Retrofit API
                 //_openLibrarySearchResponse.value =
             }
-
-
-
         }
-
     }
 
 }
