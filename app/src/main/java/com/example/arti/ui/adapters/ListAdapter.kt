@@ -1,4 +1,5 @@
 package com.example.arti.ui.adapters
+import OpenLibraryBook
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arti.R
-import com.example.arti.data.OpenLibraryBook
+
 
 class ListAdapter(
     private val context: Context,
