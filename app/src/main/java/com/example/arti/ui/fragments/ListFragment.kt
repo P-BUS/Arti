@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.arti.R
 import com.example.arti.databinding.ListFragmentBinding
-import com.example.arti.ui.adapters.ListAdapter
+import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
 import com.example.arti.ui.viewmodel.OrderViewModel
 
@@ -25,8 +25,8 @@ class ListFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding = ListFragmentBinding.inflate(inflater, container, false)
+    ): View {
+        binding = ListFragmentBinding.inflate(inflater, container, false)
         showLoadingImage()
         return binding.root
     }
@@ -38,10 +38,9 @@ class ListFragment: Fragment() {
         // this is for grid layout
         recyclerView.layoutManager = GridLayoutManager(context, 3)
         // pass to adapter transition on detailed fragment function
-        recyclerView.adapter = ListAdapter(
-            sharedViewModel.openLibrarySearchResponse.value, {
-            sharedViewModel.updateCurrentBook(it) }
-        )
+        recyclerView.adapter = BooksListAdapter { currentBook ->
+                sharedViewModel.updateCurrentBook(currentBook)
+                }
     }
 
     private fun showLoadingImage() {

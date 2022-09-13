@@ -2,6 +2,7 @@ package com.example.arti.ui.viewmodel
 
 import OpenLibraryBook
 import OpenLibrarySearchResponse
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.arti.R
 import com.example.arti.data.network.BooksApi
@@ -10,14 +11,17 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
 
-
+const val TAG = "ViewModel"
 enum class BooksApiStatus { LOADING, ERROR, DONE }
 
 
 class OrderViewModel() : ViewModel() {
 
-    private var _openLibrarySearchResponse = MutableLiveData<Response<OpenLibrarySearchResponse>>()
-    val openLibrarySearchResponse: LiveData<Response<OpenLibrarySearchResponse>> = _openLibrarySearchResponse
+    private var _openLibrarySearchResponse = MutableLiveData<OpenLibrarySearchResponse>()
+    val openLibrarySearchResponse: LiveData<OpenLibrarySearchResponse> = _openLibrarySearchResponse
+
+    private var _openLibraryBooks = MutableLiveData<List<OpenLibraryBook>>()
+    val openLibraryBooks: LiveData<List<OpenLibraryBook>> = _openLibraryBooks
 
     private val _currentBook = MutableLiveData<OpenLibraryBook>()
     val currentBook: LiveData<OpenLibraryBook> = _currentBook
@@ -30,23 +34,20 @@ class OrderViewModel() : ViewModel() {
         getOpenLibrarySearchResponse()
     }
 
-    // Updates current book LiveData property
-    fun updateCurrentBook(book: OpenLibraryBook) {
-        _currentBook.value = book
-    }
-
     private fun getOpenLibrarySearchResponse() {
         viewModelScope.launch {
             _status.value = BooksApiStatus.LOADING
             try {
                 _openLibrarySearchResponse.value = BooksApi.retrofitApiService.getSearchBooks(
                     // TODO: to change hardcoded text to requests from user
-                    "Кобзар",
-                     Constants.UKRAINIAN,
-                    true,
+                    "Шевченко",
+                     "ukr",
+                    "true",
                     // TODO: change hardcoded text to string link in res but needs context
                     "ebooks"
                 )
+                _openLibraryBooks.value = _openLibrarySearchResponse.value!!.docs
+                _openLibraryBooks.value!!.size
                 _status.value = BooksApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = BooksApiStatus.ERROR
@@ -54,6 +55,11 @@ class OrderViewModel() : ViewModel() {
                 //_openLibrarySearchResponse.value =
             }
         }
+    }
+
+    // Updates current book LiveData property
+    fun updateCurrentBook(book: OpenLibraryBook) {
+        _currentBook.value = book
     }
 
 }

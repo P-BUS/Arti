@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arti.R
 import retrofit2.Response
 
 
-class ListAdapter(
-    private val dataset: Response<OpenLibrarySearchResponse>?,
-    private val clickListener: (OpenLibraryBook) -> Unit,
-
-) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+class BooksListAdapter(private val clickListener: (OpenLibraryBook) -> Unit) :
+    ListAdapter<OpenLibraryBook, BooksListAdapter.ListViewHolder>(DiffCallback) {
 
     class ListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val nameTextView: TextView = view.findViewById(R.id.item_name)
@@ -32,19 +31,23 @@ class ListAdapter(
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val item = dataset?.body()?.docs?.get(position)
-        if (item != null) {
+        val item = getItem(position)
             holder.imageView.setImageResource(item.cover_i)
-            holder.authorTextView.text = item.author_name[0]
+            holder.authorTextView.text = item.author_alternative_name[0]
             holder.nameTextView.text = item.title
-        }
+
         holder.view.setOnClickListener {
-            if (item != null) {
                 clickListener(item)
-            }
         }
     }
 
-    override fun getItemCount(): Int = dataset!!.body()!!.docs.size
+    companion object DiffCallback : DiffUtil.ItemCallback<OpenLibraryBook>() {
+        override fun areItemsTheSame(oldItem: OpenLibraryBook, newItem: OpenLibraryBook): Boolean {
+            return oldItem.title == newItem.title
+        }
+        override fun areContentsTheSame(oldItem: OpenLibraryBook, newItem: OpenLibraryBook): Boolean {
+            return oldItem.ia == newItem.ia
+        }
+    }
 }
 
