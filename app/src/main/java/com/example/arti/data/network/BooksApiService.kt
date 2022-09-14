@@ -1,6 +1,6 @@
 package com.example.arti.data.network
 
-import OpenLibrarySearchResponse
+import OpenLibraryBook
 import com.example.arti.other.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -33,15 +33,20 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-interface BooksApiService {
+//interface BooksApiService {
     // Searches e-books with full text by description and language
-    @GET("search.json")
-    suspend fun getSearchBooks(
-        @Query("q") searchText: String,
-        @Query("language") booksLanguage: String,
-        @Query("has_fulltext") hasFullText: String,
-        @Query("mode") typeOfDocument: String
-    ): OpenLibrarySearchResponse
+//    @GET("search.json")
+//    suspend fun getSearchBooks(
+//        @Query("q") searchText: String,
+//        @Query("language") booksLanguage: String,
+//        @Query("has_fulltext") hasFullText: String,
+//        @Query("mode") typeOfDocument: String
+//    ): OpenLibrarySearchResponse
+//}
+
+interface BooksApiService {
+    @GET("books/OL7353617M.json")
+    suspend fun getSearchBooks(): List<OpenLibraryBook>
 }
 
 object BooksApi {

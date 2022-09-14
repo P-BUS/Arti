@@ -1,52 +1,46 @@
 package com.example.arti.ui.adapters
 import OpenLibraryBook
-import OpenLibrarySearchResponse
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.arti.R
-import retrofit2.Response
+import com.example.arti.databinding.ItemViewBinding
 
 
-class BooksListAdapter(private val clickListener: (OpenLibraryBook) -> Unit) :
-    ListAdapter<OpenLibraryBook, BooksListAdapter.ListViewHolder>(DiffCallback) {
+class BooksListAdapter(
+    private val onItemClicked: (OpenLibraryBook) -> Unit
+) : ListAdapter<OpenLibraryBook, BooksListAdapter.ListViewHolder>(DiffCallback) {
 
-    class ListViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val nameTextView: TextView = view.findViewById(R.id.item_name)
-        val authorTextView: TextView = view.findViewById(R.id.item_author)
-        val imageView: ImageView = view.findViewById(R.id.item_image)
+    class ListViewHolder(private var binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(book: OpenLibraryBook) {
+            //binding.itemAuthor.text = book.author_alternative_name[0]
+            //binding.itemName.text = book.title
+            binding.itemName.text = book.local_id.toString()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val layout = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.item_view, parent, false)
-        return ListViewHolder(layout)
+        val viewHolder = ListViewHolder(
+            ItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
+        viewHolder.itemView.setOnClickListener {
+            val position = viewHolder.adapterPosition
+            onItemClicked(getItem(position))
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val item = getItem(position)
-            holder.imageView.setImageResource(item.cover_i)
-            holder.authorTextView.text = item.author_alternative_name[0]
-            holder.nameTextView.text = item.title
-
-        holder.view.setOnClickListener {
-                clickListener(item)
-        }
+        holder.bind(getItem(position))
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<OpenLibraryBook>() {
         override fun areItemsTheSame(oldItem: OpenLibraryBook, newItem: OpenLibraryBook): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.local_id[0] == newItem.local_id[0]
         }
         override fun areContentsTheSame(oldItem: OpenLibraryBook, newItem: OpenLibraryBook): Boolean {
-            return oldItem.ia == newItem.ia
+            return oldItem == newItem
         }
     }
 }
