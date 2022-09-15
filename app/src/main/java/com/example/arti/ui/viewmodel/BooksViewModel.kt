@@ -11,8 +11,8 @@ enum class BooksApiStatus { LOADING, ERROR, DONE }
 
 class OrderViewModel() : ViewModel() {
 
-//    private var _openLibrarySearchResponse = MutableLiveData<OpenLibrarySearchResponse>()
-//    val openLibrarySearchResponse: LiveData<OpenLibrarySearchResponse> = _openLibrarySearchResponse
+    //private lateinit var _openLibrarySearchResponse : OpenLibrarySearchResponse
+    //val openLibrarySearchResponse: LiveData<OpenLibrarySearchResponse> = _openLibrarySearchResponse
 
     private var _openLibraryBooks = MutableLiveData<List<OpenLibraryBook>>()
     val openLibraryBooks: LiveData<List<OpenLibraryBook>> = _openLibraryBooks
@@ -33,14 +33,14 @@ class OrderViewModel() : ViewModel() {
             _status.value = BooksApiStatus.LOADING
             try {
                 _openLibraryBooks.value = BooksApi.retrofitApiService.getSearchBooks(
-                    // TODO: to change hardcoded text to requests from user
-//                    "Шевченко",
+//                    "Чорна рада",
 //                     "ukr",
 //                    "true",
-                    // TODO: change hardcoded text to string link in res but needs context
-//                    "ebooks"
+//                   "ebooks"
                 )
-//                _openLibraryBooks.value = _openLibrarySearchResponse.value.local_id
+                //_openLibraryBooks.value = _openLibrarySearchResponse.docs
+
+
                 _status.value = BooksApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = BooksApiStatus.ERROR
