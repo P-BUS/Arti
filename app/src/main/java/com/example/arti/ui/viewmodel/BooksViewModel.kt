@@ -4,6 +4,7 @@ import com.example.arti.data.model.OpenLibraryBook
 import androidx.lifecycle.*
 import com.example.arti.data.database.BooksDao
 import com.example.arti.data.database.BooksDatabase
+import com.example.arti.data.database.BooksEntity
 import com.example.arti.data.network.BooksApi
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -14,14 +15,14 @@ enum class BooksApiStatus { LOADING, ERROR, DONE }
 class BooksViewModel(private val booksDao: BooksDao
 ) : ViewModel() {
 
-    private val _allBooks: MutableLiveData<List<OpenLibraryBook>> = booksDao.getAllBooks().asLiveData()
-    val allBooks: LiveData<List<OpenLibraryBook>> = _allBooks
+    private val _allBooks: LiveData<List<BooksEntity>> = booksDao.getAllBooks().asLiveData()
+    val allBooks: LiveData<List<BooksEntity>> = _allBooks
 
-    fun retrieveBook(name: String):LiveData<OpenLibraryBook> {
-        return booksDao.getBook(name).asLiveData
+    fun retrieveBook(name: String): LiveData<BooksEntity> {
+        return booksDao.getBook(name).asLiveData()
     }
 
-fun deleteBook(book: OpenLibraryBook) {
+fun deleteBook(book: BooksEntity) {
     viewModelScope.launch {
         booksDao.delete(book)
     }

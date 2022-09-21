@@ -1,5 +1,6 @@
 package com.example.arti.data.database
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.arti.data.model.OpenLibraryBook
@@ -8,7 +9,9 @@ import com.example.arti.data.model.OpenLibraryBook
 data class BooksEntity(
     @PrimaryKey
     val name: String,
+    @ColumnInfo(name = "type")
     val type: String,
+    @ColumnInfo(name = "description")
     val description: String
 )
 
