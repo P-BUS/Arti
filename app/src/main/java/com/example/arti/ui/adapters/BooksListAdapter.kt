@@ -1,5 +1,5 @@
 package com.example.arti.ui.adapters
-import OpenLibraryBook
+import com.example.arti.data.model.OpenLibraryBook
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

@@ -1,7 +1,9 @@
 package com.example.arti.ui.viewmodel
 
-import OpenLibraryBook
+import com.example.arti.data.model.OpenLibraryBook
 import androidx.lifecycle.*
+import com.example.arti.data.database.BooksDao
+import com.example.arti.data.database.BooksDatabase
 import com.example.arti.data.network.BooksApi
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -9,10 +11,21 @@ import java.lang.Exception
 enum class BooksApiStatus { LOADING, ERROR, DONE }
 
 
-class OrderViewModel() : ViewModel() {
+class BooksViewModel(private val booksDao: BooksDao
+) : ViewModel() {
 
-    //private lateinit var _openLibrarySearchResponse : OpenLibrarySearchResponse
-    //val openLibrarySearchResponse: LiveData<OpenLibrarySearchResponse> = _openLibrarySearchResponse
+    private val _allBooks: MutableLiveData<List<OpenLibraryBook>> = booksDao.getAllBooks().asLiveData()
+    val allBooks: LiveData<List<OpenLibraryBook>> = _allBooks
+
+    fun retrieveBook(name: String):LiveData<OpenLibraryBook> {
+        return booksDao.getBook(name).asLiveData
+    }
+
+fun deleteBook(book: OpenLibraryBook) {
+    viewModelScope.launch {
+        booksDao.delete(book)
+    }
+}
 
     private var _openLibraryBooks = MutableLiveData<List<OpenLibraryBook>>()
     val openLibraryBooks: LiveData<List<OpenLibraryBook>> = _openLibraryBooks
@@ -53,5 +66,15 @@ class OrderViewModel() : ViewModel() {
     // Updates current book LiveData property
     fun updateCurrentBook(book: OpenLibraryBook) {
         _currentBook.value = book
+    }
+}
+
+class BooksViewModelFactory(private val booksDao: BooksDao) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(BooksViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return BooksViewModel(booksDao) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

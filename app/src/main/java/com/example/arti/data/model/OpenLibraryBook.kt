@@ -1,3 +1,4 @@
+package com.example.arti.data.model
 
 data class OpenLibraryBook(
 val name: String,
@@ -6,7 +7,7 @@ val description: String
 )
 
 /*
-data class OpenLibraryBook(
+data class com.example.arti.data.model.OpenLibraryBook(
 val _version_: Long,
 val author_alternative_name: List<String>,
 val author_facet: List<String>,

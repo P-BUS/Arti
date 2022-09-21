@@ -11,19 +11,24 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.arti.BaseApplication
 import com.example.arti.R
 import com.example.arti.data.network.BooksApi
 import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
-import com.example.arti.ui.viewmodel.OrderViewModel
-import kotlinx.coroutines.launch
+import com.example.arti.ui.viewmodel.BooksViewModel
+import com.example.arti.ui.viewmodel.BooksViewModelFactory
 
 
 class ListFragment: Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
-    private val sharedViewModel: OrderViewModel by activityViewModels()
+    private val sharedViewModel: BooksViewModel by activityViewModels {
+        BooksViewModelFactory(
+            (activity?.application as BaseApplication).database.booksDao()
+        )
+    }
 
 
     override fun onCreateView(
