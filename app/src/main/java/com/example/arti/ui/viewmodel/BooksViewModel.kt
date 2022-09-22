@@ -6,6 +6,8 @@ import com.example.arti.data.database.BooksDao
 import com.example.arti.data.database.BooksDatabase
 import com.example.arti.data.database.BooksEntity
 import com.example.arti.data.network.BooksApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -43,7 +45,7 @@ fun deleteBook(book: BooksEntity) {
  //   }
 
     fun getOpenLibrarySearchResponse() {
-        viewModelScope.launch {
+       viewModelScope.launch {
             _status.value = BooksApiStatus.LOADING
             try {
                 _openLibraryBooks.value = BooksApi.retrofitApiService.getSearchBooks(

@@ -19,7 +19,7 @@ interface BooksDao {
     fun getBook(name: String): Flow<BooksEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(book: BooksEntity)
+    suspend fun insertAll(books: List<BooksEntity>)
 
     @Update
     suspend fun update(book: BooksEntity)
