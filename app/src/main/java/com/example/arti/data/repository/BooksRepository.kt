@@ -1,6 +1,5 @@
 package com.example.arti.data.repository
 
-import android.view.animation.Transformation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
@@ -14,7 +13,7 @@ import kotlinx.coroutines.withContext
 
 class BooksRepository(private val database: BooksDatabase) {
 
-
+    //Transforms database entity to domain
     val books: LiveData<List<OpenLibraryBook>> = Transformations.map(database.booksDao().getAllBooks().asLiveData()) {
         it.asDomainModel()
     }
