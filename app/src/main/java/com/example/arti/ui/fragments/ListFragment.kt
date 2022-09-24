@@ -7,13 +7,10 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.arti.BaseApplication
 import com.example.arti.R
-import com.example.arti.data.network.BooksApi
 import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
@@ -24,11 +21,25 @@ import com.example.arti.ui.viewmodel.BooksViewModelFactory
 class ListFragment: Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
-    private val sharedViewModel: BooksViewModel by activityViewModels {
-        BooksViewModelFactory(
-            (activity?.application as BaseApplication).database.booksDao()
-        )
+
+
+    private val sharedViewModel: BooksViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        ViewModelProvider(this, BooksViewModelFactory(activity.application))
+            .get(BooksViewModel::class.java)
     }
+    /*private val sharedViewModel: BooksViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        ViewModelProvider(this, BooksViewModel.Factory(activity.application))
+            .get(BooksViewModel::class.java)
+        *//*BooksViewModelFactory(
+            (activity?.application as BaseApplication).database.booksDao()
+        )*//*
+    }*/
 
 
     override fun onCreateView(
@@ -36,7 +47,7 @@ class ListFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = ListFragmentBinding.inflate(inflater, container, false)
-        sharedViewModel.getOpenLibrarySearchResponse()
+        //sharedViewModel.getOpenLibrarySearchResponse()
         // showLoadingImage()
         return binding.root
     }
@@ -51,7 +62,7 @@ class ListFragment: Fragment() {
         recyclerView.adapter = adapter
         // observe the list of books from the view model and submit it the adapter
 
-        sharedViewModel.openLibraryBooks.observe(this.viewLifecycleOwner) { books ->
+        sharedViewModel.books.observe(this.viewLifecycleOwner) { books ->
             books.let {
                 adapter.submitList(it)
             }

@@ -1,23 +1,27 @@
 package com.example.arti.ui.viewmodel
 
-import com.example.arti.data.model.OpenLibraryBook
+import android.app.Application
 import androidx.lifecycle.*
-import com.example.arti.data.database.BooksDao
-import com.example.arti.data.database.BooksDatabase
-import com.example.arti.data.database.BooksEntity
-import com.example.arti.data.network.BooksApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.example.arti.data.database.BooksDatabase.Companion.getDatabase
+import com.example.arti.data.model.OpenLibraryBook
+import com.example.arti.data.repository.BooksRepository
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import java.io.IOException
+
 
 enum class BooksApiStatus { LOADING, ERROR, DONE }
 
 
-class BooksViewModel(private val booksDao: BooksDao
-) : ViewModel() {
+class BooksViewModel(
+    application: Application
+//    private val booksDao: BooksDao
+) : AndroidViewModel(application) {
 
-    private val _allBooks: LiveData<List<BooksEntity>> = booksDao.getAllBooks().asLiveData()
+    private val booksRepository = BooksRepository(getDatabase(application))
+
+    val books = booksRepository.books
+
+ /*   private val _allBooks: LiveData<List<BooksEntity>> = booksDao.getAllBooks().asLiveData()
     val allBooks: LiveData<List<BooksEntity>> = _allBooks
 
     fun retrieveBook(name: String): LiveData<BooksEntity> {
@@ -28,7 +32,7 @@ fun deleteBook(book: BooksEntity) {
     viewModelScope.launch {
         booksDao.delete(book)
     }
-}
+}*/
 
     private var _openLibraryBooks = MutableLiveData<List<OpenLibraryBook>>()
     val openLibraryBooks: LiveData<List<OpenLibraryBook>> = _openLibraryBooks
@@ -39,12 +43,24 @@ fun deleteBook(book: BooksEntity) {
     private val _status = MutableLiveData<BooksApiStatus>()
     val status: LiveData<BooksApiStatus> = _status
 
- //   init {
- //        //Initialize the books on start search.
- //        getOpenLibrarySearchResponse()
- //   }
+    init {
+        refreshDataFromRepository()
+    }
 
-    fun getOpenLibrarySearchResponse() {
+    fun refreshDataFromRepository() {
+        viewModelScope.launch {
+            _status.value = BooksApiStatus.LOADING
+            try {
+                booksRepository.refreshBooks()
+                _status.value = BooksApiStatus.DONE
+            }
+            catch (networkError: IOException) {
+                _status.value = BooksApiStatus.ERROR
+            }
+        }
+    }
+
+/*    fun getOpenLibrarySearchResponse() {
        viewModelScope.launch {
             _status.value = BooksApiStatus.LOADING
             try {
@@ -56,15 +72,13 @@ fun deleteBook(book: BooksEntity) {
                 )
                 //_openLibraryBooks.value = _openLibrarySearchResponse.docs
 
-
                 _status.value = BooksApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = BooksApiStatus.ERROR
-                // TODO: Dont understand yet how to back unsuccessful Response from Retrofit API
                 //_openLibrarySearchResponse.value =
             }
         }
-    }
+    }*/
 
     // Updates current book LiveData property
     fun updateCurrentBook(book: OpenLibraryBook) {
@@ -72,12 +86,12 @@ fun deleteBook(book: BooksEntity) {
     }
 }
 
-class BooksViewModelFactory(private val booksDao: BooksDao) : ViewModelProvider.Factory {
+class BooksViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(BooksViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return BooksViewModel(booksDao) as T
+            return BooksViewModel(application) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException("Unable to construct viewmodel")
     }
 }

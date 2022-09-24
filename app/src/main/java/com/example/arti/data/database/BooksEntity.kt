@@ -26,3 +26,15 @@ fun List<BooksEntity>.asDomainModel(): List<OpenLibraryBook> {
             description = it.description)
     }
 }
+
+/**
+ * Map [OpenLibraryBook] to database entities
+ */
+fun List<OpenLibraryBook>.asDatabaseModel(): List<BooksEntity> {
+    return map {
+        BooksEntity(
+            name = it.name,
+            type = it.type,
+            description = it.description)
+    }
+}
