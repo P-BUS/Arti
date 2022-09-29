@@ -60,6 +60,9 @@ fun deleteBook(book: BooksEntity) {
         }
     }
 
+
+
+
 /*    fun getOpenLibrarySearchResponse() {
        viewModelScope.launch {
             _status.value = BooksApiStatus.LOADING
@@ -84,6 +87,12 @@ fun deleteBook(book: BooksEntity) {
     fun updateCurrentBook(book: OpenLibraryBook) {
         _currentBook.value = book
     }
+
+    // Updates current _status LiveData property
+    fun updateCurrentStatus(status: BooksApiStatus) {
+        _status.value = status
+    }
+
 }
 
 class BooksViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
