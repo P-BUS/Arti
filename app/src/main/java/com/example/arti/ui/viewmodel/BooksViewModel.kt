@@ -47,7 +47,8 @@ fun deleteBook(book: BooksEntity) {
         refreshDataFromRepository()
     }
 
-    fun refreshDataFromRepository() {
+    // TODO: Remake error status instead loading waiting
+    private fun refreshDataFromRepository() {
         viewModelScope.launch {
             _status.value = BooksApiStatus.LOADING
             try {
