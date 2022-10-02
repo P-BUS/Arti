@@ -1,17 +1,15 @@
+package com.example.arti.data.model
 
 
-
-
-/*
 data class OpenLibrarySearchResponse(
-    val docs: List<com.example.arti.data.model.OpenLibraryBook>,
+    val docs: List<OpenLibraryBook>,
     val numFound: Int,
-    val numFoundExact: Boolean,
+    //val numFoundExact: Boolean,
     val num_found: Int,
-    val offset: Any,
+    //val offset: Any,
     val q: String,
     val start: Int
 )
-*/
+
 
 

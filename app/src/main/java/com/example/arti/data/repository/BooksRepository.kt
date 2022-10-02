@@ -24,8 +24,14 @@ class BooksRepository(private val database: BooksDatabase) {
      */
     suspend fun refreshBooks() {
         withContext(Dispatchers.IO) {
-            val booksList = BooksApi.retrofitApiService.getSearchBooks()
-            database.booksDao().insertAll(booksList.asDatabaseModel())
+            val searchResult = BooksApi.retrofitApiService.getSearchBooks(
+               searchText = "Шевченко",
+               booksLanguage = "ukr",
+               hasFullText = "true",
+               typeOfDocument = "ebooks"
+            )
+            val listBooks: List<OpenLibraryBook> = searchResult.docs
+            database.booksDao().insertAll(listBooks.asDatabaseModel())
         }
     }
 }

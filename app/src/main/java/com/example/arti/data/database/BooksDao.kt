@@ -1,11 +1,6 @@
 package com.example.arti.data.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 
@@ -15,8 +10,8 @@ interface BooksDao {
     @Query("SELECT * FROM books_database")
     fun getAllBooks(): Flow<List<BooksEntity>>
 
-    @Query("SELECT * FROM books_database WHERE name = :name")
-    fun getBook(name: String): Flow<BooksEntity>
+    @Query("SELECT * FROM books_database WHERE cover_edition_key = :cover")
+    fun getBook(cover: String): Flow<BooksEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(books: List<BooksEntity>)

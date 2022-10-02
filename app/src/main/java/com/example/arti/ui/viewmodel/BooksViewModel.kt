@@ -1,6 +1,7 @@
 package com.example.arti.ui.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.arti.data.database.BooksDatabase.Companion.getDatabase
 import com.example.arti.data.model.OpenLibraryBook
@@ -11,11 +12,13 @@ import java.io.IOException
 
 enum class BooksApiStatus { LOADING, ERROR, DONE }
 
+const val TAG = "BooksViewModel"
 
 class BooksViewModel(
     application: Application
 //    private val booksDao: BooksDao
 ) : AndroidViewModel(application) {
+
 
     private val booksRepository = BooksRepository(getDatabase(application))
 
@@ -57,6 +60,7 @@ fun deleteBook(book: BooksEntity) {
             }
             catch (networkError: IOException) {
                 _status.value = BooksApiStatus.ERROR
+                Log.e(TAG, "IO Exception, you might not have internet connection")
             }
         }
     }

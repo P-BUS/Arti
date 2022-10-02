@@ -1,8 +1,7 @@
 package com.example.arti.data.network
 
-import com.example.arti.data.model.OpenLibraryBook
+import com.example.arti.data.model.OpenLibrarySearchResponse
 import com.example.arti.other.Constants.BASE_URL
-import com.example.arti.other.Constants.ENDPOINT
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -10,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 
@@ -32,20 +32,15 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-//interface BooksApiService {
-// Searches e-books with full text by description and language
-//    @GET("books/OL7353617M.json")
-//   suspend fun getSearchBooks(
-//        @Query("q") searchText: String,
-//        @Query("language") booksLanguage: String,
-//        @Query("has_fulltext") hasFullText: String,
-//        @Query("mode") typeOfDocument: String
-//    ): OpenLibrarySearchResponse
-//}
-
 interface BooksApiService {
-    @GET(ENDPOINT)
-    suspend fun getSearchBooks(): List<OpenLibraryBook>
+ //Searches e-books with full text by description and language
+    @GET("search.json")
+   suspend fun getSearchBooks(
+        @Query("q") searchText: String,
+        @Query("language") booksLanguage: String,
+        @Query("has_fulltext") hasFullText: String,
+        @Query("mode") typeOfDocument: String
+    ): OpenLibrarySearchResponse
 }
 
 object BooksApi {
