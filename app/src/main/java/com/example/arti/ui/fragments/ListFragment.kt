@@ -105,6 +105,9 @@ class ListFragment: Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
     }
 
+
+
+
     private fun setIcon(menuItem: MenuItem?) {
         if (menuItem == null)
             return
