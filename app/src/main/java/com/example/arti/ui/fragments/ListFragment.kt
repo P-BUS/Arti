@@ -8,10 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,6 @@ import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
 import com.example.arti.ui.viewmodel.BooksViewModel
-import com.example.arti.ui.viewmodel.BooksViewModelFactory
 import kotlinx.coroutines.launch
 
 
@@ -30,13 +30,16 @@ class ListFragment: Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var SettingsDataStore: SettingsDataStore
     private var isLinearLayoutManager = true // Keeps track of which LayoutManager is in use
-    private val sharedViewModel: BooksViewModel by lazy {
+
+    private val sharedViewModel: BooksViewModel by activityViewModels()
+
+/*    private val sharedViewModel: BooksViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
         ViewModelProvider(this, BooksViewModelFactory(activity.application))
             .get(BooksViewModel::class.java)
-    }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +51,8 @@ class ListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val menuHost: MenuHost = requireActivity()
-
         recyclerView = binding.recyclerView
-
         // Initialize SettingsDataStore
         SettingsDataStore = SettingsDataStore(requireContext())
 
@@ -62,9 +62,10 @@ class ListFragment: Fragment() {
             //Redraw the options menu
             //activity?.invalidateMenu()
         }
-
         val adapter = BooksListAdapter { currentBook ->
-            sharedViewModel.updateCurrentBook(currentBook) }
+            sharedViewModel.updateCurrentBook(currentBook)
+            findNavController().navigate(R.id.action_listFragment_to_detailsFragment)
+        }
         recyclerView.adapter = adapter
 
         // observe the list of books from the view model and submit it the adapter
@@ -83,7 +84,6 @@ class ListFragment: Fragment() {
                 // Add menu items here
                 menuInflater.inflate(R.menu.menu_layout, menu)
             }
-
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
@@ -104,10 +104,6 @@ class ListFragment: Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
     }
-
-
-
-
     private fun setIcon(menuItem: MenuItem?) {
         if (menuItem == null)
             return
@@ -124,7 +120,7 @@ class ListFragment: Fragment() {
         if (isLinearLayoutManager) {
             recyclerView.layoutManager = LinearLayoutManager(context)
         } else {
-            recyclerView.layoutManager = GridLayoutManager(context, 2)
+            recyclerView.layoutManager = GridLayoutManager(context, 3)
         }
     }
 

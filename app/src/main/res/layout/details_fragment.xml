@@ -10,13 +10,22 @@
 
     <ImageView
         android:id="@+id/book_detail_image"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="300dp"
-        android:layout_marginTop="@dimen/side_margin"
-        app:cardElevation="4dp"
-        app:srcCompat="@drawable/image1"
         android:layout_gravity="center"
-        android:contentDescription="@string/book_name_1"/>
+        android:layout_marginTop="@dimen/side_margin"
+        android:contentDescription="@string/book_name_1"
+        android:scaleType="centerCrop"
+        app:cardElevation="4dp"
+        app:srcCompat="@drawable/image1" />
+
+    <TextView
+        android:id="@+id/book_detail_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/side_margin"
+        android:text="@string/book_name_1"
+        android:padding="@dimen/side_margin" />
 
     <TextView
         android:id="@+id/book_author_name"
@@ -27,21 +36,13 @@
         android:padding="@dimen/side_margin" />
 
     <TextView
-        android:id="@+id/book_detail_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/side_margin"
-        android:text="@string/book_name_1"
-        android:padding="@dimen/side_margin" />
-
-
-    <TextView
         android:id="@+id/book_detail_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/side_margin"
         android:text="@string/description"
-        android:padding="@dimen/side_margin" />
+        android:padding="@dimen/side_margin"
+        android:visibility="gone"/>
 
 
     <LinearLayout
