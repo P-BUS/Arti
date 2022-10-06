@@ -13,12 +13,16 @@
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <argument
+            android:name="safeArgs"
+            app:argType="string"
+            android:defaultValue="some text" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.arti.ui.fragments.DetailsFragment"
-        android:label="details_fragment"
-        tools:layout="@layout/details_fragment" >
+        android:label="@string/book"
+        tools:layout="@layout/details_fragment">
         <action
             android:id="@+id/action_detailsFragment_to_listFragment"
             app:destination="@id/listFragment" />

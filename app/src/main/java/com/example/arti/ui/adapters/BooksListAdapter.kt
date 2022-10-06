@@ -1,15 +1,13 @@
 package com.example.arti.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.example.arti.R
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.databinding.ItemViewBinding
+import com.example.arti.other.ImageLoader
+import com.example.arti.other.ImageSize
 
 
 class BooksListAdapter(
@@ -20,18 +18,8 @@ class BooksListAdapter(
         fun bind(book: OpenLibraryBook) {
             binding.itemAuthor.text = book.title
             binding.itemName.text = book.author_alternative_name[0]
-            loadCover(binding.itemImage, book.cover_i)
-        }
-
-        fun loadCover(imgView: ImageView, imgCode: Int) {
-            val imgUrl = "https://covers.openlibrary.org/b/id/$imgCode-M.jpg"
-            imgUrl.let {
-                val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-                imgView.load(imgUri) {
-                    placeholder(R.drawable.loading_animation)
-                    error(R.drawable.ic_broken_image)
-                }
-            }
+            //Load the image from web service using Coil
+            ImageLoader(book.cover_i, ImageSize.M).loadImage(binding.itemImage)
         }
     }
 

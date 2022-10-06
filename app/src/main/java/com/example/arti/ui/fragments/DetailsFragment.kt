@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import coil.load
-import com.example.arti.R
 import com.example.arti.databinding.DetailsFragmentBinding
+import com.example.arti.other.ImageLoader
+import com.example.arti.other.ImageSize
 import com.example.arti.ui.viewmodel.BooksViewModel
 
 class DetailsFragment : Fragment() {
@@ -42,20 +40,9 @@ class DetailsFragment : Fragment() {
         binding.bookAuthorName.text = sharedViewModel.currentBook.value?.author_name?.get(0).toString()
         binding.bookDetailName.text = sharedViewModel.currentBook.value?.title.toString()
         sharedViewModel.currentBook.value?.let {
-            loadCover(binding.bookDetailImage, it.cover_i) }
+            //Load the image from web service using Coil
+            ImageLoader(it.cover_i, ImageSize.L).loadImage(binding.bookDetailImage) }
     }
-    // TODO find a way to make it reusable
-    fun loadCover(imgView: ImageView, imgCode: Int) {
-        val imgUrl = "https://covers.openlibrary.org/b/id/$imgCode-L.jpg"
-        imgUrl.let {
-            val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-            imgView.load(imgUri) {
-                placeholder(R.drawable.loading_animation)
-                error(R.drawable.ic_broken_image)
-            }
-        }
-    }
-
-    }
+}
 
 
