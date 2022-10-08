@@ -41,7 +41,7 @@ class DetailsFragment : Fragment() {
         binding.bookDetailName.text = sharedViewModel.currentBook.value?.title.toString()
         sharedViewModel.currentBook.value?.let {
             //Load the image from web service using Coil
-            ImageLoader(it.cover_i, ImageSize.L).loadImage(binding.bookDetailImage) }
+            ImageLoader().loadImage(binding.bookDetailImage, it.cover_i, ImageSize.L) }
     }
 }
 

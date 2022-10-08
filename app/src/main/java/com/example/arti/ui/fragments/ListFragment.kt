@@ -75,9 +75,23 @@ class ListFragment: Fragment() {
             }
         }
 
-        sharedViewModel.status.observe(viewLifecycleOwner) { status ->
-                showLoadingImage()
+        /*
+        * Observe changes of BooksApiStatus loading using State Flow
+        * when fragment is on Started state and based on Coroutines
+        */
+        lifecycleScope.launchWhenStarted {
+            sharedViewModel.status
+                .collect {
+                    showLoadingImage()
+                }
         }
+
+
+
+
+/*        sharedViewModel.status.observe(viewLifecycleOwner) { status ->
+                showLoadingImage()
+        }*/
 
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

@@ -14,10 +14,10 @@ enum class ImageSize(imageSize: String) {
 /*
 * Load images from web service using Coil
 **/
-class ImageLoader(imageCode: Int, pictureSize: ImageSize) {
-    val imageUrl = "https://covers.openlibrary.org/b/id/$imageCode-$pictureSize.jpg"
+class ImageLoader {
+    fun loadImage(imageView: ImageView, imageCode: Int, pictureSize: ImageSize) {
+        val imageUrl = "https://covers.openlibrary.org/b/id/$imageCode-$pictureSize.jpg"
 
-    fun loadImage(imageView: ImageView) {
         imageUrl.let {
             val imageUri = imageUrl.toUri().buildUpon().scheme("https").build()
             imageView.load(imageUri) {
