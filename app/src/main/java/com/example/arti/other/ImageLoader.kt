@@ -5,6 +5,7 @@ import androidx.core.net.toUri
 import coil.load
 import com.example.arti.R
 
+
 enum class ImageSize(imageSize: String) {
     S("Small"),
     M("Medium"),
@@ -21,7 +22,7 @@ class ImageLoader {
         imageUrl.let {
             val imageUri = imageUrl.toUri().buildUpon().scheme("https").build()
             imageView.load(imageUri) {
-                placeholder(R.drawable.loading_animation)
+                placeholder(R.drawable.loading_anim)
                 error(R.drawable.ic_broken_image)
             }
         }
