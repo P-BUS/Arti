@@ -19,7 +19,7 @@ class BooksListAdapter(
             binding.itemAuthor.text = book.title
             binding.itemName.text = book.author_alternative_name[0]
             //Load the image from web service using Coil
-            ImageLoader(book.cover_i, ImageSize.M).loadImage(binding.itemImage)
+            ImageLoader().loadImage(binding.itemImage, book.cover_i, ImageSize.M)
         }
     }
 

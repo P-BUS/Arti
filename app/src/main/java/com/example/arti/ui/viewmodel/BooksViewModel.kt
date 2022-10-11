@@ -6,6 +6,9 @@ import androidx.lifecycle.*
 import com.example.arti.data.database.BooksDatabase.Companion.getDatabase
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.repository.BooksRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -37,14 +40,17 @@ fun deleteBook(book: BooksEntity) {
     }
 }*/
 
-    private var _openLibraryBooks = MutableLiveData<List<OpenLibraryBook>>()
-    val openLibraryBooks: LiveData<List<OpenLibraryBook>> = _openLibraryBooks
+    /*private var _openLibraryBooks = MutableLiveData<List<OpenLibraryBook>>()
+    val openLibraryBooks: LiveData<List<OpenLibraryBook>> = _openLibraryBooks*/
 
     private val _currentBook = MutableLiveData<OpenLibraryBook>()
     val currentBook: LiveData<OpenLibraryBook> = _currentBook
 
-    private val _status = MutableLiveData<BooksApiStatus>()
-    val status: LiveData<BooksApiStatus> = _status
+    /**
+    * Store the status of updating database from web service
+    */
+    private val _status = MutableStateFlow(BooksApiStatus.DONE)
+    val status: StateFlow<BooksApiStatus> = _status.asStateFlow()
 
     init {
         refreshDataFromRepository()
@@ -92,12 +98,6 @@ fun deleteBook(book: BooksEntity) {
     fun updateCurrentBook(book: OpenLibraryBook) {
         _currentBook.value = book
     }
-
-    // Updates current _status LiveData property
-    fun updateCurrentStatus(status: BooksApiStatus) {
-        _status.value = status
-    }
-
 }
 
 class BooksViewModelFactory(private val application: Application) : ViewModelProvider.Factory {

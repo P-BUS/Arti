@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -59,7 +60,7 @@ class ListFragment: Fragment() {
         SettingsDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner) { value ->
             isLinearLayoutManager = value
             chooseLayout()
-            //Redraw the options menu
+            // TODO: Redraw the options menu not work as I expected need to change
             //activity?.invalidateMenu()
         }
         val adapter = BooksListAdapter { currentBook ->
@@ -75,8 +76,16 @@ class ListFragment: Fragment() {
             }
         }
 
-        sharedViewModel.status.observe(viewLifecycleOwner) { status ->
-                showLoadingImage()
+        /*
+        * Observe changes of BooksApiStatus loading using State Flow
+        * when fragment is on Started state and based on Coroutines
+        */
+        lifecycleScope.launch {
+            sharedViewModel.status
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect {
+                    showLoadingImage()
+                }
         }
 
         menuHost.addMenuProvider(object : MenuProvider {
@@ -127,18 +136,13 @@ class ListFragment: Fragment() {
     private fun showLoadingImage() {
         when(sharedViewModel.status.value) {
             BooksApiStatus.LOADING -> {
-                binding.statusImage.visibility = VISIBLE
-                binding.statusImage.setImageResource(R.drawable.loading_animation)
+                binding.statusProgressIndicator.visibility = VISIBLE
             }
             BooksApiStatus.DONE -> {
-                binding.statusImage.visibility = GONE
+                binding.statusProgressIndicator.visibility = GONE
             }
             BooksApiStatus.ERROR -> {
-                binding.statusImage.visibility = VISIBLE
-                binding.statusImage.setImageResource(R.drawable.ic_connection_error)
-            }
-            else -> {
-                binding.statusImage.visibility = GONE
+                binding.statusProgressIndicator.visibility = VISIBLE
             }
         }
     }
