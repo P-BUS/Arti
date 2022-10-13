@@ -34,10 +34,4 @@ class BooksRepository(private val database: BooksDatabase) {
             database.booksDao().insertAll(listBooks.asDatabaseModel())
         }
     }
-
-    suspend fun deleteAllBooks() {
-        withContext(Dispatchers.IO) {
-            database.booksDao().deleteAll()
-        }
-    }
 }
