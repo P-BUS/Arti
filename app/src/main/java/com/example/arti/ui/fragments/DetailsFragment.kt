@@ -14,13 +14,6 @@ import com.example.arti.ui.viewmodel.BooksViewModel
 class DetailsFragment : Fragment() {
     private lateinit var binding: DetailsFragmentBinding
     private val sharedViewModel: BooksViewModel by activityViewModels()
-    /*private val sharedViewModel: BooksViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        ViewModelProvider(this, BooksViewModelFactory(activity.application))
-            .get(BooksViewModel::class.java)
-    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +25,6 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         bindBook()
     }
 
@@ -41,7 +33,7 @@ class DetailsFragment : Fragment() {
         binding.bookDetailName.text = sharedViewModel.currentBook.value?.title.toString()
         sharedViewModel.currentBook.value?.let {
             //Load the image from web service using Coil
-            ImageLoader().loadImage(binding.bookDetailImage, it.cover_i, ImageSize.L) }
+            ImageLoader.loadImage(binding.bookDetailImage, it.cover_i, ImageSize.L) }
     }
 }
 

@@ -15,7 +15,7 @@ enum class ImageSize(imageSize: String) {
 /*
 * Load images from web service using Coil
 **/
-class ImageLoader {
+object ImageLoader {
     fun loadImage(imageView: ImageView, imageCode: Int, pictureSize: ImageSize) {
         val imageUrl = "https://covers.openlibrary.org/b/id/$imageCode-$pictureSize.jpg"
 

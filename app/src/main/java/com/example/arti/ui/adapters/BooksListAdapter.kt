@@ -17,9 +17,9 @@ class BooksListAdapter(
     class ListViewHolder(private var binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(book: OpenLibraryBook) {
             binding.itemAuthor.text = book.title
-            binding.itemName.text = book.author_alternative_name[0]
+            binding.itemName.text = book.author_name[0]
             //Load the image from web service using Coil
-            ImageLoader().loadImage(binding.itemImage, book.cover_i, ImageSize.M)
+            ImageLoader.loadImage(binding.itemImage, book.cover_i, ImageSize.M)
         }
     }
 

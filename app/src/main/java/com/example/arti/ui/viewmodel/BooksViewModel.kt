@@ -22,26 +22,9 @@ class BooksViewModel(
 //    private val booksDao: BooksDao
 ) : AndroidViewModel(application) {
 
-
     private val booksRepository = BooksRepository(getDatabase(application))
 
     val books = booksRepository.books
-
- /*   private val _allBooks: LiveData<List<BooksEntity>> = booksDao.getAllBooks().asLiveData()
-    val allBooks: LiveData<List<BooksEntity>> = _allBooks
-
-    fun retrieveBook(name: String): LiveData<BooksEntity> {
-        return booksDao.getBook(name).asLiveData()
-    }
-
-fun deleteBook(book: BooksEntity) {
-    viewModelScope.launch {
-        booksDao.delete(book)
-    }
-}*/
-
-    /*private var _openLibraryBooks = MutableLiveData<List<OpenLibraryBook>>()
-    val openLibraryBooks: LiveData<List<OpenLibraryBook>> = _openLibraryBooks*/
 
     private val _currentBook = MutableLiveData<OpenLibraryBook>()
     val currentBook: LiveData<OpenLibraryBook> = _currentBook
@@ -70,29 +53,6 @@ fun deleteBook(book: BooksEntity) {
             }
         }
     }
-
-
-
-
-/*    fun getOpenLibrarySearchResponse() {
-       viewModelScope.launch {
-            _status.value = BooksApiStatus.LOADING
-            try {
-                _openLibraryBooks.value = BooksApi.retrofitApiService.getSearchBooks(
-//                    "Чорна рада",
-//                     "ukr",
-//                    "true",
-//                   "ebooks"
-                )
-                //_openLibraryBooks.value = _openLibrarySearchResponse.docs
-
-                _status.value = BooksApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = BooksApiStatus.ERROR
-                //_openLibrarySearchResponse.value =
-            }
-        }
-    }*/
 
     // Updates current book LiveData property
     fun updateCurrentBook(book: OpenLibraryBook) {

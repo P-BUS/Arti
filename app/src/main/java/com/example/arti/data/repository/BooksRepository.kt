@@ -25,13 +25,19 @@ class BooksRepository(private val database: BooksDatabase) {
     suspend fun refreshBooks() {
         withContext(Dispatchers.IO) {
             val searchResult = BooksApi.retrofitApiService.getSearchBooks(
-               searchText = "Шевченко",
+               searchText = "Ukraine",
                booksLanguage = "ukr",
                hasFullText = "true",
                typeOfDocument = "ebooks"
             )
             val listBooks: List<OpenLibraryBook> = searchResult.docs
             database.booksDao().insertAll(listBooks.asDatabaseModel())
+        }
+    }
+
+    suspend fun deleteAllBooks() {
+        withContext(Dispatchers.IO) {
+            database.booksDao().deleteAll()
         }
     }
 }

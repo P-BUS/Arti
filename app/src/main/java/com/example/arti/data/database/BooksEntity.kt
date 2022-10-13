@@ -16,7 +16,7 @@ data class BooksEntity(
     @ColumnInfo(name = "_version_")
     val version: Long,
 
-    @ColumnInfo(name = "author_alternative_name")
+    @ColumnInfo (name = "author_alternative_name")
     val authorAlternativeName: List<String>,
 
     @ColumnInfo(name = "author_facet")
@@ -136,11 +136,11 @@ data class BooksEntity(
     @ColumnInfo(name = "publish_year")
     val publishYear: List<Int>,
 
-    @ColumnInfo(name = "publisher")
-    val publisher: List<String>,
+    //@ColumnInfo(name = "publisher")
+    //val publisher: List<String>,
 
-    @ColumnInfo(name = "publisher_facet")
-    val publisherFacet: List<String>,
+    //@ColumnInfo(name = "publisher_facet")
+    //val publisherFacet: List<String>,
 
     @ColumnInfo(name = "seed")
     val seed: List<String>,
@@ -238,8 +238,8 @@ fun List<BooksEntity>.asDomainModel(): List<OpenLibraryBook> {
             publish_date = it.publishDate,
             //publish_place = it.publishPlace,
             publish_year = it.publishYear,
-            publisher = it.publisher,
-            publisher_facet = it.publisherFacet,
+            //publisher = it.publisher,
+            //publisher_facet = it.publisherFacet,
             seed = it.seed,
             subject = it.subject,
             subject_facet = it.subjectFacet,
@@ -303,8 +303,8 @@ fun List<OpenLibraryBook>.asDatabaseModel(): List<BooksEntity> {
             publishDate = it.publish_date,
             //publishPlace = it.publish_place,
             publishYear = it.publish_year,
-            publisher = it.publisher,
-            publisherFacet = it.publisher_facet,
+            //publisher = it.publisher,
+            //publisherFacet = it.publisher_facet,
             seed = it.seed,
             subject = it.subject,
             subjectFacet = it.subject_facet,
