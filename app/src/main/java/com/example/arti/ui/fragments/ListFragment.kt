@@ -23,6 +23,7 @@ import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
 import com.example.arti.ui.viewmodel.BooksViewModel
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 
@@ -82,7 +83,10 @@ class ListFragment: Fragment() {
         */
         lifecycleScope.launch {
             sharedViewModel.status
+                // repeatOnLifecycle() under the hood for single flow - for simplicity
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                // Diffing: Returns flow where all subsequent repetitions of the same value are filtered out.
+                .distinctUntilChanged()
                 .collect {
                     showLoadingImage()
                 }
