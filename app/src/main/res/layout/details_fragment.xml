@@ -1,78 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragments.DetailsFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.DetailsFragment">
 
     <ImageView
         android:id="@+id/book_detail_image"
         android:layout_width="200dp"
         android:layout_height="300dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/side_margin"
+        android:layout_margin="@dimen/side_margin"
         android:contentDescription="@string/book_name_1"
         android:scaleType="centerCrop"
         app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/image1" />
 
-    <TextView
-        android:id="@+id/book_detail_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/side_margin"
-        android:text="@string/book_name_1"
-        android:padding="@dimen/side_margin" />
-
-    <TextView
-        android:id="@+id/book_author_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/side_margin"
-        android:text="@string/book_name_1"
-        android:padding="@dimen/side_margin" />
-
-    <TextView
-        android:id="@+id/book_detail_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/side_margin"
-        android:text="@string/description"
-        android:padding="@dimen/side_margin"
-        android:visibility="gone"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end" >
-
-        <Button
-            android:id="@+id/buy_button"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="128dp"
+        <TextView
+            android:id="@+id/book_detail_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/side_margin"
-            android:text="@string/buy_now" />
+            app:layout_constraintLeft_toRightOf="@id/book_detail_image"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/side_margin"
+            android:text="@string/book_name_1"
+            android:padding="@dimen/side_margin" />
 
-        <Button
-            android:id="@+id/read_button"
-            android:layout_width="128dp"
+        <TextView
+            android:id="@+id/book_author_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/side_margin"
-            android:text="@string/read" />
+            android:layout_marginTop="@dimen/side_margin"
+            app:layout_constraintTop_toBottomOf="@id/book_detail_name"
+            app:layout_constraintStart_toEndOf="@id/book_detail_image"
+            android:text="@string/book_name_1"
+            android:padding="@dimen/side_margin" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/book_detail_image"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/margin_between_sections"
+            android:gravity="center_horizontal" >
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/bottom_navigation_menu" />
+            <Button
+                android:id="@+id/buy_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:text="@string/read_later" />
 
-</LinearLayout>
+            <Button
+                android:id="@+id/read_button"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:text="@string/read" />
+
+        </LinearLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_navigation_menu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

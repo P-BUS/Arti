@@ -20,6 +20,7 @@
     <string name="book_author_6">Klaus Schwab</string>
 
     <string name="read">Read</string>
+    <string name="read_later">read later</string>
     <string name="description">One of the interesting books you want to read today. Dune is a 1965 epic science fiction novel by American author Frank Herbert, originally published as two separate serials in Analog magazine. </string>
     <string name="book_details">Book details</string>
     <string name="buy_now">Buy now</string>
@@ -32,8 +33,8 @@
     <string name="mail_subject">Your order</string>
     <string name="mail_text">Hello, dear friend. \n\nYour journey with book %1$s of %2$s will start soon. \nYour book cost is %3$s \n\nThank you for order, enjoy! </string>
     <string name="action_switch_layout">Switch Layout</string>
-    <string name="page_3" />
-    <string name="page_2" />
-    <string name="page_1" />
+    <string name="page_1">search</string>
+    <string name="page_2">reading</string>
+    <string name="page_3">books</string>
 
 </resources>

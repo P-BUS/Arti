@@ -4,7 +4,7 @@
     <item
         android:id="@+id/page_1"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:icon="@drawable/ic_baseline_manage_search_24"
         android:title="@string/page_1"/>
     <item
         android:id="@+id/page_2"
@@ -14,6 +14,6 @@
     <item
         android:id="@+id/page_3"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:icon="@drawable/ic_baseline_library_books_24"
         android:title="@string/page_3"/>
 </menu>
