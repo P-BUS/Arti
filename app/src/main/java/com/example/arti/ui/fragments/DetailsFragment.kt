@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.arti.databinding.DetailsFragmentBinding
+import com.example.arti.other.Constants
 import com.example.arti.other.ImageLoader
 import com.example.arti.other.ImageSize
 import com.example.arti.ui.viewmodel.BooksViewModel
@@ -26,6 +28,10 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindBook()
+        with(binding.detailsFragmentWebView) {
+            loadUrl(Constants.WEB_URL)
+            webViewClient = WebViewClient()
+        }
     }
 
     private fun bindBook() {
@@ -35,6 +41,8 @@ class DetailsFragment : Fragment() {
             //Load the image from web service using Coil
             ImageLoader.loadImage(binding.bookDetailImage, it.cover_i, ImageSize.L) }
     }
+
+
 }
 
 
