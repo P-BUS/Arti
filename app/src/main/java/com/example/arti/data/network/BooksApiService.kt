@@ -43,7 +43,7 @@ interface BooksApiService {
     ): OpenLibrarySearchResponse
 }
 
-object BooksApi {
+object BooksRemoteDataSource {
     val retrofitApiService : BooksApiService by lazy {
         retrofit.create(BooksApiService::class.java)
     }

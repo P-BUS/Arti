@@ -8,19 +8,18 @@ import androidx.room.TypeConverters
 
 @Database(entities = [BooksEntity::class], version = 1, exportSchema = false)
 @TypeConverters(ConverterString::class, ConverterInt::class)
-
-abstract class BooksDatabase : RoomDatabase() {
+abstract class BooksLocalDataSource : RoomDatabase() {
     abstract fun booksDao(): BooksDao
 
     companion object {
         @Volatile //The value of a volatile variable will never be cached, and all writes and reads will be done to and from the main memory.
-        private var INSTANCE: BooksDatabase? = null
+        private var INSTANCE: BooksLocalDataSource? = null
 
-        fun getDatabase(context: Context): BooksDatabase {
+        fun getLocalDataSource(context: Context): BooksLocalDataSource {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    BooksDatabase::class.java,
+                    BooksLocalDataSource::class.java,
                     "books_database"
                 )
                     .fallbackToDestructiveMigration()

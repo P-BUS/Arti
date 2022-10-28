@@ -1,12 +1,12 @@
 package com.example.arti
 
 import android.app.Application
-import com.example.arti.data.database.BooksDatabase
+import com.example.arti.data.database.BooksLocalDataSource
 
 /**
  * An application class that inherits from [Application], allows for the creation of a singleton
- * instance of the [BooksDatabase]
+ * instance of the [BooksLocalDataSource]
  */
 class BaseApplication : Application() {
-    val database: BooksDatabase by lazy { BooksDatabase.getDatabase(this) }
+    val database: BooksLocalDataSource by lazy { BooksLocalDataSource.getLocalDataSource(this) }
 }

@@ -18,7 +18,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arti.R
-import com.example.arti.data.SettingsDataStore
+import com.example.arti.data.database.BooksLocalDataSource
+import com.example.arti.data.repository.LayoutRepository
 import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
@@ -27,10 +28,10 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 
-class ListFragment: Fragment() {
+class ListFragment : Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var SettingsDataStore: SettingsDataStore
+    private lateinit var BooksLocalDataSource: BooksLocalDataSource
     private var isLinearLayoutManager = true // Keeps track of which LayoutManager is in use
 
     private val sharedViewModel: BooksViewModel by activityViewModels()
@@ -55,10 +56,12 @@ class ListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val menuHost: MenuHost = requireActivity()
         recyclerView = binding.recyclerView
+        // TODO: I created repository for DataStore but don't understand how to pass context
+        //  and why it needed
         // Initialize SettingsDataStore
-        SettingsDataStore = SettingsDataStore(requireContext())
+        BooksLocalDataSource = BooksLocalDataSource(requireContext())
 
-        SettingsDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner) { value ->
+        sharedViewModel.isLinearLayout.observe(viewLifecycleOwner) { value ->
             isLinearLayoutManager = value
             chooseLayout()
             // TODO: Redraw the options menu not work as I expected need to change
@@ -97,6 +100,7 @@ class ListFragment: Fragment() {
                 // Add menu items here
                 menuInflater.inflate(R.menu.menu_layout, menu)
             }
+
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Handle the menu selection
                 return when (menuItem.itemId) {
@@ -108,7 +112,10 @@ class ListFragment: Fragment() {
                         setIcon(menuItem)
                         // Launches a coroutine and write the layout setting in the preference Datastore
                         lifecycleScope.launch() {
-                            SettingsDataStore.saveLayoutToPreferencesStore(isLinearLayoutManager, requireContext())
+                            layoutRepository.saveLayoutToPreferencesStore(
+                                isLinearLayoutManager
+                                //requireContext()
+                            )
                         }
                         true
                     }
@@ -117,13 +124,20 @@ class ListFragment: Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
     }
+
     private fun setIcon(menuItem: MenuItem?) {
         if (menuItem == null)
             return
         menuItem.icon =
             if (isLinearLayoutManager)
-                ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_baseline_view_module_24)
-            else ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_baseline_view_list_24)
+                ContextCompat.getDrawable(
+                    this.requireContext(),
+                    R.drawable.ic_baseline_view_module_24
+                )
+            else ContextCompat.getDrawable(
+                this.requireContext(),
+                R.drawable.ic_baseline_view_list_24
+            )
     }
 
     /**
@@ -138,7 +152,7 @@ class ListFragment: Fragment() {
     }
 
     private fun showLoadingImage() {
-        when(sharedViewModel.status.value) {
+        when (sharedViewModel.status.value) {
             BooksApiStatus.LOADING -> {
                 binding.statusProgressIndicator.visibility = VISIBLE
             }
