@@ -30,18 +30,11 @@ class BooksRepository(
     /**
      * This method retrieve data from network and refresh the offline database.
      */
-    suspend fun refreshBooks(
-        searchText: String,
-        booksLanguage: String,
-        hasFullText: String,
-        typeOfDocument: String
-    ) {
+    suspend fun refreshBooks(searchText: String) {
         withContext(Dispatchers.IO) {
+            // TODO: add handle IO Exceptions
             val searchResult = network.retrofitApiService.getSearchBooks(
-                searchText = searchText,
-                booksLanguage = booksLanguage,
-                hasFullText = hasFullText,
-                typeOfDocument = typeOfDocument
+                searchText = searchText
             )
             val listBooks: List<OpenLibraryBook> = searchResult.docs
             database.booksDao().insertAll(listBooks.asDatabaseModel())

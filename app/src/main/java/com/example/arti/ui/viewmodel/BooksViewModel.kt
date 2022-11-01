@@ -10,10 +10,12 @@ import com.example.arti.data.datastore.LocalDataSource
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.repository.BooksRepository
 import com.example.arti.data.repository.LayoutRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.io.IOException
+import kotlin.coroutines.CoroutineContext
 
 
 enum class BooksApiStatus { LOADING, ERROR, DONE }
@@ -25,12 +27,20 @@ class BooksViewModel(
     private val layoutRepository: LayoutRepository
 ) : ViewModel() {
 
+    var searchText: String = "Ukraine"
+
     // TODO: Transform from Flow to StateFow
-    val books: Flow<List<OpenLibraryBook>> = booksRepository.books
-        // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
-        .retry(3) { e ->
-            (e is IOException).also { if (it) delay(1000) }
-        }
+/*    private var _books = MutableStateFlow(listOf<OpenLibraryBook>())
+    val books: StateFlow<List<BooksApiStatus>> = _books.asStateFlow()*/
+    private var _books = booksRepository.books.stateIn()
+/*    suspend fun retrieveBooks() {
+        _books = booksRepository.books
+            // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
+            .retry(3) { e ->
+                (e is IOException).also { if (it) delay(1000) }
+            }
+            .stateIn()
+    }*/
 
     // Store the information about layout type saved by user
     val isLinearLayout = layoutRepository.layoutTypeStream.asLiveData()
@@ -45,24 +55,14 @@ class BooksViewModel(
     val status: StateFlow<BooksApiStatus> = _status.asStateFlow()
 
     init {
-        refreshDataFromRepository(
-            "Ukraine",
-            "ukr",
-            "true",
-            "ebooks"
-        )
+        refreshDataFromRepository(searchText)
     }
 
-    private fun refreshDataFromRepository(
-        searchText: String,
-        booksLanguage: String,
-        hasFullText: String,
-        typeOfDocument: String
-    ) {
+    private fun refreshDataFromRepository(searchText: String) {
         viewModelScope.launch {
             _status.value = BooksApiStatus.LOADING
             try {
-                booksRepository.refreshBooks(searchText, booksLanguage, hasFullText, typeOfDocument)
+                booksRepository.refreshBooks(searchText)
                 _status.value = BooksApiStatus.DONE
             } catch (networkError: IOException) {
                 _status.value = BooksApiStatus.ERROR

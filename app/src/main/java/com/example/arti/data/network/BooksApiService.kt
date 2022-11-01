@@ -36,10 +36,10 @@ interface BooksApiService {
  //Searches e-books with full text by description and language
     @GET("search.json")
    suspend fun getSearchBooks(
-        @Query("q") searchText: String,
-        @Query("language") booksLanguage: String,
-        @Query("has_fulltext") hasFullText: String,
-        @Query("mode") typeOfDocument: String
+        @Query("q") searchText: String = "Ukraine",
+        @Query("language") booksLanguage: String = "ukr",
+        @Query("has_fulltext") hasFullText: String = "true",
+        @Query("mode") typeOfDocument: String = "ebooks"
     ): OpenLibrarySearchResponse
 }
 
