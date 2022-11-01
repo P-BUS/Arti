@@ -91,6 +91,7 @@ class ListFragment : Fragment() {
         }
         recyclerView.adapter = adapter
 
+        // TODO: Transform to hot Flow observer
         // observe the list of books from the view model and submit it the adapter
         sharedViewModel.books.observe(viewLifecycleOwner) { books ->
             books.let {

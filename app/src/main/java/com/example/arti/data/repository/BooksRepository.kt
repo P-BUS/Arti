@@ -2,13 +2,17 @@ package com.example.arti.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.asLiveData
+
 import com.example.arti.data.database.BooksLocalDataSource
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.network.BooksRemoteDataSource
 import com.example.arti.other.asDatabaseModel
 import com.example.arti.other.asDomainModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 
@@ -18,22 +22,26 @@ class BooksRepository(
 ) {
 
     //Transforms database entity to domain
-    val books: LiveData<List<OpenLibraryBook>> =
-        Transformations.map(database.booksDao().getAllBooks().asLiveData()) {
-            it.asDomainModel()
-        }
+    // TODO: Transform to Flow
+    val books: Flow<List<OpenLibraryBook>> =
+        database.booksDao().getAllBooks()
+            .map { it.asDomainModel() }
 
     /**
-     * This method the API used to refresh the offline cache.
+     * This method retrieve data from network and refresh the offline database.
      */
-    // TODO: Implementation in repository?
-    suspend fun refreshBooks() {
+    suspend fun refreshBooks(
+        searchText: String,
+        booksLanguage: String,
+        hasFullText: String,
+        typeOfDocument: String
+    ) {
         withContext(Dispatchers.IO) {
             val searchResult = network.retrofitApiService.getSearchBooks(
-                searchText = "Ukraine",
-                booksLanguage = "ukr",
-                hasFullText = "true",
-                typeOfDocument = "ebooks"
+                searchText = searchText,
+                booksLanguage = booksLanguage,
+                hasFullText = hasFullText,
+                typeOfDocument = typeOfDocument
             )
             val listBooks: List<OpenLibraryBook> = searchResult.docs
             database.booksDao().insertAll(listBooks.asDatabaseModel())
