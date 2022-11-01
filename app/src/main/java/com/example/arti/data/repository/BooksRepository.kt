@@ -4,16 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import com.example.arti.data.database.BooksLocalDataSource
-import com.example.arti.data.database.asDatabaseModel
-import com.example.arti.data.database.asDomainModel
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.network.BooksRemoteDataSource
+import com.example.arti.other.asDatabaseModel
+import com.example.arti.other.asDomainModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
 class BooksRepository(
-    private val database: BooksLocalDataSource
+    private val database: BooksLocalDataSource,
+    private val network: BooksRemoteDataSource
 ) {
 
     //Transforms database entity to domain
@@ -28,7 +29,7 @@ class BooksRepository(
     // TODO: Implementation in repository?
     suspend fun refreshBooks() {
         withContext(Dispatchers.IO) {
-            val searchResult = BooksRemoteDataSource.retrofitApiService.getSearchBooks(
+            val searchResult = network.retrofitApiService.getSearchBooks(
                 searchText = "Ukraine",
                 booksLanguage = "ukr",
                 hasFullText = "true",

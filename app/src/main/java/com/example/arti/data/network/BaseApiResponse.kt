@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import retrofit2.Response
 
 class BaseApiResponse {
-
+/*
     suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): NetworkResult<T> {
         return try {
             val response = apiCall()
@@ -58,5 +58,5 @@ class BaseApiResponse {
         } catch (e: Exception) {
             NetworkResult.Error(e)
         }
-    }
+    }*/
 }

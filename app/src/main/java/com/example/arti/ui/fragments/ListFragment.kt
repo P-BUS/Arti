@@ -17,13 +17,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.arti.BaseApplication
 import com.example.arti.R
 import com.example.arti.data.database.BooksLocalDataSource
+import com.example.arti.data.datastore.LocalDataSource
+import com.example.arti.data.network.BooksRemoteDataSource
+import com.example.arti.data.repository.BooksRepository
 import com.example.arti.data.repository.LayoutRepository
 import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
 import com.example.arti.ui.viewmodel.BooksViewModel
+import com.example.arti.ui.viewmodel.BooksViewModelFactory
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
@@ -31,18 +36,31 @@ import kotlinx.coroutines.launch
 class ListFragment : Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var BooksLocalDataSource: BooksLocalDataSource
+
+    //private lateinit var BooksLocalDataSource: BooksLocalDataSource
     private var isLinearLayoutManager = true // Keeps track of which LayoutManager is in use
 
-    private val sharedViewModel: BooksViewModel by activityViewModels()
+    private val sharedViewModel: BooksViewModel by activityViewModels() {
+        BooksViewModelFactory(
+            //requireActivity().application,
+            // TODO: How to pass here repositories in a right way?
+            BooksRepository(
+                (activity?.application as BaseApplication).database,
+                BooksRemoteDataSource
+            ),
+            LayoutRepository(
+                LocalDataSource()
+            )
+        )
+    }
 
-/*    private val sharedViewModel: BooksViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        ViewModelProvider(this, BooksViewModelFactory(activity.application))
-            .get(BooksViewModel::class.java)
-    }*/
+/*        private val sharedViewModel: BooksViewModel by lazy {
+            val activity = requireNotNull(this.activity) {
+                "You can only access the viewModel after onActivityCreated()"
+            }
+            ViewModelProvider(this, BooksViewModelFactory(activity.application))
+                .get(BooksViewModel::class.java)
+        }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +77,7 @@ class ListFragment : Fragment() {
         // TODO: I created repository for DataStore but don't understand how to pass context
         //  and why it needed
         // Initialize SettingsDataStore
-        BooksLocalDataSource = BooksLocalDataSource(requireContext())
+        //BooksLocalDataSource = BooksLocalDataSource(requireContext())
 
         sharedViewModel.isLinearLayout.observe(viewLifecycleOwner) { value ->
             isLinearLayoutManager = value

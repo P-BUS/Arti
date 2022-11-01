@@ -3,7 +3,9 @@ package com.example.arti.ui.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.arti.data.database.BooksLocalDataSource
 import com.example.arti.data.database.BooksLocalDataSource.Companion.getLocalDataSource
+import com.example.arti.data.datastore.LocalDataSource
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.repository.BooksRepository
 import com.example.arti.data.repository.LayoutRepository
@@ -19,12 +21,9 @@ enum class BooksApiStatus { LOADING, ERROR, DONE }
 const val TAG = "BooksViewModel"
 
 class BooksViewModel(
-    application: Application,
     private val booksRepository: BooksRepository,
-    layoutRepository: LayoutRepository
-) : AndroidViewModel(application) {
-
-    //private val booksRepository = BooksRepository(getLocalDataSource(application))
+    private val layoutRepository: LayoutRepository
+) : ViewModel() {
 
     val books = booksRepository.books
 
@@ -64,15 +63,20 @@ class BooksViewModel(
 }
 
 class BooksViewModelFactory(
-    private val application: Application,
+    //private val application: Application,
     private val booksRepository: BooksRepository,
     private val layoutRepository: LayoutRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(BooksViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return BooksViewModel(application, booksRepository, layoutRepository) as T
+            return BooksViewModel(
+                booksRepository,
+                layoutRepository
+            ) as T
         }
         throw IllegalArgumentException("Unable to construct viewmodel")
     }
 }
+
+

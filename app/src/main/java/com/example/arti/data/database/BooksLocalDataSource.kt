@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.arti.other.ConverterInt
+import com.example.arti.other.ConverterString
 
 @Database(entities = [BooksEntity::class], version = 1, exportSchema = false)
 @TypeConverters(ConverterString::class, ConverterInt::class)
