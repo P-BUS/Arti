@@ -6,8 +6,10 @@ import kotlinx.coroutines.flow.Flow
 
 class LayoutRepository(private val localDataSource: LocalDataSource) {
 
+    // Read
     val layoutTypeStream: Flow<Boolean> = localDataSource.layoutTypeStream
 
+    // Write
     suspend fun saveLayoutToPreferencesStore(isLinearLayoutManager: Boolean) =
         localDataSource.saveLayoutToPreferencesStore(isLinearLayoutManager)
 }

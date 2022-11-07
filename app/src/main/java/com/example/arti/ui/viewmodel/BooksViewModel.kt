@@ -27,32 +27,43 @@ class BooksViewModel(
     private val layoutRepository: LayoutRepository
 ) : ViewModel() {
 
-    var searchText: String = "Ukraine"
-
-    // TODO: Transform from Flow to StateFow
-/*    private var _books = MutableStateFlow(listOf<OpenLibraryBook>())
-    val books: StateFlow<List<BooksApiStatus>> = _books.asStateFlow()*/
-    private var _books = booksRepository.books.stateIn()
-/*    suspend fun retrieveBooks() {
-        _books = booksRepository.books
+    // Transforms books Flow to StateFow with and retrying to fetch data if IO Exceptions
+    val books: StateFlow<List<OpenLibraryBook>> =
+        booksRepository.books
             // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
             .retry(3) { e ->
                 (e is IOException).also { if (it) delay(1000) }
             }
-            .stateIn()
-    }*/
+            // transforms from cold Flow to hot StateFlow
+            .stateIn(
+                scope = viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                initialValue = listOf()
+            )
 
     // Store the information about layout type saved by user
-    val isLinearLayout = layoutRepository.layoutTypeStream.asLiveData()
+    val isLinearLayout: StateFlow<Boolean> =
+        layoutRepository.layoutTypeStream
+            // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
+            .retry(3) { e ->
+                (e is IOException).also { if (it) delay(1000) }
+            }
+            // transforms from cold Flow to hot StateFlow
+            .stateIn(
+                scope = viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                initialValue = true
+            )
 
     private val _currentBook = MutableLiveData<OpenLibraryBook>()
     val currentBook: LiveData<OpenLibraryBook> = _currentBook
 
-    /**
-     * Store the status of updating database from web service
-     */
+    // Store the status of updating database from web service
     private val _status = MutableStateFlow(BooksApiStatus.DONE)
     val status: StateFlow<BooksApiStatus> = _status.asStateFlow()
+
+    // Default search when the APP is started
+    var searchText: String = "Ukraine"
 
     init {
         refreshDataFromRepository(searchText)
@@ -75,6 +86,11 @@ class BooksViewModel(
     fun updateCurrentBook(book: OpenLibraryBook) {
         _currentBook.value = book
     }
+
+    // TODO: Fun was passed throughout layers without changes only to keep data flow in a right direction
+    // Write to a Preferences DataStore
+    suspend fun saveLayoutToPreferencesStore(isLinearLayoutManager: Boolean) =
+        layoutRepository.saveLayoutToPreferencesStore(isLinearLayoutManager)
 }
 
 class BooksViewModelFactory(

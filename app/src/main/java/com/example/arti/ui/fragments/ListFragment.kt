@@ -79,25 +79,49 @@ class ListFragment : Fragment() {
         // Initialize SettingsDataStore
         //BooksLocalDataSource = BooksLocalDataSource(requireContext())
 
-        sharedViewModel.isLinearLayout.observe(viewLifecycleOwner) { value ->
+        lifecycleScope.launch {
+            sharedViewModel.isLinearLayout
+                // repeatOnLifecycle() under the hood for single flow - for simplicity
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                // Diffing: Returns flow where all subsequent repetitions of the same value are filtered out.
+                .distinctUntilChanged() // TODO: maybe it is not needed here?
+                .collect { value ->
+                    isLinearLayoutManager = value
+                    chooseLayout()
+                    // TODO: Redraw the options menu not work as I expected need to change
+                    //activity?.invalidateMenu()
+                }
+        }
+
+/*        sharedViewModel.isLinearLayout.observe(viewLifecycleOwner) { value ->
             isLinearLayoutManager = value
             chooseLayout()
-            // TODO: Redraw the options menu not work as I expected need to change
             //activity?.invalidateMenu()
-        }
+        }*/
+
         val adapter = BooksListAdapter { currentBook ->
             sharedViewModel.updateCurrentBook(currentBook)
             findNavController().navigate(R.id.action_listFragment_to_detailsFragment)
         }
         recyclerView.adapter = adapter
 
-        // TODO: Transform to hot Flow observer
-        // observe the list of books from the view model and submit it the adapter
-        sharedViewModel.books.observe(viewLifecycleOwner) { books ->
+        /*
+        * Observe changes of books using State Flow
+        * when fragment is on Started state and based on Coroutines
+        */
+        lifecycleScope.launch {
+            sharedViewModel.books
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .distinctUntilChanged() // TODO: maybe it is not needed here?
+                .collect {
+                    adapter.submitList(it)
+                }
+        }
+/*        sharedViewModel.books.observe(viewLifecycleOwner) { books ->
             books.let {
                 adapter.submitList(it)
             }
-        }
+        }*/
 
         /*
         * Observe changes of BooksApiStatus loading using State Flow
@@ -108,7 +132,7 @@ class ListFragment : Fragment() {
                 // repeatOnLifecycle() under the hood for single flow - for simplicity
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 // Diffing: Returns flow where all subsequent repetitions of the same value are filtered out.
-                .distinctUntilChanged()
+                .distinctUntilChanged() // TODO: maybe it is not needed here?
                 .collect {
                     showLoadingImage()
                 }
@@ -131,7 +155,7 @@ class ListFragment : Fragment() {
                         setIcon(menuItem)
                         // Launches a coroutine and write the layout setting in the preference Datastore
                         lifecycleScope.launch() {
-                            layoutRepository.saveLayoutToPreferencesStore(
+                            sharedViewModel.saveLayoutToPreferencesStore(
                                 isLinearLayoutManager
                                 //requireContext()
                             )
