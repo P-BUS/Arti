@@ -44,13 +44,8 @@ class ListFragment : Fragment() {
         BooksViewModelFactory(
             //requireActivity().application,
             // TODO: How to pass here repositories in a right way?
-            BooksRepository(
-                (activity?.application as BaseApplication).database,
-                BooksRemoteDataSource
-            ),
-            LayoutRepository(
-                LocalDataSource()
-            )
+            BooksRepository(),
+            LayoutRepository()
         )
     }
 

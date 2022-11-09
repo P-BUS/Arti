@@ -94,19 +94,15 @@ class BooksViewModel(
 }
 
 class BooksViewModelFactory(
-    //private val application: Application,
     private val booksRepository: BooksRepository,
     private val layoutRepository: LayoutRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(BooksViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return BooksViewModel(
-                booksRepository,
-                layoutRepository
-            ) as T
+            return BooksViewModel(booksRepository, layoutRepository) as T
         }
-        throw IllegalArgumentException("Unable to construct viewmodel")
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
 

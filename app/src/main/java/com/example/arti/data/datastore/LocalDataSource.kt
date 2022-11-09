@@ -20,7 +20,9 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
 
 class LocalDataSource(private val dataStore: DataStore<Preferences>) {
 
-    private val IS_LINEAR_LAYOUT_MANAGER = booleanPreferencesKey("is_linear_layout_manager")
+    private object PreferencesKeys {
+        val IS_LINEAR_LAYOUT_MANAGER = booleanPreferencesKey("is_linear_layout_manager")
+    }
 
     // Read Flow from a Preferences DataStore
     val layoutTypeStream: Flow<Boolean> = dataStore.data
@@ -34,13 +36,13 @@ class LocalDataSource(private val dataStore: DataStore<Preferences>) {
         }
         .map { preferences ->
             // On the first run of the app, we will use LinearLayoutManager by default
-            preferences[IS_LINEAR_LAYOUT_MANAGER] ?: true
+            preferences[PreferencesKeys.IS_LINEAR_LAYOUT_MANAGER] ?: true
         }
 
     // Write to a Preferences DataStore
     suspend fun saveLayoutToPreferencesStore(isLinearLayoutManager: Boolean) {
         dataStore.edit { preferences ->
-            preferences[IS_LINEAR_LAYOUT_MANAGER] = isLinearLayoutManager
+            preferences[PreferencesKeys.IS_LINEAR_LAYOUT_MANAGER] = isLinearLayoutManager
         }
     }
 }
