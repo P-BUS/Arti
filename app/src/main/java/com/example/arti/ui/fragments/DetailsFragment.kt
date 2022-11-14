@@ -18,8 +18,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private lateinit var binding: DetailsFragmentBinding
-
-    val sharedViewModel: BooksViewModel by activityViewModels()
+    private val sharedViewModel: BooksViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

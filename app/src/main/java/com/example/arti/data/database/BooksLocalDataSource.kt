@@ -7,10 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.arti.other.ConverterInt
 import com.example.arti.other.ConverterString
+import dagger.Provides
 
 @Database(entities = [BooksEntity::class], version = 1, exportSchema = false)
 @TypeConverters(ConverterString::class, ConverterInt::class)
 abstract class BooksLocalDataSource : RoomDatabase() {
+
     abstract fun booksDao(): BooksDao
 
     companion object {

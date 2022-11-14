@@ -10,20 +10,13 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.arti.BaseApplication
 import com.example.arti.R
-import com.example.arti.data.database.BooksLocalDataSource
-import com.example.arti.data.datastore.LocalDataSource
-import com.example.arti.data.network.BooksRemoteDataSource
-import com.example.arti.data.repository.BooksRepository
-import com.example.arti.data.repository.LayoutRepository
 import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
@@ -37,26 +30,8 @@ import javax.inject.Inject
 class ListFragment : Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
-
-    //private lateinit var BooksLocalDataSource: BooksLocalDataSource
+    private val sharedViewModel: BooksViewModel by activityViewModels()
     private var isLinearLayoutManager = true // Keeps track of which LayoutManager is in use
-
-    val sharedViewModel: BooksViewModel by activityViewModels() /*{
-        BooksViewModelFactory(
-            //requireActivity().application,
-            // TODO: How to pass here repositories in a right way? Injection?
-            BooksRepository(),
-            LayoutRepository()
-        )
-    }*/
-
-/*        private val sharedViewModel: BooksViewModel by lazy {
-            val activity = requireNotNull(this.activity) {
-                "You can only access the viewModel after onActivityCreated()"
-            }
-            ViewModelProvider(this, BooksViewModelFactory(activity.application))
-                .get(BooksViewModel::class.java)
-        }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,10 +45,6 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val menuHost: MenuHost = requireActivity()
         recyclerView = binding.recyclerView
-        // TODO: I created repository for DataStore but don't understand how to pass context
-        //  and why it needed
-        // Initialize SettingsDataStore
-        //BooksLocalDataSource = BooksLocalDataSource(requireContext())
 
         lifecycleScope.launch {
             sharedViewModel.isLinearLayout
@@ -88,12 +59,6 @@ class ListFragment : Fragment() {
                     //activity?.invalidateMenu()
                 }
         }
-
-/*        sharedViewModel.isLinearLayout.observe(viewLifecycleOwner) { value ->
-            isLinearLayoutManager = value
-            chooseLayout()
-            //activity?.invalidateMenu()
-        }*/
 
         val adapter = BooksListAdapter { currentBook ->
             sharedViewModel.updateCurrentBook(currentBook)
@@ -113,11 +78,6 @@ class ListFragment : Fragment() {
                     adapter.submitList(it)
                 }
         }
-/*        sharedViewModel.books.observe(viewLifecycleOwner) { books ->
-            books.let {
-                adapter.submitList(it)
-            }
-        }*/
 
         /*
         * Observe changes of BooksApiStatus loading using State Flow

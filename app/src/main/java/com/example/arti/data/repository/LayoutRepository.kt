@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class LayoutRepository @Inject constructor(
     private val localDataSource: LocalDataSource
-    ) {
+) {
 
     // Read
     val layoutTypeStream: Flow<Boolean> = localDataSource.layoutTypeStream
