@@ -12,10 +12,14 @@ import com.example.arti.other.Constants
 import com.example.arti.other.ImageLoader
 import com.example.arti.other.ImageSize
 import com.example.arti.ui.viewmodel.BooksViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private lateinit var binding: DetailsFragmentBinding
-    private val sharedViewModel: BooksViewModel by activityViewModels()
+
+    val sharedViewModel: BooksViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,11 +39,13 @@ class DetailsFragment : Fragment() {
     }
 
     private fun bindBook() {
-        binding.bookAuthorName.text = sharedViewModel.currentBook.value?.author_name?.get(0).toString()
+        binding.bookAuthorName.text =
+            sharedViewModel.currentBook.value?.author_name?.get(0).toString()
         binding.bookDetailName.text = sharedViewModel.currentBook.value?.title.toString()
         sharedViewModel.currentBook.value?.let {
             //Load the image from web service using Coil
-            ImageLoader.loadImage(binding.bookDetailImage, it.cover_i, ImageSize.L) }
+            ImageLoader.loadImage(binding.bookDetailImage, it.cover_i, ImageSize.L)
+        }
     }
 
 

@@ -10,5 +10,5 @@ import dagger.hilt.android.HiltAndroidApp
  */
 @HiltAndroidApp
 class BaseApplication : Application() {
-    val database: BooksLocalDataSource by lazy { BooksLocalDataSource.getLocalDataSource(this) }
+    //val database: BooksLocalDataSource by lazy { BooksLocalDataSource.getLocalDataSource(this) }
 }

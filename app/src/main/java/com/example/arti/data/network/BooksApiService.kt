@@ -4,6 +4,7 @@ import com.example.arti.data.model.OpenLibrarySearchResponse
 import com.example.arti.other.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -33,9 +34,9 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface BooksApiService {
- //Searches e-books with full text by description and language
+    //Searches e-books with full text by description and language
     @GET("search.json")
-   suspend fun getSearchBooks(
+    suspend fun getSearchBooks(
         @Query("q") searchText: String = "Ukraine",
         @Query("language") booksLanguage: String = "ukr",
         @Query("has_fulltext") hasFullText: String = "true",
@@ -44,7 +45,7 @@ interface BooksApiService {
 }
 
 object BooksRemoteDataSource {
-    val retrofitApiService : BooksApiService by lazy {
+    val retrofitApiService: BooksApiService by lazy {
         retrofit.create(BooksApiService::class.java)
     }
 }

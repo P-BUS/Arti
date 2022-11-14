@@ -10,19 +10,19 @@ import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.network.BooksRemoteDataSource
 import com.example.arti.other.asDatabaseModel
 import com.example.arti.other.asDomainModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-
-class BooksRepository(
+class BooksRepository @Inject constructor(
     private val database: BooksLocalDataSource,
     private val network: BooksRemoteDataSource
 ) {
 
     //Transforms database entity to domain
-    // TODO: Transform to Flow
     val books: Flow<List<OpenLibraryBook>> =
         database.booksDao().getAllBooks()
             .map { it.asDomainModel() }
@@ -32,7 +32,7 @@ class BooksRepository(
      */
     suspend fun refreshBooks(searchText: String) {
         withContext(Dispatchers.IO) {
-            // TODO: add handle IO Exceptions
+            // TODO: implement safe response with exceptions handling
             val searchResult = network.retrofitApiService.getSearchBooks(
                 searchText = searchText
             )

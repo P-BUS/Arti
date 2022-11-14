@@ -10,11 +10,14 @@ import com.example.arti.data.datastore.LocalDataSource
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.repository.BooksRepository
 import com.example.arti.data.repository.LayoutRepository
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.io.IOException
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
@@ -22,7 +25,8 @@ enum class BooksApiStatus { LOADING, ERROR, DONE }
 
 const val TAG = "BooksViewModel"
 
-class BooksViewModel(
+@HiltViewModel
+class BooksViewModel @Inject constructor(
     private val booksRepository: BooksRepository,
     private val layoutRepository: LayoutRepository
 ) : ViewModel() {
@@ -93,7 +97,7 @@ class BooksViewModel(
         layoutRepository.saveLayoutToPreferencesStore(isLinearLayoutManager)
 }
 
-class BooksViewModelFactory(
+/*class BooksViewModelFactory(
     private val booksRepository: BooksRepository,
     private val layoutRepository: LayoutRepository
 ) : ViewModelProvider.Factory {
@@ -104,6 +108,6 @@ class BooksViewModelFactory(
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-}
+}*/
 
 

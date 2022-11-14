@@ -28,11 +28,12 @@ import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
 import com.example.arti.ui.viewmodel.BooksViewModel
-import com.example.arti.ui.viewmodel.BooksViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class ListFragment : Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var recyclerView: RecyclerView
@@ -40,14 +41,14 @@ class ListFragment : Fragment() {
     //private lateinit var BooksLocalDataSource: BooksLocalDataSource
     private var isLinearLayoutManager = true // Keeps track of which LayoutManager is in use
 
-    private val sharedViewModel: BooksViewModel by activityViewModels() {
+    val sharedViewModel: BooksViewModel by activityViewModels() /*{
         BooksViewModelFactory(
             //requireActivity().application,
-            // TODO: How to pass here repositories in a right way?
+            // TODO: How to pass here repositories in a right way? Injection?
             BooksRepository(),
             LayoutRepository()
         )
-    }
+    }*/
 
 /*        private val sharedViewModel: BooksViewModel by lazy {
             val activity = requireNotNull(this.activity) {
