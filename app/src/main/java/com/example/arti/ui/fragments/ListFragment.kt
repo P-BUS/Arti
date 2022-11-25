@@ -55,8 +55,8 @@ class ListFragment : Fragment() {
                 .collect { value ->
                     isLinearLayoutManager = value
                     chooseLayout()
-                    // TODO: Redraw the options menu not work as I expected need to change
-                    //activity?.invalidateMenu()
+                    //Redraw the options menu
+                    activity?.invalidateOptionsMenu()
                 }
         }
 

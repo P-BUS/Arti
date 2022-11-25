@@ -8,11 +8,13 @@ import androidx.room.TypeConverters
 import com.example.arti.other.ConverterInt
 import com.example.arti.other.ConverterString
 import dagger.Provides
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Database(entities = [BooksEntity::class], version = 1, exportSchema = false)
 @TypeConverters(ConverterString::class, ConverterInt::class)
-abstract class BooksLocalDataSource : RoomDatabase() {
-
+@Singleton
+abstract class BooksLocalDataSource @Inject constructor() : RoomDatabase() {
     abstract fun booksDao(): BooksDao
 
     companion object {
