@@ -33,8 +33,8 @@
     <string name="mail_subject">Your order</string>
     <string name="mail_text">Hello, dear friend. \n\nYour journey with book %1$s of %2$s will start soon. \nYour book cost is %3$s \n\nThank you for order, enjoy! </string>
     <string name="action_switch_layout">Switch Layout</string>
-    <string name="page_1">search</string>
-    <string name="page_2">reading</string>
-    <string name="page_3">books</string>
+    <string name="search_page_title">search</string>
+    <string name="reading_page_title">reading</string>
+    <string name="books_page_title">books</string>
 
 </resources>

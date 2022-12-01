@@ -21,6 +21,8 @@ import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
 import com.example.arti.ui.viewmodel.BooksViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -118,10 +120,59 @@ class ListFragment : Fragment() {
                         }
                         true
                     }
+
                     else -> false
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
+
+
+        // BottomNavigationView - redirection on click
+        NavigationBarView.OnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.search_page_bottom_navigation -> {
+                    findNavController().navigate(R.id.listFragment)
+                    true
+                }
+
+                R.id.reading_page_bottom_navigation -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+
+                R.id.books_page_bottom_navigation -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+
+        // BottomNavigationView - when navigation items have been reselected
+        NavigationBarView.OnItemReselectedListener { item ->
+            when (item.itemId) {
+                R.id.search_page_bottom_navigation -> {
+                    findNavController().navigate(R.id.listFragment)
+                    true
+                }
+
+                R.id.reading_page_bottom_navigation -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+
+                R.id.books_page_bottom_navigation -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+
     }
 
     private fun setIcon(menuItem: MenuItem?) {
@@ -155,9 +206,11 @@ class ListFragment : Fragment() {
             BooksApiStatus.LOADING -> {
                 binding.statusProgressIndicator.visibility = VISIBLE
             }
+
             BooksApiStatus.DONE -> {
                 binding.statusProgressIndicator.visibility = GONE
             }
+
             BooksApiStatus.ERROR -> {
                 binding.statusProgressIndicator.visibility = VISIBLE
             }
