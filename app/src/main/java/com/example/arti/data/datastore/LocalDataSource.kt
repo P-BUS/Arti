@@ -23,7 +23,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
 @Singleton
 class LocalDataSource @Inject constructor(
     private val dataStore: DataStore<Preferences>
-    ) {
+) {
 
     private object PreferencesKeys {
         val IS_LINEAR_LAYOUT_MANAGER = booleanPreferencesKey("is_linear_layout_manager")

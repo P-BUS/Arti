@@ -16,6 +16,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
+/*
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -36,6 +37,7 @@ private val retrofit = Retrofit.Builder()
     .client(client)
     .baseUrl(BASE_URL)
     .build()
+*/
 
 interface BooksApiService {
     //Searches e-books with full text by description and language
