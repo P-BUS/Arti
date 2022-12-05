@@ -1,4 +1,4 @@
-package com.example.arti.other
+package com.example.arti.Utils
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

@@ -1,10 +1,13 @@
 package com.example.arti.data.network
 
 import com.example.arti.data.model.OpenLibrarySearchResponse
-import com.example.arti.other.Constants.BASE_URL
+import com.example.arti.Utils.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,7 +15,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 
 private val moshi = Moshi.Builder()
@@ -21,6 +23,7 @@ private val moshi = Moshi.Builder()
 
 val logging = HttpLoggingInterceptor()
     .setLevel(HttpLoggingInterceptor.Level.BODY)
+
 val client = OkHttpClient.Builder()
     .addInterceptor(logging)
     .connectTimeout(30, TimeUnit.SECONDS)
@@ -45,8 +48,8 @@ interface BooksApiService {
     ): OpenLibrarySearchResponse
 }
 
-object BooksRemoteDataSource {
+/*object BooksRemoteDataSource {
     val retrofitApiService: BooksApiService by lazy {
         retrofit.create(BooksApiService::class.java)
     }
-}
+}*/

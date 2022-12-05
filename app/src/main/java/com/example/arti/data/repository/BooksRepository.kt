@@ -1,25 +1,21 @@
 package com.example.arti.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.Transformations.map
-import androidx.lifecycle.asLiveData
-
-import com.example.arti.data.database.BooksLocalDataSource
+import com.example.arti.data.database.AppDatabase
 import com.example.arti.data.model.OpenLibraryBook
-import com.example.arti.data.network.BooksRemoteDataSource
-import com.example.arti.other.asDatabaseModel
-import com.example.arti.other.asDomainModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.arti.Utils.asDatabaseModel
+import com.example.arti.Utils.asDomainModel
+import com.example.arti.data.network.BooksApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class BooksRepository @Inject constructor(
-    private val database: BooksLocalDataSource,
-    private val network: BooksRemoteDataSource
+    private val database: AppDatabase,
+    private val network: BooksApiService
 ) {
 
     //Transforms database entity to domain
@@ -33,7 +29,7 @@ class BooksRepository @Inject constructor(
     suspend fun refreshBooks(searchText: String) {
         withContext(Dispatchers.IO) {
             // TODO: implement safe response with exceptions handling
-            val searchResult = network.retrofitApiService.getSearchBooks(
+            val searchResult = network.getSearchBooks(
                 searchText = searchText
             )
             val listBooks: List<OpenLibraryBook> = searchResult.docs

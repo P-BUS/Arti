@@ -1,4 +1,4 @@
-package com.example.arti.other
+package com.example.arti.Utils
 
 import android.widget.ImageView
 import androidx.core.net.toUri

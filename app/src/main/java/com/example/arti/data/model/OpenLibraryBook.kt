@@ -1,6 +1,6 @@
 package com.example.arti.data.model
 
-import com.example.arti.other.Constants
+import com.example.arti.Utils.Constants
 
 
 data class OpenLibraryBook(

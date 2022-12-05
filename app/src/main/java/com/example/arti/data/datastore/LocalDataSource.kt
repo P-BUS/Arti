@@ -7,20 +7,23 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.arti.other.Constants
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.arti.Utils.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import okio.IOException
 import javax.inject.Inject
+import javax.inject.Singleton
 
 // Access dataStore through this property throughout the rest of application
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = Constants.LAYOUT_PREFERENCES_NAME
 )
 
-class LocalDataSource @Inject constructor(private val dataStore: DataStore<Preferences>) {
+@Singleton
+class LocalDataSource @Inject constructor(
+    private val dataStore: DataStore<Preferences>
+    ) {
 
     private object PreferencesKeys {
         val IS_LINEAR_LAYOUT_MANAGER = booleanPreferencesKey("is_linear_layout_manager")

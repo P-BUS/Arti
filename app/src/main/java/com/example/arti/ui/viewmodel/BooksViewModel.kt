@@ -4,9 +4,6 @@ import android.app.Application
 import android.util.Log
 import android.util.Log.ERROR
 import androidx.lifecycle.*
-import com.example.arti.data.database.BooksLocalDataSource
-import com.example.arti.data.database.BooksLocalDataSource.Companion.getLocalDataSource
-import com.example.arti.data.datastore.LocalDataSource
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.repository.BooksRepository
 import com.example.arti.data.repository.LayoutRepository

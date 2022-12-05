@@ -8,12 +8,11 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.arti.databinding.DetailsFragmentBinding
-import com.example.arti.other.Constants
-import com.example.arti.other.ImageLoader
-import com.example.arti.other.ImageSize
+import com.example.arti.Utils.Constants
+import com.example.arti.Utils.ImageLoader
+import com.example.arti.Utils.ImageSize
 import com.example.arti.ui.viewmodel.BooksViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
