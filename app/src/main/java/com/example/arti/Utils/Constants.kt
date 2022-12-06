@@ -11,4 +11,5 @@ object Constants {
 
     // DataStore
     const val LAYOUT_PREFERENCES_NAME = "layout_preferences"
+    const val DATA_STORE_FILE_NAME = "Data_store_file_name"
 }
