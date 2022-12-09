@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.arti.databinding.DetailsFragmentBinding
-import com.example.arti.Utils.Constants
 import com.example.arti.Utils.ImageLoader
 import com.example.arti.Utils.ImageSize
+import com.example.arti.databinding.DetailsFragmentBinding
 import com.example.arti.ui.viewmodel.BooksViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,10 +28,6 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindBook()
-        with(binding.detailsFragmentWebView) {
-            loadUrl(Constants.WEB_URL)
-            webViewClient = WebViewClient()
-        }
     }
 
     private fun bindBook() {

@@ -56,6 +56,7 @@ class BooksViewModel @Inject constructor(
                 initialValue = true
             )
 
+    // TODO: change to StateFlow but what to choose for default value?
     private val _currentBook = MutableLiveData<OpenLibraryBook>()
     val currentBook: LiveData<OpenLibraryBook> = _currentBook
 
@@ -93,18 +94,5 @@ class BooksViewModel @Inject constructor(
     suspend fun saveLayoutToPreferencesStore(isLinearLayoutManager: Boolean) =
         layoutRepository.saveLayoutToPreferencesStore(isLinearLayoutManager)
 }
-
-/*class BooksViewModelFactory(
-    private val booksRepository: BooksRepository,
-    private val layoutRepository: LayoutRepository
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(BooksViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return BooksViewModel(booksRepository, layoutRepository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}*/
 
 

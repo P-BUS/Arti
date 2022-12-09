@@ -1,23 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">Arti</string>
-    <string name="book_name_1">Genom.</string>
-    <string name="book_name_2">Island.</string>
-    <string name="book_name_3">Rhetorica.</string>
-    <string name="book_name_4">Dune Messiah.</string>
-    <string name="book_name_5">Dune.</string>
-    <string name="book_name_6">Children of Dune.</string>
-    <string name="book_name_7">Spectr.</string>
-    <string name="book_name_8">Limit.</string>
-    <string name="book_name_9">Antilibrary.</string>
-    <string name="book_name_10">Fourth industrial revolution.</string>
-
-    <string name="book_author_1">Sergey Lukyanenko</string>
-    <string name="book_author_2">Oldos Haksli</string>
-    <string name="book_author_3">Aristotle</string>
-    <string name="book_author_4">Frank Herbert</string>
-    <string name="book_author_5">Nassim Taleb</string>
-    <string name="book_author_6">Klaus Schwab</string>
+    <string name="book_image">Book image</string>
 
     <string name="read">Read</string>
     <string name="read_later">read later</string>
@@ -26,15 +10,18 @@
     <string name="buy_now">Buy now</string>
     <string name="order_details">Order Details</string>
     <string name="books">Books</string>
-    <string name="book">Book</string>
-    <string name="author">author</string>
+    <string name="book" tools:ignore="ExtraTranslation">Book</string>
+    <string name="book_name">Book name</string>
+    <string name="book_author">Book author</string>
     <string name="send_order">send order</string>
     <string name="cancel">Cancel</string>
     <string name="mail_subject">Your order</string>
     <string name="mail_text">Hello, dear friend. \n\nYour journey with book %1$s of %2$s will start soon. \nYour book cost is %3$s \n\nThank you for order, enjoy! </string>
     <string name="action_switch_layout">Switch Layout</string>
-    <string name="search_page_title">search</string>
-    <string name="reading_page_title">reading</string>
-    <string name="books_page_title">books</string>
+
+    <!--    Bottom bar navigation-->
+    <string name="search_page_title">Search</string>
+    <string name="reading_page_title">Reading</string>
+    <string name="books_page_title">Books</string>
 
 </resources>

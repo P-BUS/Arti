@@ -1,9 +1,14 @@
 package com.example.arti.ui.fragments
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -21,12 +26,9 @@ import com.example.arti.databinding.ListFragmentBinding
 import com.example.arti.ui.adapters.BooksListAdapter
 import com.example.arti.ui.viewmodel.BooksApiStatus
 import com.example.arti.ui.viewmodel.BooksViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -125,52 +127,6 @@ class ListFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
-
-
-        // BottomNavigationView - redirection on click
-        NavigationBarView.OnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.search_page_bottom_navigation -> {
-                    findNavController().navigate(R.id.listFragment)
-                    true
-                }
-
-                R.id.reading_page_bottom_navigation -> {
-                    // Respond to navigation item 2 click
-                    true
-                }
-
-                R.id.books_page_bottom_navigation -> {
-                    // Respond to navigation item 2 click
-                    true
-                }
-
-                else -> false
-            }
-        }
-
-
-        // BottomNavigationView - when navigation items have been reselected
-        NavigationBarView.OnItemReselectedListener { item ->
-            when (item.itemId) {
-                R.id.search_page_bottom_navigation -> {
-                    findNavController().navigate(R.id.listFragment)
-                    true
-                }
-
-                R.id.reading_page_bottom_navigation -> {
-                    // Respond to navigation item 2 click
-                    true
-                }
-
-                R.id.books_page_bottom_navigation -> {
-                    // Respond to navigation item 2 click
-                    true
-                }
-
-                else -> false
-            }
-        }
 
 
     }

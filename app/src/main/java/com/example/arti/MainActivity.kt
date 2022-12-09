@@ -1,11 +1,12 @@
 package com.example.arti
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +25,10 @@ class MainActivity : AppCompatActivity() {
 
         // Set up the action bar for use with the NavController
         setupActionBarWithNavController(navController)
+
+        // Set up the bottom navigation with the NavController
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
