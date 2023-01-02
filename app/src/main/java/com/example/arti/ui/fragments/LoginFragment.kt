@@ -16,7 +16,6 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.BuildConfig
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -52,18 +51,18 @@ class LoginFragment : Fragment() {
 
         setProgressBar(binding.progressBar)
 
-        binding.login.setOnClickListener {
+/*        binding.login.setOnClickListener {
             val email = binding.etEmail.toString()
             val password = binding.etPassword.toString()
             signIn(email, password)
-        }
+        }*/
         binding.tvSignUp.text = getString(R.string.action_sign_up,
             signUp(
                 binding.etEmail.toString(),
                 binding.etPassword.toString()
             )
         )
-        binding.login.setOnClickListener { startSignIn() }
+        binding.buttonSignIn.setOnClickListener { startSignIn() }
     }
 
     override fun onStart() {
@@ -100,7 +99,7 @@ class LoginFragment : Fragment() {
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
                     //updateUI(user)
-                    findNavController().navigate(R.id.action_loginFragment_to_detailsFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_listFragment)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
@@ -124,7 +123,7 @@ class LoginFragment : Fragment() {
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
                     //updateUI(user)
-                    findNavController().navigate(R.id.action_loginFragment_to_detailsFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_listFragment)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)

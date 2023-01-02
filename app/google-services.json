@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "40972434073",
+    "project_id": "arti-6774b",
+    "storage_bucket": "arti-6774b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40972434073:android:ba2956247f8d4ec753d608",
+        "android_client_info": {
+          "package_name": "com.example.arti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40972434073-et0vipu0hekfjie14utjtp50qetarsaa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.arti",
+            "certificate_hash": "0c2c08f1c591cffc7e7b70c3b605329d5ab9d4b4"
+          }
+        },
+        {
+          "client_id": "40972434073-7sjv8otbbf5itr11f183e8mt66j5h3qo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQc9O2GdSQIzowmRVMu3IewNtwkJKG9kk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40972434073-7sjv8otbbf5itr11f183e8mt66j5h3qo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
