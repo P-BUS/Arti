@@ -1,5 +1,6 @@
 package com.example.arti.ui.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,10 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.arti.R
 import com.example.arti.databinding.LoginFragmentBinding
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.BuildConfig
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -23,6 +28,11 @@ class LoginFragment : Fragment() {
     private lateinit var binding: LoginFragmentBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
+    // Build FirebaseUI sign in intent. For documentation on this operation and all
+    // possible customization see: https://github.com/firebase/firebaseui-android
+    private val signInLauncher = registerForActivityResult(
+        FirebaseAuthUIActivityResultContract()
+    ) { result -> this.onSignInResult(result)}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +45,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -52,10 +63,10 @@ class LoginFragment : Fragment() {
                 binding.etPassword.toString()
             )
         )
-        //binding.login.setOnClickListener { startSignIn() }
+        binding.login.setOnClickListener { startSignIn() }
     }
 
-    public override fun onStart() {
+    override fun onStart() {
         super.onStart()
 
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -63,6 +74,18 @@ class LoginFragment : Fragment() {
         if(currentUser != null) {
             reload();
         }
+    }
+
+    private fun startSignIn() {
+        val providers = listOf(
+            AuthUI.IdpConfig.EmailBuilder().build()
+        )
+        val signInIntent = AuthUI.getInstance().createSignInIntentBuilder()
+            .setIsSmartLockEnabled(!BuildConfig.DEBUG)
+            .setAvailableProviders(providers)
+            .setLogo(R.mipmap.ic_launcher)
+            .build()
+        signInLauncher.launch(signInIntent)
     }
 
     private fun signUp(email: String, password: String) {
@@ -111,6 +134,11 @@ class LoginFragment : Fragment() {
                 }
                 hideProgressBar()
             }
+    }
+
+    private fun signOut() {
+        AuthUI.getInstance()
+            .signOut(requireContext())
     }
 
     fun getCurrentUser() {
@@ -174,4 +202,16 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+        val response = result.idpResponse
+        if (result.resultCode == Activity.RESULT_OK) {
+            // Sign in succeeded
+            val user = FirebaseAuth.getInstance().currentUser
+
+        } else {
+            // Sign in failed
+            Toast.makeText(context, "Sign In Failed", Toast.LENGTH_SHORT).show()
+            response?.error?.errorCode
+        }
+    }
 }
