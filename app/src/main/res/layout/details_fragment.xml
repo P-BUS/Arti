@@ -62,7 +62,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/side_margin"
             android:text="@string/read" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

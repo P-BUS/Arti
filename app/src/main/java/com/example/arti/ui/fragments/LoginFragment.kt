@@ -16,6 +16,7 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.BuildConfig
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -32,6 +33,7 @@ class LoginFragment : Fragment() {
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
     ) { result -> this.onSignInResult(result)}
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +52,10 @@ class LoginFragment : Fragment() {
         auth = Firebase.auth
 
         setProgressBar(binding.progressBar)
+
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView?.visibility = View.GONE
+
 
        binding.buttonSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString()
@@ -80,7 +86,8 @@ class LoginFragment : Fragment() {
         val providers = listOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
-        val signInIntent = AuthUI.getInstance().createSignInIntentBuilder()
+        val signInIntent = AuthUI.getInstance()
+        .createSignInIntentBuilder()
             .setIsSmartLockEnabled(!BuildConfig.DEBUG)
             .setAvailableProviders(providers)
             .setLogo(R.mipmap.ic_launcher)

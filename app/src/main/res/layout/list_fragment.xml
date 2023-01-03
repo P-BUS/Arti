@@ -32,6 +32,5 @@
             android:indeterminate="true"
             tools:ignore="MissingConstraints" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
