@@ -51,18 +51,19 @@ class LoginFragment : Fragment() {
 
         setProgressBar(binding.progressBar)
 
-/*        binding.login.setOnClickListener {
-            val email = binding.etEmail.toString()
-            val password = binding.etPassword.toString()
+       binding.buttonSignIn.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
             signIn(email, password)
-        }*/
-        binding.tvSignUp.text = getString(R.string.action_sign_up,
-            signUp(
-                binding.etEmail.toString(),
-                binding.etPassword.toString()
-            )
-        )
-        binding.buttonSignIn.setOnClickListener { startSignIn() }
+        }
+
+       binding.tvSign.setOnClickListener {
+           val email = binding.etEmail.text.toString()
+           val password = binding.etPassword.text.toString()
+           signUp(email, password)
+       }
+
+        /*binding.buttonSignIn.setOnClickListener { startSignIn() }*/
     }
 
     override fun onStart() {
@@ -75,7 +76,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun startSignIn() {
+    /*private fun startSignIn() {
         val providers = listOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
@@ -85,7 +86,7 @@ class LoginFragment : Fragment() {
             .setLogo(R.mipmap.ic_launcher)
             .build()
         signInLauncher.launch(signInIntent)
-    }
+    }*/
 
     private fun signUp(email: String, password: String) {
         if (!validateForm()) {
