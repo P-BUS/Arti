@@ -6,8 +6,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
@@ -50,6 +48,9 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val menuHost: MenuHost = requireActivity()
         recyclerView = binding.recyclerView
+
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView?.visibility = View.VISIBLE
 
         lifecycleScope.launch {
             sharedViewModel.isLinearLayout
@@ -161,15 +162,15 @@ class ListFragment : Fragment() {
     private fun showLoadingImage() {
         when (sharedViewModel.status.value) {
             BooksApiStatus.LOADING -> {
-                binding.statusProgressIndicator.visibility = VISIBLE
+                binding.statusProgressIndicator.visibility = View.VISIBLE
             }
 
             BooksApiStatus.DONE -> {
-                binding.statusProgressIndicator.visibility = GONE
+                binding.statusProgressIndicator.visibility = View.GONE
             }
 
             BooksApiStatus.ERROR -> {
-                binding.statusProgressIndicator.visibility = VISIBLE
+                binding.statusProgressIndicator.visibility = View.VISIBLE
             }
         }
     }
