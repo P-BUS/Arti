@@ -1,4 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+// applies the Android Gradle plugin to this build
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -9,15 +11,37 @@ plugins {
     id "com.google.gms.google-services"
 }
 
+/**
+ * The android block is where you configure all your Android-specific
+ * build options.
+ */
 android {
-    compileSdk 33
+    // Use the following syntax to access properties you defined at the project level:
+    // rootProject.ext.property_name
+    /**
+     * compileSdk specifies the Android API level Gradle should use to
+     * compile your app. This means your app can use the API features included in
+     * this API level and lower.
+     */
+    compileSdk rootProject.ext.sdkVersion
 
+    /**
+     * The defaultConfig block encapsulates default settings and entries for all
+     * build variants and can override some attributes in main/AndroidManifest.xml
+     * dynamically from the build system. You can configure product flavors to override
+     * these values for different versions of your app.
+     */
     defaultConfig {
+        // Uniquely identifies the package for publishing.
         applicationId "com.example.arti"
-        minSdk 29
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        // Defines the minimum API level required to run the app.
+        minSdk rootProject.ext.minSdkVersion
+        // Specifies the API level used to test the app.
+        targetSdk rootProject.ext.targetSdkVersion
+        // Defines the version number of your app.
+        versionCode = rootProject.ext.versionCode
+        // Defines a user-friendly version name for your app.
+        versionName = rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -27,9 +51,20 @@ android {
         }
     }
 
+    /**
+     * The buildTypes block is where you can configure multiple build types.
+     * By default, the build system defines two build types: debug and release. The
+     * debug build type is not explicitly shown in the default build configuration,
+     * but it includes debugging tools and is signed with the debug key. The release
+     * build type applies ProGuard settings and is not signed by default.
+     */
     buildTypes {
+        /**
+         * By default, Android Studio configures the release build type to enable code
+         * shrinking, using minifyEnabled, and specifies the default ProGuard rules file.
+         */
         release {
-            minifyEnabled false
+            minifyEnabled true // Enables code shrinking for the release build type.
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -45,9 +80,16 @@ android {
     }
 }
 
+/**
+ * The dependencies block in the module-level build configuration file
+ * specifies dependencies required to build only the module itself.
+ * To learn more, go to Add build dependencies.
+ */
 dependencies {
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    // Use the following syntax to access properties you defined at the project level:
+    // rootProject.ext.property_name
+    implementation "androidx.core:core-ktx:${rootProject.ext.androidCoreVersion}"
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.appcompatVersion}"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'com.google.code.gson:gson:2.10'
@@ -69,9 +111,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 
     // Navigation component
-    def nav_version = '2.5.3'
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.ext.nav_version}"
+    implementation "androidx.navigation:navigation-ui-ktx:${rootProject.ext.nav_version}"
 
     // Moshi
     implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
@@ -92,9 +133,8 @@ dependencies {
     implementation 'io.coil-kt:coil:2.2.2'
 
     // Hilt
-    def hiltVersion = '2.44.2'
-    implementation "com.google.dagger:hilt-android:$hiltVersion"
-    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+    implementation "com.google.dagger:hilt-android:${rootProject.ext.hilt_version}"
+    kapt "com.google.dagger:hilt-compiler:${rootProject.ext.hilt_version}"
     def viewModelHiltVersion = "1.0.0-alpha03"
     // implementation "androidx.hilt:hilt-lifecycle-viewmodel:$viewModelHiltVersion"
     kapt 'androidx.hilt:hilt-compiler:1.0.0'

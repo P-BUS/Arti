@@ -2,9 +2,17 @@
 
 
 buildscript {
+    // For Android projects that include multiple modules, it might be useful to define certain properties at the project level and share them across all the modules. Having consistent versions between modules can avoid conflicts with behavior.
     ext {
-        nav_version = "2.5.2"
-        //hilt_version = "1.0.0"
+        sdkVersion = 33
+        minSdkVersion = 29
+        targetSdkVersion = 33
+        versionCode = 1
+        versionName = "1.0"
+        appcompatVersion = "1.5.1"
+        androidCoreVersion = "1.9.0"
+        nav_version = "2.5.3"
+        hilt_version = "2.44.2"
         firebase_version = "4.3.14"
     }
     repositories {
@@ -17,13 +25,13 @@ buildscript {
         classpath "com.google.gms:google-services:$firebase_version"
     }
 }
-
+// By default, the top-level build file uses the plugins block to define the Gradle dependencies that are common to all modules in the project.
 plugins {
     id 'com.android.application' version '7.3.1' apply false
     id 'com.android.library' version '7.3.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.7.0' apply false
-    id "org.jetbrains.kotlin.kapt" version '1.7.10' apply false
-    id 'com.google.dagger.hilt.android' version '2.44' apply false
+    id 'org.jetbrains.kotlin.kapt' version '1.7.10' apply false
+    id 'com.google.dagger.hilt.android' version "$hilt_version" apply false
 }
 
 task clean(type: Delete) {
