@@ -4,7 +4,10 @@ import android.app.Application
 import android.util.Log
 import android.util.Log.ERROR
 import androidx.lifecycle.*
+import androidx.work.Constraints
+import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.repository.BooksRepository
@@ -17,6 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -77,7 +81,19 @@ class BooksViewModel @Inject constructor(
     }
 
     internal fun scheduleBooksUpdate() {
-        var scheduleWorkRequest = PeriodicWorkRequest.Builder(BooksUpdateWorker::class.java)
+        val constraints =
+            Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .setRequiresDeviceIdle(true)
+                .setRequiresStorageNotLow(true)
+                .build()
+
+        val scheduleWorkRequest =
+            PeriodicWorkRequestBuilder<BooksUpdateWorker>(1, TimeUnit.DAYS)
+                .setConstraints(constraints)
+                .build()
+
+        workManager.enqueue(scheduleWorkRequest)
     }
 
     private fun refreshDataFromRepository(searchText: String) {
