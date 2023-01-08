@@ -3,8 +3,8 @@ package com.example.arti.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.arti.Utils.ConverterInt
-import com.example.arti.Utils.ConverterString
+import com.example.arti.utils.ConverterInt
+import com.example.arti.utils.ConverterString
 
 @Database(entities = [BooksEntity::class], version = 1, exportSchema = false)
 @TypeConverters(ConverterString::class, ConverterInt::class)

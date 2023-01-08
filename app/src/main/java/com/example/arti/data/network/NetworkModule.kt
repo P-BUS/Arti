@@ -1,6 +1,6 @@
 package com.example.arti.data.network
 
-import com.example.arti.Utils.Constants
+import com.example.arti.utils.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

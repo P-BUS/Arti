@@ -1,4 +1,4 @@
-package com.example.arti.Utils
+package com.example.arti.utils
 
 object Constants {
 

@@ -1,20 +1,15 @@
 package com.example.arti.data.datastore
 
 import android.content.Context
-import android.view.KeyEvent.DispatcherState
 import androidx.datastore.core.DataStore
-import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
-import androidx.datastore.dataStoreFile
 import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.example.arti.Utils.Constants
-import com.example.arti.Utils.Constants.DATA_STORE_FILE_NAME
-import com.example.arti.Utils.Constants.LAYOUT_PREFERENCES_NAME
+import com.example.arti.utils.Constants.DATA_STORE_FILE_NAME
+import com.example.arti.utils.Constants.LAYOUT_PREFERENCES_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

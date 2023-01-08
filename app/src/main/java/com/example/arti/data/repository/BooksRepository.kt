@@ -2,8 +2,8 @@ package com.example.arti.data.repository
 
 import com.example.arti.data.database.AppDatabase
 import com.example.arti.data.model.OpenLibraryBook
-import com.example.arti.Utils.asDatabaseModel
-import com.example.arti.Utils.asDomainModel
+import com.example.arti.utils.asDatabaseModel
+import com.example.arti.utils.asDomainModel
 import com.example.arti.data.network.BooksApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

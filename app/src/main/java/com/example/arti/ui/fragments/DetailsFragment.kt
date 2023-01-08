@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.arti.R
-import com.example.arti.Utils.ImageLoader
-import com.example.arti.Utils.ImageSize
+import com.example.arti.utils.ImageLoader
+import com.example.arti.utils.ImageSize
 import com.example.arti.databinding.DetailsFragmentBinding
 import com.example.arti.ui.viewmodel.BooksViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView

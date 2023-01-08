@@ -4,9 +4,12 @@ import android.app.Application
 import android.util.Log
 import android.util.Log.ERROR
 import androidx.lifecycle.*
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.repository.BooksRepository
 import com.example.arti.data.repository.LayoutRepository
+import com.example.arti.worker.BooksUpdateWorker
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -25,9 +28,11 @@ const val TAG = "BooksViewModel"
 @HiltViewModel
 class BooksViewModel @Inject constructor(
     private val booksRepository: BooksRepository,
-    private val layoutRepository: LayoutRepository
+    private val layoutRepository: LayoutRepository,
+    application: Application
 ) : ViewModel() {
 
+    private val workManager = WorkManager.getInstance(application)
     // Transforms books Flow to StateFow with and retrying to fetch data if IO Exceptions
     val books: StateFlow<List<OpenLibraryBook>> =
         booksRepository.books
@@ -69,6 +74,10 @@ class BooksViewModel @Inject constructor(
 
     init {
         refreshDataFromRepository(searchText)
+    }
+
+    internal fun scheduleBooksUpdate() {
+        var scheduleWorkRequest = PeriodicWorkRequest.Builder(BooksUpdateWorker::class.java)
     }
 
     private fun refreshDataFromRepository(searchText: String) {

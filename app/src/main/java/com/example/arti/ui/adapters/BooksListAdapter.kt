@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.databinding.ItemViewBinding
-import com.example.arti.Utils.ImageLoader
-import com.example.arti.Utils.ImageSize
+import com.example.arti.utils.ImageLoader
+import com.example.arti.utils.ImageSize
 
 
 class BooksListAdapter(

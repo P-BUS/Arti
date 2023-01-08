@@ -1,4 +1,4 @@
-package com.example.arti.Utils
+package com.example.arti.utils
 
 import com.example.arti.data.database.BooksEntity
 import com.example.arti.data.model.OpenLibraryBook

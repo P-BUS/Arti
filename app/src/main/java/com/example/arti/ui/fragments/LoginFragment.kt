@@ -47,15 +47,13 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView?.visibility = View.GONE
 
         // Initialize Firebase Auth
         auth = Firebase.auth
 
         setProgressBar(binding.progressBar)
-
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigationView?.visibility = View.GONE
-
 
        binding.buttonSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString()
@@ -68,7 +66,6 @@ class LoginFragment : Fragment() {
            val password = binding.etPassword.text.toString()
            signUp(email, password)
        }
-
         /*binding.buttonSignIn.setOnClickListener { startSignIn() }*/
     }
 
@@ -169,18 +166,15 @@ class LoginFragment : Fragment() {
     private fun setProgressBar(bar: ProgressBar) {
         progressBar = bar
     }
-
     private fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
     }
-
     private fun hideProgressBar() {
         progressBar.visibility = View.GONE
     }
 
     private fun validateForm(): Boolean {
         var valid = true
-
         val email = binding.etEmail.text.toString()
         if (email.isEmpty()) {
             binding.etEmail.error = "Please fill in your email"
@@ -188,7 +182,6 @@ class LoginFragment : Fragment() {
         } else {
             binding.etEmail.error = null
         }
-
         val password = binding.etPassword.text.toString()
         if (password.isEmpty()) {
             binding.etPassword.error = "Please fill in your password."
