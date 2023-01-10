@@ -42,7 +42,6 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = LoginFragmentBinding.inflate(inflater, container, false)
-        // Change the title of fragment
         return binding.root
 
     }
