@@ -89,7 +89,7 @@ class BooksViewModel @Inject constructor(
                 .build()
 
         val scheduleWorkRequest =
-            PeriodicWorkRequestBuilder<SyncBooksWorker>(1, TimeUnit.DAYS)
+            PeriodicWorkRequestBuilder<SyncBooksWorker>(30, TimeUnit.SECONDS)
                 .setConstraints(constraints)
                 .build()
 
