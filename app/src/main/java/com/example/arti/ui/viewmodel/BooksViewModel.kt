@@ -2,27 +2,22 @@ package com.example.arti.ui.viewmodel
 
 import android.app.Application
 import android.util.Log
-import android.util.Log.ERROR
 import androidx.lifecycle.*
 import androidx.work.Constraints
 import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequest
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.repository.BooksRepository
 import com.example.arti.data.repository.LayoutRepository
-import com.example.arti.worker.BooksUpdateWorker
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.arti.worker.SyncBooksWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 
 enum class BooksApiStatus { LOADING, ERROR, DONE }
@@ -36,7 +31,8 @@ class BooksViewModel @Inject constructor(
     application: Application
 ) : ViewModel() {
 
-    private val workManager = WorkManager.getInstance(application)
+    val workManager = WorkManager.getInstance(application)
+
     // Transforms books Flow to StateFow with and retrying to fetch data if IO Exceptions
     val books: StateFlow<List<OpenLibraryBook>> =
         booksRepository.books
@@ -73,14 +69,18 @@ class BooksViewModel @Inject constructor(
     private val _status = MutableStateFlow(BooksApiStatus.DONE)
     val status: StateFlow<BooksApiStatus> = _status.asStateFlow()
 
+    // TODO: To change the hardcoded text to variable or string source
     // Default search when the APP is started
     var searchText: String = "Ukraine"
 
     init {
         refreshDataFromRepository(searchText)
+        scheduleBooksUpdate()
     }
 
-    internal fun scheduleBooksUpdate() {
+    // Work manager function
+    private fun scheduleBooksUpdate() {
+        // Constraints in which worker will be executed
         val constraints =
             Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -89,11 +89,15 @@ class BooksViewModel @Inject constructor(
                 .build()
 
         val scheduleWorkRequest =
-            PeriodicWorkRequestBuilder<BooksUpdateWorker>(1, TimeUnit.DAYS)
+            PeriodicWorkRequestBuilder<SyncBooksWorker>(1, TimeUnit.DAYS)
                 .setConstraints(constraints)
                 .build()
 
-        workManager.enqueue(scheduleWorkRequest)
+        with(workManager) {
+            enqueue(scheduleWorkRequest) // Enqueue the work request
+            // TODO: need to add observer to this work info
+            getWorkInfosByTag("syncBooksWorkManager")// Produce work info by tag
+        }
     }
 
     private fun refreshDataFromRepository(searchText: String) {

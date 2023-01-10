@@ -1,32 +1,33 @@
 package com.example.arti.worker
 
-import android.app.Notification
 import android.content.Context
+import android.util.Log
+import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
-import com.example.arti.ui.viewmodel.BooksViewModel
+import com.example.arti.data.repository.BooksRepository
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 
-const val NOTIFICATION_ID = 1
+const val TAG = "BookUpdateWorker"
 
-class BooksUpdateWorker(context: Context, workerParams: WorkerParameters) :
-    CoroutineWorker(context, workerParams) {
+// TODO: Add Hilt DI
+@HiltWorker
+class SyncBooksWorker @AssistedInject constructor(
+    @Assisted context: Context,
+    @Assisted workerParams: WorkerParameters,
+    private val booksRepository: BooksRepository
+) : CoroutineWorker(context, workerParams) {
 
-    override suspend fun getForegroundInfo(): ForegroundInfo {
-        return ForegroundInfo(
-            NOTIFICATION_ID, createNotification()
-        )
-    }
     override suspend fun doWork(): Result {
-        try {
-            // Put my code to execute here
+        return try {
+            // TODO: Change hardcoded parameter
+            booksRepository.refreshBooks("Ukraine")
+            Log.e(TAG, "WorkManager started books sync")
+            Result.success()
         } catch (exception: Exception) {
-            return Result.failure()
+            Log.e(TAG, "WorkManager error in Periodic work", exception)
+            Result.failure()
         }
-        return Result.success()
-
-    }
-    private fun createNotification() : Notification {
-        TODO()
     }
 }

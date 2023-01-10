@@ -49,7 +49,8 @@ class ListFragment : Fragment() {
         val menuHost: MenuHost = requireActivity()
         recyclerView = binding.recyclerView
 
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottomNavigationView =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView?.visibility = View.VISIBLE
 
         lifecycleScope.launch {
@@ -129,8 +130,6 @@ class ListFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.STARTED)
-
-
     }
 
     private fun setIcon(menuItem: MenuItem?) {
@@ -174,6 +173,16 @@ class ListFragment : Fragment() {
             }
         }
     }
+
+    // Observe Work status
+    /*    WorkManager.getInstance().getWorkInfoByIdLiveData(uploadWorkRequest.id)
+            .observe(lifecycleOwner, Observer { workInfo ->
+                // Check if the current work's state is "successfully finished"
+                if (workInfo != null && workInfo.state == WorkInfo.State.SUCCEEDED) {
+                    displayImage(workInfo.outputData.getString(KEY_IMAGE_URI))
+                }
+            })*/
+
 }
 
 
