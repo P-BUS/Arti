@@ -28,10 +28,10 @@ const val TAG = "BooksViewModel"
 class BooksViewModel @Inject constructor(
     private val booksRepository: BooksRepository,
     private val layoutRepository: LayoutRepository,
-    application: Application
+    private val workManager: WorkManager
 ) : ViewModel() {
 
-    val workManager = WorkManager.getInstance(application)
+    //val workManager = WorkManager.getInstance(application)
 
     // Transforms books Flow to StateFow with and retrying to fetch data if IO Exceptions
     val books: StateFlow<List<OpenLibraryBook>> =

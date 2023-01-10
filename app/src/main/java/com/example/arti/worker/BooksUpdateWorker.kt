@@ -11,7 +11,6 @@ import dagger.assisted.AssistedInject
 
 const val TAG = "BookUpdateWorker"
 
-// TODO: Add Hilt DI
 @HiltWorker
 class SyncBooksWorker @AssistedInject constructor(
     @Assisted context: Context,
@@ -23,10 +22,11 @@ class SyncBooksWorker @AssistedInject constructor(
         return try {
             // TODO: Change hardcoded parameter
             booksRepository.refreshBooks("Ukraine")
-            Log.e(TAG, "WorkManager started books sync")
+            Log.i(TAG, "WorkManager started books sync")
             Result.success()
         } catch (exception: Exception) {
             Log.e(TAG, "WorkManager error in Periodic work", exception)
+            exception.printStackTrace()
             Result.failure()
         }
     }
