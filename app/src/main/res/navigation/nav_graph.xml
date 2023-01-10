@@ -31,8 +31,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.arti.ui.fragments.LoginFragment"
-        android:label="login_fragment"
-        tools:layout="@layout/login_fragment" >
+        android:label="@string/login_title_name"
+        tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/action_loginFragment_to_listFragment"
             app:destination="@id/listFragment" />

@@ -28,11 +28,12 @@ class LoginFragment : Fragment() {
     private lateinit var binding: LoginFragmentBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var progressBar: ProgressBar
+
     // Build FirebaseUI sign in intent. For documentation on this operation and all
     // possible customization see: https://github.com/firebase/firebaseui-android
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
-    ) { result -> this.onSignInResult(result)}
+    ) { result -> this.onSignInResult(result) }
 
 
     override fun onCreateView(
@@ -41,13 +42,16 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = LoginFragmentBinding.inflate(inflater, container, false)
+        // Change the title of fragment
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottomNavigationView =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView?.visibility = View.GONE
 
         // Initialize Firebase Auth
@@ -55,17 +59,17 @@ class LoginFragment : Fragment() {
 
         setProgressBar(binding.progressBar)
 
-       binding.buttonSignIn.setOnClickListener {
+        binding.buttonSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
             signIn(email, password)
         }
 
-       binding.tvSign.setOnClickListener {
-           val email = binding.etEmail.text.toString()
-           val password = binding.etPassword.text.toString()
-           signUp(email, password)
-       }
+        binding.tvSign.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            signUp(email, password)
+        }
         /*binding.buttonSignIn.setOnClickListener { startSignIn() }*/
     }
 
@@ -74,7 +78,7 @@ class LoginFragment : Fragment() {
 
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        if(currentUser != null) {
+        if (currentUser != null) {
             reload();
         }
     }
@@ -108,9 +112,11 @@ class LoginFragment : Fragment() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(context, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                   //updateUI(null)
+                    Toast.makeText(
+                        context, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    //updateUI(null)
                 }
                 hideProgressBar()
             }
@@ -132,8 +138,10 @@ class LoginFragment : Fragment() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(context, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     //updateUI(null)
                 }
                 hideProgressBar()
@@ -166,9 +174,11 @@ class LoginFragment : Fragment() {
     private fun setProgressBar(bar: ProgressBar) {
         progressBar = bar
     }
+
     private fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
     }
+
     private fun hideProgressBar() {
         progressBar.visibility = View.GONE
     }
@@ -191,6 +201,7 @@ class LoginFragment : Fragment() {
         }
         return valid
     }
+
     private fun reload() {
         auth.currentUser!!.reload().addOnCompleteListener { task ->
             if (task.isSuccessful) {
