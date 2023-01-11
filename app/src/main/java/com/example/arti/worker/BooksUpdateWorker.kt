@@ -23,7 +23,7 @@ class SyncBooksWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         try {
-            // TODO: It is not worked but I not understand why
+            // TODO: It is not working but I dont understand why
             // TODO: Change hardcoded parameter
             booksRepository.refreshBooks("Ukraine")
             Log.i(TAG, "WorkManager started books sync")
