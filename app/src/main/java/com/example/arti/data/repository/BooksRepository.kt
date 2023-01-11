@@ -32,8 +32,16 @@ class BooksRepository @Inject constructor(
             val searchResult = network.getSearchBooks(
                 searchText = searchText
             )
-            val listBooks: List<OpenLibraryBook> = searchResult.docs
-            database.booksDao().insertAll(listBooks.asDatabaseModel())
+            if (searchResult.docs.isNotEmpty()) {
+                database.booksDao().deleteAllBooks()
+                val listBooks: List<OpenLibraryBook> = searchResult.docs
+                database.booksDao().insertAll(listBooks.asDatabaseModel())
+            }
+
         }
+    }
+
+    suspend fun deleteAllBooks() {
+        database.booksDao().deleteAllBooks()
     }
 }

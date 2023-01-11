@@ -23,6 +23,7 @@ import javax.inject.Inject
 enum class BooksApiStatus { LOADING, ERROR, DONE }
 
 const val TAG = "BooksViewModel"
+const val WORKER_TAG = "syncBooksWorkManager"
 
 @HiltViewModel
 class BooksViewModel @Inject constructor(
@@ -75,29 +76,26 @@ class BooksViewModel @Inject constructor(
 
     init {
         refreshDataFromRepository(searchText)
-        scheduleBooksUpdate()
+        scheduleRefreshDataFromRepository()
     }
 
     // Work manager function
-    private fun scheduleBooksUpdate() {
+    private fun scheduleRefreshDataFromRepository() {
         // Constraints in which worker will be executed
         val constraints =
             Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
-                .setRequiresDeviceIdle(true)
-                .setRequiresStorageNotLow(true)
                 .build()
 
         val scheduleWorkRequest =
-            PeriodicWorkRequestBuilder<SyncBooksWorker>(30, TimeUnit.SECONDS)
+            PeriodicWorkRequestBuilder<SyncBooksWorker>(1, TimeUnit.MINUTES)
                 .setConstraints(constraints)
+                .addTag(WORKER_TAG)
                 .build()
 
-        with(workManager) {
-            enqueue(scheduleWorkRequest) // Enqueue the work request
-            // TODO: need to add observer to this work info
-            getWorkInfosByTag("syncBooksWorkManager")// Produce work info by tag
-        }
+        workManager.enqueue(scheduleWorkRequest) // Enqueue the work request
+        // TODO: need to add observer to this work info
+        workManager.getWorkInfosByTag(WORKER_TAG)// Produce work info by tag
     }
 
     private fun refreshDataFromRepository(searchText: String) {
