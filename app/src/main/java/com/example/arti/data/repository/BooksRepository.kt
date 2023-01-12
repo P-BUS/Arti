@@ -33,7 +33,7 @@ class BooksRepository @Inject constructor(
                 searchText = searchText
             )
             if (searchResult.docs.isNotEmpty()) {
-                database.booksDao().deleteAllBooks()
+                deleteAllBooks()
                 val listBooks: List<OpenLibraryBook> = searchResult.docs
                 database.booksDao().insertAll(listBooks.asDatabaseModel())
             }

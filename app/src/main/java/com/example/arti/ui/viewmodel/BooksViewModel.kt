@@ -23,7 +23,7 @@ import javax.inject.Inject
 enum class BooksApiStatus { LOADING, ERROR, DONE }
 
 const val TAG = "BooksViewModel"
-const val WORKER_TAG = "syncBooksWorkManager"
+const val WORKER_TAG = "WorkManager syncBooks"
 
 @HiltViewModel
 class BooksViewModel @Inject constructor(
@@ -88,9 +88,8 @@ class BooksViewModel @Inject constructor(
                 .build()
 
         val scheduleWorkRequest =
-            PeriodicWorkRequestBuilder<SyncBooksWorker>(1, TimeUnit.MINUTES)
+            PeriodicWorkRequestBuilder<SyncBooksWorker>(5, TimeUnit.MINUTES)
                 .setConstraints(constraints)
-                .addTag(WORKER_TAG)
                 .build()
 
         workManager.enqueue(scheduleWorkRequest) // Enqueue the work request
