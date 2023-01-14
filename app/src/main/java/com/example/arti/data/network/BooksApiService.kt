@@ -12,5 +12,5 @@ interface BooksApiService {
         @Query("language") booksLanguage: String = "ukr",
         @Query("has_fulltext") hasFullText: String = "true",
         @Query("mode") typeOfDocument: String = "ebooks"
-    ): OpenLibrarySearchResponse
+    ): ApiResult<OpenLibrarySearchResponse>
 }
