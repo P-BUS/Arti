@@ -18,6 +18,9 @@ const val TAG = "BooksRepository"
 
 @Singleton
 class BooksRepository @Inject constructor(
+    // TODO: Need to create BooksLocalDataSource instead AppDatabase
+    //  and gather everything in one Repository including BooksDataStore?
+    //  Or separate Repository for every data source?
     private val database: AppDatabase,
     private val network: BooksRemoteDataSource
 ) {
