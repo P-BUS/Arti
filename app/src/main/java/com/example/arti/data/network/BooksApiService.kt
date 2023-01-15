@@ -1,6 +1,7 @@
 package com.example.arti.data.network
 
 import com.example.arti.data.model.OpenLibrarySearchResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,6 +12,7 @@ interface BooksApiService {
         @Query("q") searchText: String = "Ukraine",
         @Query("language") booksLanguage: String = "ukr",
         @Query("has_fulltext") hasFullText: String = "true",
-        @Query("mode") typeOfDocument: String = "ebooks"
-    ): ApiResult<OpenLibrarySearchResponse>
+        @Query("mode") typeOfDocument: String= "ebooks"
+    ): Response<OpenLibrarySearchResponse>
 }
+

@@ -1,8 +1,10 @@
 package com.example.arti.ui.viewmodel
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
@@ -13,7 +15,12 @@ import com.example.arti.data.repository.LayoutRepository
 import com.example.arti.worker.SyncBooksWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.retry
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -70,12 +77,8 @@ class BooksViewModel @Inject constructor(
     private val _status = MutableStateFlow(BooksApiStatus.DONE)
     val status: StateFlow<BooksApiStatus> = _status.asStateFlow()
 
-    // TODO: To change the hardcoded text to variable or string source
-    // Default search when the APP is started
-    var searchText: String = "Ukraine"
-
     init {
-        refreshDataFromRepository(searchText)
+        refreshDataFromRepository()
         scheduleRefreshDataFromRepository()
     }
 
@@ -97,11 +100,11 @@ class BooksViewModel @Inject constructor(
         workManager.getWorkInfosByTag(WORKER_TAG)// Produce work info by tag
     }
 
-    private fun refreshDataFromRepository(searchText: String) {
+    private fun refreshDataFromRepository() {
         viewModelScope.launch {
             _status.value = BooksApiStatus.LOADING
             try {
-                booksRepository.refreshBooks(searchText)
+                booksRepository.refreshBooks()
                 _status.value = BooksApiStatus.DONE
             } catch (networkError: IOException) {
                 _status.value = BooksApiStatus.ERROR

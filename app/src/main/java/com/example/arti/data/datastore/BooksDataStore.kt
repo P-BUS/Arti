@@ -21,7 +21,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
 )
 
 @Singleton
-class LocalDataSource @Inject constructor(
+class BooksDataStore @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) {
 

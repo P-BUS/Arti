@@ -1,14 +1,13 @@
 package com.example.arti.data.repository
 
-import com.example.arti.data.datastore.LocalDataSource
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.arti.data.datastore.BooksDataStore
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class LayoutRepository @Inject constructor(
-    private val localDataSource: LocalDataSource
+    private val localDataSource: BooksDataStore
 ) {
 
     // Read

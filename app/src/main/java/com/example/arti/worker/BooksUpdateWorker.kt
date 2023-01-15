@@ -24,8 +24,7 @@ class SyncBooksWorker @AssistedInject constructor(
         withContext(Dispatchers.IO) {
             try {
                 // TODO: Seems it right but don't work))
-                // TODO: Change hardcoded parameter
-                booksRepository.refreshBooks("Ukraine")
+                booksRepository.refreshBooks()
                 Log.i(TAG, "WorkManager started books sync")
                 Result.success()
             } catch (exception: Exception) {
