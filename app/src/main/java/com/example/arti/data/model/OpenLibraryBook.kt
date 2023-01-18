@@ -1,8 +1,9 @@
 package com.example.arti.data.model
 
 import com.example.arti.utils.Constants
+import com.squareup.moshi.JsonClass
 
-
+@JsonClass(generateAdapter = true)
 data class OpenLibraryBook(
     val _version_: Long = Constants.MISSED_LONG_DATA,
     val author_alternative_name: List<String> = listOf(Constants.MISSED_STRING_DATA),
