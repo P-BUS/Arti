@@ -12,7 +12,7 @@ interface BooksApiService {
         @Query("q") searchText: String = "Ukraine",
         @Query("language") booksLanguage: String = "ukr",
         @Query("has_fulltext") hasFullText: String = "true",
-        @Query("mode") typeOfDocument: String= "ebooks"
+        @Query("mode") typeOfDocument: String = "ebooks"
     ): Response<OpenLibrarySearchResponse>
 }
 

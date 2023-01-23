@@ -1,7 +1,7 @@
 package com.example.arti.data.repository
 
 import android.util.Log
-import com.example.arti.data.database.AppDatabase
+import com.example.arti.data.database.BooksLocalDataSource
 import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.network.ApiResult
 import com.example.arti.data.network.BooksRemoteDataSource
@@ -18,16 +18,13 @@ const val TAG = "BooksRepository"
 
 @Singleton
 class BooksRepository @Inject constructor(
-    // TODO: Need to create BooksLocalDataSource instead AppDatabase
-    //  and gather everything in one Repository including BooksDataStore?
-    //  Or separate Repository for every data source?
-    private val database: AppDatabase,
+    private val database: BooksLocalDataSource,
     private val network: BooksRemoteDataSource
 ) {
 
     //Transforms database entity to domain
     val books: Flow<List<OpenLibraryBook>> =
-        database.booksDao().getAllBooks()
+        database.getAllBooks()
             .map { it.asDomainModel() }
 
     /**
@@ -43,11 +40,11 @@ class BooksRepository @Inject constructor(
                 is ApiResult.Exception -> Log.e(TAG, "${response.e.message}")
             }
             // Update database
-            database.booksDao().insertAll(listBooks.asDatabaseModel())
+            database.insertAll(listBooks.asDatabaseModel())
         }
     }
 
     suspend fun deleteAllBooks() {
-        database.booksDao().deleteAllBooks()
+        database.deleteAllBooks()
     }
 }

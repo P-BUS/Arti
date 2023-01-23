@@ -3,9 +3,6 @@ package com.example.arti.data.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import com.example.arti.data.model.OpenLibraryBook
-import com.google.gson.Gson
 
 
 @Entity(tableName = "books_database")
