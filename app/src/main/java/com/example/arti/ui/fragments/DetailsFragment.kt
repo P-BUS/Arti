@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.arti.R
-import com.example.arti.utils.ImageLoader
-import com.example.arti.utils.ImageSize
 import com.example.arti.databinding.DetailsFragmentBinding
 import com.example.arti.ui.viewmodel.BooksViewModel
+import com.example.arti.utils.ImageLoader
+import com.example.arti.utils.ImageSize
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.DynamicColorsOptions
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +32,8 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bindBook()
 
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottomNavigationView =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView?.visibility = View.GONE
     }
 
