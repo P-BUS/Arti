@@ -2,12 +2,12 @@
 
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="?attr/materialCardViewElevatedStyle"
     android:layout_width="match_parent"
-    android:clickable="true"
-    android:focusable="true"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    style="?attr/materialCardViewElevatedStyle"
+    android:clickable="true"
+    android:focusable="true"
     app:cardElevation="1dp">
 
     <LinearLayout
