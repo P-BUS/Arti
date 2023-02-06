@@ -1,7 +1,12 @@
 package com.example.arti.ui.fragments
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -53,7 +58,7 @@ class ListFragment : Fragment() {
                 // repeatOnLifecycle() under the hood for single flow - for simplicity
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 // Diffing: Returns flow where all subsequent repetitions of the same value are filtered out.
-                .distinctUntilChanged() // TODO: maybe it is not needed here?
+                .distinctUntilChanged()
                 .collect { value ->
                     isLinearLayoutManager = value
                     chooseLayout()

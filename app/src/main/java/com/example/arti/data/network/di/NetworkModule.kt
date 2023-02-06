@@ -1,5 +1,6 @@
-package com.example.arti.data.network
+package com.example.arti.data.network.di
 
+import com.example.arti.data.network.BooksApiService
 import com.example.arti.utils.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

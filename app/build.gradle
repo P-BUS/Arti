@@ -93,7 +93,7 @@ dependencies {
     implementation "androidx.core:core-ktx:${rootProject.ext.androidCoreVersion}"
     implementation "androidx.appcompat:appcompat:${rootProject.ext.appcompatVersion}"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'com.google.code.gson:gson:2.10'
 
     // Firebase authentication
@@ -105,7 +105,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'androidx.annotation:annotation:1.5.0'
     // Also add the dependency for the Google Play services library and specify its version
-    implementation 'com.google.android.gms:play-services-auth:20.4.0'
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
     def lifecycle_version = "2.5.1"

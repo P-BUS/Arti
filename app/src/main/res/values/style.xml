@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="TextAppearance.MdcTypographyStyles.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+    <style name="TextAppearance.MdcTypographyStyles.Headline1" parent="TextAppearance.Material3.DisplayLarge">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">96sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+    <style name="TextAppearance.MdcTypographyStyles.Headline2" parent="TextAppearance.Material3.DisplayMedium">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">60sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+    <style name="TextAppearance.MdcTypographyStyles.Headline3" parent="TextAppearance.Material3.DisplaySmall">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">48sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+    <style name="TextAppearance.MdcTypographyStyles.Headline4" parent="TextAppearance.Material3.HeadlineMedium">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">34sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="TextAppearance.MdcTypographyStyles.Headline5" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">24sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="TextAppearance.MdcTypographyStyles.Headline6" parent="TextAppearance.Material3.TitleLarge">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+    <style name="TextAppearance.MdcTypographyStyles.Subtitle1" parent="TextAppearance.Material3.TitleMedium">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">16sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+    <style name="TextAppearance.MdcTypographyStyles.Subtitle2" parent="TextAppearance.Material3.TitleSmall">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">14sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Body1" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="TextAppearance.MdcTypographyStyles.Body1" parent="TextAppearance.Material3.BodyLarge">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">16sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Body2" parent="TextAppearance.MaterialComponents.Body2">
+    <style name="TextAppearance.MdcTypographyStyles.Body2" parent="TextAppearance.Material3.BodyMedium">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">14sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Button" parent="TextAppearance.MaterialComponents.Button">
+    <style name="TextAppearance.MdcTypographyStyles.Button" parent="TextAppearance.Material3.LabelLarge">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">14sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Caption" parent="TextAppearance.MaterialComponents.Caption">
+    <style name="TextAppearance.MdcTypographyStyles.Caption" parent="TextAppearance.Material3.BodySmall">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">12sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Overline" parent="TextAppearance.MaterialComponents.Overline">
+    <style name="TextAppearance.MdcTypographyStyles.Overline" parent="TextAppearance.Material3.LabelSmall">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textSize">10sp</item>
@@ -69,43 +69,43 @@
 
     <!-- Text Appearance Subtitle1 style -->
     <style name="TextAppearance.Cupcake.Subtitle1"
-        parent="TextAppearance.MaterialComponents.Subtitle1">
+        parent="TextAppearance.Material3.TitleMedium">
         <item name="android:textSize">18sp</item>
     </style>
-
-    <!-- TextView style -->
-    <style name="Widget.Cupcake.TextView" parent="Widget.MaterialComponents.TextView">
+<!--
+    &lt;!&ndash; TextView style &ndash;&gt;
+    <style name="Widget.Arti.TextView" parent="Widget.Material3.TextView">
         <item name="android:textAppearance">?attr/textAppearanceSubtitle1</item>
     </style>
 
-    <!-- Final price TextView style -->
-    <style name="Widget.Cupcake.TextView.FinalPrice" parent="Widget.Cupcake.TextView">
+    &lt;!&ndash; Final price TextView style &ndash;&gt;
+    <style name="Widget.Arti.TextView.FinalPrice" parent="Widget.Cupcake.TextView">
         <item name="android:textAllCaps">true</item>
         <item name="android:textAppearance">?attr/textAppearanceHeadline6</item>
     </style>
 
-    <!-- TextView style for an order summary label -->
-    <style name="Widget.Cupcake.TextView.Label" parent="Widget.MaterialComponents.TextView">
+    &lt;!&ndash; TextView style for an order summary label &ndash;&gt;
+    <style name="Widget.Arti.TextView.Label" parent="Widget.Material3.TextView">
         <item name="android:textAllCaps">true</item>
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
     </style>
 
-    <!-- TextView style for an order summary entry -->
-    <style name="Widget.Cupcake.TextView.OrderSummary" parent="Widget.MaterialComponents.TextView">
+    &lt;!&ndash; TextView style for an order summary entry &ndash;&gt;
+    <style name="Widget.Arti.TextView.OrderSummary" parent="Widget.Material3.CheckedTextView">
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <!-- Radio Button style -->
-    <style name="Widget.Cupcake.CompoundButton.RadioButton"
-        parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+    &lt;!&ndash; Radio Button style &ndash;&gt;
+    <style name="Widget.Arti.CompoundButton.RadioButton"
+        parent="Widget.Material3.CompoundButton.RadioButton">
         <item name="android:paddingEnd">@dimen/radio_button_padding</item>
         <item name="android:paddingStart">@dimen/radio_button_padding</item>
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
     </style>
 
-    <!-- Divider style -->
-    <style name="Widget.Cupcake.Divider" parent="">
+    &lt;!&ndash; Divider style &ndash;&gt;
+    <style name="Widget.Arti.Divider" parent="">
         <item name="android:background">?attr/dividerHorizontal</item>
-    </style>
+    </style>-->
 </resources>
