@@ -1,4 +1,4 @@
-package com.example.arti.di
+package com.example.arti
 
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
