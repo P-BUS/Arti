@@ -23,7 +23,7 @@ class BooksRepository @Inject constructor(
 ) {
 
     //Transforms database entity to domain
-    val booksSteam: Flow<List<OpenLibraryBook>> =
+    val booksStream: Flow<List<OpenLibraryBook>> =
         database.getAllBooks()
             .map { it.asDomainModel() }
 

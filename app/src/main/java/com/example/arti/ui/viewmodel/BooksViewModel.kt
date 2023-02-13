@@ -38,7 +38,7 @@ class BooksViewModel @Inject constructor(
 
     // Transforms books Flow to StateFow with and retrying to fetch data if IO Exceptions
     val books: StateFlow<List<OpenLibraryBook>> =
-        booksRepository.booksSteam
+        booksRepository.booksStream
             // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
             .retry(3) { e ->
                 (e is IOException).also { if (it) delay(1000) }
