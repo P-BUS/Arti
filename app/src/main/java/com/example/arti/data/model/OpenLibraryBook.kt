@@ -4,6 +4,8 @@ import com.example.arti.utils.Constants
 import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.JsonClass
 
+
+// TODO: decrease quantity of received properties and change it as needed for UI in Mappers
 @JsonClass(generateAdapter = true)
 data class OpenLibraryBook(
     @SerializedName("_version_")

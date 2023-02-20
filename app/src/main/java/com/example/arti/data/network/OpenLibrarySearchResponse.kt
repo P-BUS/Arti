@@ -1,5 +1,6 @@
-package com.example.arti.data.model
+package com.example.arti.data.network
 
+import com.example.arti.data.model.OpenLibraryBook
 import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.JsonClass
 

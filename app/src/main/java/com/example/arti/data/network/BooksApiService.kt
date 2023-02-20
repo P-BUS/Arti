@@ -1,6 +1,5 @@
 package com.example.arti.data.network
 
-import com.example.arti.data.model.OpenLibrarySearchResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
