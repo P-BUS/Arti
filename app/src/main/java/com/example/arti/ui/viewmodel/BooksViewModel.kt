@@ -1,8 +1,6 @@
 package com.example.arti.ui.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.Constraints
@@ -64,9 +62,8 @@ class BooksViewModel @Inject constructor(
                 initialValue = true
             )
 
-    // TODO: change to StateFlow but what to choose for default value?
-    private val _currentBook = MutableLiveData<OpenLibraryBook>()
-    val currentBook: LiveData<OpenLibraryBook> = _currentBook
+    private val _currentBook = MutableStateFlow(OpenLibraryBook())
+    val currentBook: StateFlow<OpenLibraryBook> = _currentBook.asStateFlow()
 
     // Store the status of updating database from web service
     private val _status = MutableStateFlow(BooksApiStatus.DONE)
@@ -108,7 +105,7 @@ class BooksViewModel @Inject constructor(
         }
     }
 
-    // Updates current book LiveData property
+    // Updates current book property
     fun updateCurrentBook(book: OpenLibraryBook) {
         _currentBook.value = book
     }

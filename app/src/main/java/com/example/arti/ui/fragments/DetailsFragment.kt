@@ -12,8 +12,6 @@ import com.example.arti.ui.viewmodel.BooksViewModel
 import com.example.arti.utils.ImageLoader
 import com.example.arti.utils.ImageSize
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.color.DynamicColors
-import com.google.android.material.color.DynamicColorsOptions
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,12 +36,11 @@ class DetailsFragment : Fragment() {
     }
 
     private fun bindBook() {
-        binding.bookAuthorName.text =
-            sharedViewModel.currentBook.value?.author_name?.get(0).toString()
-        binding.bookDetailName.text = sharedViewModel.currentBook.value?.title.toString()
-        sharedViewModel.currentBook.value?.let {
+        binding.bookAuthorName.text = sharedViewModel.currentBook.value.authorName[0]
+        binding.bookDetailName.text = sharedViewModel.currentBook.value.title.toString()
+        sharedViewModel.currentBook.value.let {
             //Load the image from web service using Coil
-            ImageLoader.loadImage(binding.bookDetailImage, it.cover_i, ImageSize.L)
+            ImageLoader.loadImage(binding.bookDetailImage, it.coverI, ImageSize.L)
         }
     }
 
