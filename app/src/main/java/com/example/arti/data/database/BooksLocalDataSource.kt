@@ -9,9 +9,6 @@ class BooksLocalDataSource @Inject constructor(
     fun getAllBooks(): Flow<List<BooksEntity>> =
         database.booksDao().getAllBooks()
 
-    fun getBook(cover: String): Flow<BooksEntity> =
-        database.booksDao().getBook(cover)
-
     suspend fun insertAll(books: List<BooksEntity>) =
         database.booksDao().insertAll(books)
 

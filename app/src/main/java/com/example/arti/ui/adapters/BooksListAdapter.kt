@@ -4,18 +4,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.arti.data.network.OpenLibraryBook
+import com.example.arti.data.model.Book
 import com.example.arti.databinding.ItemViewBinding
 import com.example.arti.utils.ImageLoader
 import com.example.arti.utils.ImageSize
 
 
 class BooksListAdapter(
-    private val onItemClicked: (OpenLibraryBook) -> Unit
-) : ListAdapter<OpenLibraryBook, BooksListAdapter.ListViewHolder>(DiffCallback) {
+    private val onItemClicked: (Book) -> Unit
+) : ListAdapter<Book, BooksListAdapter.ListViewHolder>(DiffCallback) {
 
     class ListViewHolder(private var binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(book: OpenLibraryBook) {
+        fun bind(book: Book) {
             binding.itemAuthor.text = book.title
             binding.itemName.text = book.authorName[0]
             //Load the image from web service using Coil
@@ -38,11 +38,11 @@ class BooksListAdapter(
         holder.bind(getItem(position))
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<OpenLibraryBook>() {
-        override fun areItemsTheSame(oldItem: OpenLibraryBook, newItem: OpenLibraryBook): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Book>() {
+        override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem.key == newItem.key
         }
-        override fun areContentsTheSame(oldItem: OpenLibraryBook, newItem: OpenLibraryBook): Boolean {
+        override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem == newItem
         }
     }

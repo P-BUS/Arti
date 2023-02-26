@@ -6,13 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.example.arti.R
+import com.example.arti.data.model.Book
 import com.example.arti.databinding.DetailsFragmentBinding
 import com.example.arti.ui.viewmodel.BooksViewModel
 import com.example.arti.utils.ImageLoader
 import com.example.arti.utils.ImageSize
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -28,23 +34,29 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindBook()
+
+        lifecycleScope.launch {
+            sharedViewModel.currentBook
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .distinctUntilChanged()
+                .collect { currentBook ->
+                    bindBook(currentBook)
+                }
+        }
 
         val bottomNavigationView =
             activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView?.visibility = View.GONE
     }
 
-    private fun bindBook() {
-        binding.bookAuthorName.text = sharedViewModel.currentBook.value.authorName[0]
-        binding.bookDetailName.text = sharedViewModel.currentBook.value.title.toString()
-        sharedViewModel.currentBook.value.let {
+    private fun bindBook(currentBook: Book) {
+        binding.bookAuthorName.text = currentBook.authorName[0]
+        binding.bookDetailName.text = currentBook.title
+        currentBook.let {
             //Load the image from web service using Coil
             ImageLoader.loadImage(binding.bookDetailImage, it.coverI, ImageSize.L)
         }
     }
-
-
 }
 
 

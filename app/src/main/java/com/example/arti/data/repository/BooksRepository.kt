@@ -2,6 +2,7 @@ package com.example.arti.data.repository
 
 import android.util.Log
 import com.example.arti.data.database.BooksLocalDataSource
+import com.example.arti.data.model.Book
 import com.example.arti.data.network.ApiResult
 import com.example.arti.data.network.BooksRemoteDataSource
 import com.example.arti.data.network.OpenLibraryBook
@@ -23,7 +24,7 @@ class BooksRepository @Inject constructor(
 ) {
 
     //Transforms database entity to domain
-    val booksStream: Flow<List<OpenLibraryBook>> =
+    val booksStream: Flow<List<Book>> =
         database.getAllBooks()
             .map { it.asDomainModel() }
 
