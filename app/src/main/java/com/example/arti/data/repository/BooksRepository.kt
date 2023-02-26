@@ -2,9 +2,9 @@ package com.example.arti.data.repository
 
 import android.util.Log
 import com.example.arti.data.database.BooksLocalDataSource
-import com.example.arti.data.model.OpenLibraryBook
 import com.example.arti.data.network.ApiResult
 import com.example.arti.data.network.BooksRemoteDataSource
+import com.example.arti.data.network.OpenLibraryBook
 import com.example.arti.utils.asDatabaseModel
 import com.example.arti.utils.asDomainModel
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +35,10 @@ class BooksRepository @Inject constructor(
             // Safe network response
             var listBooks: List<OpenLibraryBook> = listOf()
             when (val response = network.invoke()) {
-                is ApiResult.Success -> listBooks = response.data.docs
+                is ApiResult.Success -> {
+                    deleteAllBooks()
+                    listBooks = response.data.docs
+                }
                 is ApiResult.Error -> Log.e(TAG, "${response.code} ${response.message}")
                 is ApiResult.Exception -> Log.e(TAG, "${response.e.message}")
             }

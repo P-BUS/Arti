@@ -7,7 +7,7 @@ import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import com.example.arti.data.model.OpenLibraryBook
+import com.example.arti.data.network.OpenLibraryBook
 import com.example.arti.data.repository.BooksRepository
 import com.example.arti.data.repository.LayoutRepository
 import com.example.arti.worker.SyncBooksWorker
@@ -110,7 +110,6 @@ class BooksViewModel @Inject constructor(
         _currentBook.value = book
     }
 
-    // TODO: Fun was passed throughout layers without changes only to keep data flow in a right direction
     // Write to a Preferences DataStore
     suspend fun saveLayoutToPreferencesStore(isLinearLayoutManager: Boolean) =
         layoutRepository.saveLayoutToPreferencesStore(isLinearLayoutManager)

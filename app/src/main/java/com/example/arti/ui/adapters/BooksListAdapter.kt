@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.arti.data.model.OpenLibraryBook
+import com.example.arti.data.network.OpenLibraryBook
 import com.example.arti.databinding.ItemViewBinding
 import com.example.arti.utils.ImageLoader
 import com.example.arti.utils.ImageSize

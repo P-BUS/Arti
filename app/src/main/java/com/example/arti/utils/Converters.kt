@@ -10,11 +10,3 @@ class ConverterString {
     @TypeConverter
     fun jsonToList(value: String) = Gson().fromJson(value, Array<String>::class.java).toList()
 }
-
-class ConverterInt {
-    @TypeConverter
-    fun listToJson(value: List<Int>?) = Gson().toJson(value)
-
-    @TypeConverter
-    fun jsonToList(value: String) = Gson().fromJson(value, Array<Int>::class.java).toList()
-}

@@ -1,7 +1,7 @@
 package com.example.arti.utils
 
 import com.example.arti.data.database.BooksEntity
-import com.example.arti.data.model.OpenLibraryBook
+import com.example.arti.data.network.OpenLibraryBook
 
 
 /**
