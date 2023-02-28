@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="Arti.app" target="11" />
+      <module name="Arti.core.common" target="11" />
+      <module name="Arti.core.data" target="11" />
+      <module name="Arti.core.database" target="11" />
+      <module name="Arti.core.datastore" target="11" />
+      <module name="Arti.core.domain" target="11" />
+      <module name="Arti.core.network" target="11" />
+      <module name="Arti.feature.home" target="11" />
+      <module name="Arti.feature.mybooks" target="11" />
+      <module name="Arti.feature.onboarding" target="11" />
+      <module name="Arti.feature.settings" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

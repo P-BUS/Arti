@@ -16,3 +16,14 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Arti"
 include ':app'
+include ':core:database'
+include ':feature:home'
+include ':feature:onboarding'
+include ':feature:settings'
+include ':feature:mybooks'
+include ':core:common'
+include ':core:data'
+include ':core:datastore'
+include ':core:domain'
+include ':core:model'
+include ':core:network'

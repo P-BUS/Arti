@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.arti.data.repository.BooksRepository
+import com.example.data.repository.BooksRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +17,7 @@ const val TAG = "WorkManager SyncBooksWorker"
 class SyncBooksWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted workerParams: WorkerParameters,
-    private val booksRepository: BooksRepository
+    private val booksRepository: com.example.data.repository.BooksRepository
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result =
