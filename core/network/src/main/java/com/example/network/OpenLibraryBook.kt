@@ -1,5 +1,6 @@
 package com.example.network
 
+import com.example.database.model.BooksEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -16,4 +17,17 @@ data class OpenLibraryBook(
     val title: String = "",
     val type: String = ""
 )
+
+fun List<OpenLibraryBook>.asDatabaseModel(): List<BooksEntity> {
+    return map {
+        BooksEntity(
+            key = it.key,
+            authorName = it.authorName,
+            coverI = it.coverI,
+            language = it.language,
+            title = it.title,
+            type = it.type
+        )
+    }
+}
 

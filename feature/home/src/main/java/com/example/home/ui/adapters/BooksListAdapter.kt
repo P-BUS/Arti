@@ -5,9 +5,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arti.databinding.ItemViewBinding
-import com.example.arti.utils.ImageLoader
-import com.example.arti.utils.ImageSize
-import com.example.model.Book
+import com.example.common.ImageLoader
+import com.example.common.ImageSize
 
 
 class BooksListAdapter(

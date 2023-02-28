@@ -1,4 +1,4 @@
-package com.example.arti.utils
+package com.example.database.util
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

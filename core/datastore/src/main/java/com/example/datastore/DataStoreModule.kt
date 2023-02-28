@@ -8,8 +8,8 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.example.arti.utils.Constants.DATA_STORE_FILE_NAME
-import com.example.arti.utils.Constants.LAYOUT_PREFERENCES_NAME
+import com.example.common.Constants.DATA_STORE_FILE_NAME
+import com.example.common.Constants.LAYOUT_PREFERENCES_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

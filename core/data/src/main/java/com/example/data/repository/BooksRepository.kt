@@ -1,9 +1,12 @@
 package com.example.data.repository
 
 import android.util.Log
-import com.example.arti.asDatabaseModel
-import com.example.arti.asDomainModel
-import com.example.arti.data.model.Book
+import com.example.database.BooksLocalDataSource
+import com.example.model.Book
+import com.example.model.asDatabaseModel
+import com.example.model.asDomainModel
+import com.example.network.BooksRemoteDataSource
+import com.example.network.OpenLibraryBook
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -15,8 +18,8 @@ const val TAG = "BooksRepository"
 
 @Singleton
 class BooksRepository @Inject constructor(
-    private val database: com.example.database.BooksLocalDataSource,
-    private val network: com.example.network.BooksRemoteDataSource
+    private val database: BooksLocalDataSource,
+    private val network: BooksRemoteDataSource
 ) {
 
     //Transforms database entity to domain
@@ -30,7 +33,7 @@ class BooksRepository @Inject constructor(
     suspend fun refreshBooks() {
         withContext(Dispatchers.IO) {
             // Safe network response
-            var listBooks: List<com.example.network.OpenLibraryBook> = listOf()
+            var listBooks: List<OpenLibraryBook> = listOf()
             when (val response = network.invoke()) {
                 is com.example.network.ApiResult.Success -> {
                     deleteAllBooks()

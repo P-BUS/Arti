@@ -1,9 +1,8 @@
-package com.example.arti.utils
+package com.example.common
 
 import android.widget.ImageView
 import androidx.core.net.toUri
 import coil.load
-import com.example.arti.R
 
 
 enum class ImageSize(imageSize: String) {

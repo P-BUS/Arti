@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 class LayoutRepository @Inject constructor(
-    private val localDataSource: com.example.datastore.BooksDataStore
+    private val localDataSource: BooksDataStore
 ) {
 
     // Read

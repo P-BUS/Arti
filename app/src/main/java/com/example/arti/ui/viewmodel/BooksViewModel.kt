@@ -7,8 +7,8 @@ import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import com.example.arti.Book
-import com.example.work.worker.SyncBooksWorker
+import com.example.model.Book
+import com.example.work.workers.SyncBooksWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
@@ -86,7 +86,7 @@ class BooksViewModel @Inject constructor(
                 .build()
 
         val scheduleWorkRequest =
-            PeriodicWorkRequestBuilder<com.example.work.worker.SyncBooksWorker>(5, TimeUnit.MINUTES)
+            PeriodicWorkRequestBuilder<SyncBooksWorker>(5, TimeUnit.MINUTES)
                 .setConstraints(constraints)
                 .build()
 
