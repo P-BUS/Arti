@@ -1,4 +1,4 @@
-package com.example.arti.utils
+package com.example.arti
 
 import com.example.database.BooksEntity
 import com.example.network.OpenLibraryBook
@@ -7,9 +7,9 @@ import com.example.network.OpenLibraryBook
 /**
  * Map [BooksEntity] to domain entities
  */
-fun List<com.example.database.BooksEntity>.asDomainModel(): List<com.example.model.Book> {
+fun List<com.example.database.BooksEntity>.asDomainModel(): List<Book> {
     return map {
-        com.example.model.Book(
+        Book(
             key = it.key,
             authorName = it.authorName,
             coverI = it.coverI,

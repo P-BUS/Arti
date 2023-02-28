@@ -7,9 +7,7 @@ import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import com.example.data.repository.BooksRepository
-import com.example.data.repository.LayoutRepository
-import com.example.model.Book
+import com.example.arti.Book
 import com.example.work.worker.SyncBooksWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -36,7 +34,7 @@ class BooksViewModel @Inject constructor(
     //val workManager = WorkManager.getInstance(application)
 
     // Transforms books Flow to StateFow with and retrying to fetch data if IO Exceptions
-    val books: StateFlow<List<com.example.model.Book>> =
+    val books: StateFlow<List<Book>> =
         booksRepository.booksStream
             // if exception caught retry 3 times on any IOException but also introduce delay 1sec if retrying
             .retry(3) { e ->
@@ -63,12 +61,12 @@ class BooksViewModel @Inject constructor(
                 initialValue = true
             )
 
-    private val _currentBook = MutableSharedFlow<com.example.model.Book>(
+    private val _currentBook = MutableSharedFlow<Book>(
         replay = 1,
         extraBufferCapacity = 0,
         BufferOverflow.DROP_OLDEST
     )
-    val currentBook: SharedFlow<com.example.model.Book> = _currentBook.asSharedFlow()
+    val currentBook: SharedFlow<Book> = _currentBook.asSharedFlow()
 
     // Store the status of updating database from web service
     private val _status = MutableStateFlow(BooksApiStatus.DONE)
@@ -111,7 +109,7 @@ class BooksViewModel @Inject constructor(
     }
 
     // Updates current book property
-    fun updateCurrentBook(book: com.example.model.Book) {
+    fun updateCurrentBook(book: Book) {
         viewModelScope.launch {
             _currentBook.emit(book)
         }

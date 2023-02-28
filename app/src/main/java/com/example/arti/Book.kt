@@ -1,4 +1,4 @@
-package com.example.model
+package com.example.arti
 
 data class Book(
     val authorName: List<String>,
