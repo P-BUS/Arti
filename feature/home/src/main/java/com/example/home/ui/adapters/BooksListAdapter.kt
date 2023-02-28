@@ -1,4 +1,4 @@
-package com.example.arti.ui.adapters
+package com.example.home.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

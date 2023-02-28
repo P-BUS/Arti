@@ -8,7 +8,7 @@
     <fragment android:id="@+id/placeholder" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.arti.ui.fragments.ListFragment"
+        android:name="com.example.home.ui.ListFragment"
         android:label="@string/books"
         tools:layout="@layout/list_fragment">
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.arti.ui.fragments.DetailsFragment"
+        android:name="com.example.home.ui.DetailsFragment"
         android:label="@string/book"
         tools:layout="@layout/details_fragment">
         <action

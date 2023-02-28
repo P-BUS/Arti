@@ -1,4 +1,4 @@
-package com.example.arti.worker
+package com.example.work.workers
 
 import android.content.Context
 import android.util.Log

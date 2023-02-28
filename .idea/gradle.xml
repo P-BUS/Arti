@@ -25,6 +25,8 @@
             <option value="$PROJECT_DIR$/feature/mybooks" />
             <option value="$PROJECT_DIR$/feature/onboarding" />
             <option value="$PROJECT_DIR$/feature/settings" />
+            <option value="$PROJECT_DIR$/sync" />
+            <option value="$PROJECT_DIR$/sync/work" />
           </set>
         </option>
       </GradleProjectSettings>

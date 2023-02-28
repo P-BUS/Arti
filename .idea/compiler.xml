@@ -13,6 +13,7 @@
       <module name="Arti.feature.mybooks" target="11" />
       <module name="Arti.feature.onboarding" target="11" />
       <module name="Arti.feature.settings" target="11" />
+      <module name="Arti.sync.work" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

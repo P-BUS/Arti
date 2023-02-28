@@ -1,4 +1,4 @@
-package com.example.arti.ui.fragments
+package com.example.onboarding.ui
 
 import android.app.Activity
 import android.os.Bundle
@@ -16,8 +16,6 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.color.DynamicColors
-import com.google.android.material.color.DynamicColorsOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
