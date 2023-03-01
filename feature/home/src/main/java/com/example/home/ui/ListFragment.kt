@@ -14,11 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.arti.R
-import com.example.arti.databinding.ListFragmentBinding
-import com.example.arti.ui.adapters.BooksListAdapter
-import com.example.arti.ui.viewmodel.BooksApiStatus
-import com.example.arti.ui.viewmodel.BooksViewModel
+import com.example.home.databinding.ListFragmentBinding
+import com.example.home.ui.adapters.BooksListAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged

@@ -9,12 +9,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.example.arti.R
-import com.example.arti.databinding.DetailsFragmentBinding
-import com.example.arti.ui.viewmodel.BooksViewModel
-import com.example.data.model.Book
-import com.example.data.utils.ImageLoader
-import com.example.data.utils.ImageSize
+import com.example.common.ImageLoader
+import com.example.common.ImageSize
+import com.example.home.databinding.DetailsFragmentBinding
+import com.example.model.Book
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged

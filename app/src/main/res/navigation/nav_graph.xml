@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.arti.ui.fragments.LoginFragment"
+        android:name="com.example.onboarding.ui.LoginFragment"
         android:label="@string/login_title_name"
         tools:layout="@layout/login_fragment">
         <action
