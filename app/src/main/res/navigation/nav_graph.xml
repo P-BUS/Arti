@@ -1,43 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/onboarding_nav_graph">
 
-    <fragment android:id="@+id/placeholder" />
-    <fragment
-        android:id="@+id/listFragment"
-        android:name="com.example.home.ui.ListFragment"
-        android:label="@string/books"
-        tools:layout="@layout/list_fragment">
-        <action
-            android:id="@+id/action_listFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-        <argument
-            android:name="safeArgs"
-            android:defaultValue="some text"
-            app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.example.home.ui.DetailsFragment"
-        android:label="@string/book"
-        tools:layout="@layout/details_fragment">
-        <action
-            android:id="@+id/action_detailsFragment_to_listFragment"
-            app:destination="@id/listFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.onboarding.ui.LoginFragment"
-        android:label="@string/login_title_name"
-        tools:layout="@layout/login_fragment">
-        <action
-            android:id="@+id/action_loginFragment_to_listFragment"
-            app:destination="@id/listFragment"
-            app:popUpTo="@id/listFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+    <include app:graph="@navigation/onboarding_nav_graph" />
+    <include app:graph="@navigation/home_nav_graph" />
 
 </navigation>
