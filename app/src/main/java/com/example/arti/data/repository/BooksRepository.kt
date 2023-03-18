@@ -6,9 +6,9 @@ import com.example.arti.data.model.Book
 import com.example.arti.data.network.ApiResult
 import com.example.arti.data.network.BooksRemoteDataSource
 import com.example.arti.data.network.OpenLibraryBook
+import com.example.arti.utils.CoroutineDispatchers
 import com.example.arti.utils.asDatabaseModel
 import com.example.arti.utils.asDomainModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -20,7 +20,8 @@ const val TAG = "BooksRepository"
 @Singleton
 class BooksRepository @Inject constructor(
     private val database: BooksLocalDataSource,
-    private val network: BooksRemoteDataSource
+    private val network: BooksRemoteDataSource,
+    private val dispatchers: CoroutineDispatchers
 ) {
 
     //Transforms database entity to domain
@@ -32,7 +33,7 @@ class BooksRepository @Inject constructor(
      * This method retrieve data from network and refresh the offline database.
      */
     suspend fun refreshBooks() {
-        withContext(Dispatchers.IO) {
+        withContext(dispatchers.io) {
             // Safe network response
             var listBooks: List<OpenLibraryBook> = listOf()
             when (val response = network.invoke()) {
