@@ -12,6 +12,7 @@ import com.example.arti.data.repository.BooksRepository
 import com.example.arti.data.repository.LayoutRepository
 import com.example.arti.worker.SyncBooksWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -98,7 +99,7 @@ class BooksViewModel @Inject constructor(
     }
 
     private fun refreshDataFromRepository() {
-        viewModelScope.launch {
+        viewModelScope.launch(CoroutineName("refreshData")) {
             _status.value = BooksApiStatus.LOADING
             try {
                 booksRepository.refreshBooks()
@@ -112,7 +113,7 @@ class BooksViewModel @Inject constructor(
 
     // Updates current book property
     fun updateCurrentBook(book: Book) {
-        viewModelScope.launch {
+        viewModelScope.launch(CoroutineName("updateCurrentBook")) {
             _currentBook.emit(book)
         }
     }
