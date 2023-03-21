@@ -10,10 +10,10 @@ class LayoutRepository @Inject constructor(
     private val localDataSource: BooksDataStore
 ) {
 
-    // Read
+    // Read layout type
     val layoutTypeStream: Flow<Boolean> = localDataSource.layoutTypeStream
 
-    // Write
+    // Write layout type
     suspend fun saveLayoutToPreferencesStore(isLinearLayoutManager: Boolean) =
         localDataSource.saveLayoutToPreferencesStore(isLinearLayoutManager)
 }
