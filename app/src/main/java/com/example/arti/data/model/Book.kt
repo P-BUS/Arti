@@ -1,10 +1,10 @@
 package com.example.arti.data.model
 
 data class Book(
-    val authorName: List<String>,
-    val coverI: Int,
-    val key: String,
-    val language: List<String>,
-    val title: String,
-    val type: String
+    val authorName: List<String> = listOf(),
+    val coverI: Int = 0,
+    val key: String = "",
+    val language: List<String> = listOf(),
+    val title: String = "",
+    val type: String = ""
 )

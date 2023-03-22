@@ -10,6 +10,7 @@ import com.example.arti.utils.CoroutineDispatchers
 import com.example.arti.utils.asDatabaseModel
 import com.example.arti.utils.asDomainModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -27,6 +28,7 @@ class BooksRepository @Inject constructor(
     //Transforms database entity to domain
     val booksStream: Flow<List<Book>> =
         database.getAllBooks()
+            .filterNotNull()
             .map { it.asDomainModel() }
 
     /**

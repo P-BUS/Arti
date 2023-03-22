@@ -4,20 +4,20 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class BooksLocalDataSource @Inject constructor(
-    private val database: AppDatabase
+    private val database: BooksDao
 ) {
     fun getAllBooks(): Flow<List<BooksEntity>> =
-        database.booksDao().getAllBooks()
+        database.getAllBooks()
 
     suspend fun insertAll(books: List<BooksEntity>) =
-        database.booksDao().insertAll(books)
+        database.insertAll(books)
 
     suspend fun update(book: BooksEntity) =
-        database.booksDao().update(book)
+        database.update(book)
 
     suspend fun deleteBook(book: BooksEntity) =
-        database.booksDao().deleteBook(book)
+        database.deleteBook(book)
 
     suspend fun deleteAllBooks() =
-        database.booksDao().deleteAllBooks()
+        database.deleteAllBooks()
 }

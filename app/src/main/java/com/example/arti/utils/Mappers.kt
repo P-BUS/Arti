@@ -28,7 +28,7 @@ fun List<OpenLibraryBook>.asDatabaseModel(): List<BooksEntity> {
     return map {
         BooksEntity(
             key = it.key,
-            authorName = it.authorName,
+            authorName = it.authorName ?: listOf("Unknown Author"),
             coverI = it.coverI,
             language = it.language,
             title = it.title,

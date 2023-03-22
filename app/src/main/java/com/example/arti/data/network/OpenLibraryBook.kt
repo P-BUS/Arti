@@ -8,7 +8,7 @@ import com.squareup.moshi.JsonClass
 data class OpenLibraryBook(
 
     @Json(name = "author_name")
-    val authorName: List<String> = listOf(),
+    val authorName: List<String>? = null,
     @Json(name = "cover_i")
     val coverI: Int = 0,
     val key: String = "",
