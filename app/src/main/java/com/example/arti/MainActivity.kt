@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         // Set up the action bar for use with the NavController
-        //setupActionBarWithNavController(navController)
+        setupActionBarWithNavController(navController)
 
         // Set up the bottom navigation with the NavController
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
