@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.arti.R
 import com.example.arti.data.model.Book
 import com.example.arti.databinding.DetailsFragmentBinding
@@ -34,6 +35,10 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.readButton.setOnClickListener {
+            findNavController().navigate(R.id.action_detailsFragment_to_bookReaderFragment)
+        }
 
         lifecycleScope.launch {
             sharedViewModel.currentBook
