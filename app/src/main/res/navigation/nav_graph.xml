@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/bookReaderFragment"
         android:name="com.example.arti.ui.fragments.BookReaderFragment"
-        android:label="book_reader_fragment"
+        android:label="@string/reader_title_name"
         tools:layout="@layout/book_reader_fragment" />
 
 </navigation>
