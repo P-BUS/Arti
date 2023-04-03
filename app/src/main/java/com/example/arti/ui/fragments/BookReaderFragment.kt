@@ -10,10 +10,12 @@ import com.example.arti.databinding.BookReaderFragmentBinding
 import com.example.arti.ui.viewmodel.BooksViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class BookReaderFragment : Fragment() {
     private lateinit var binding: BookReaderFragmentBinding
     private val sharedViewModel: BooksViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,5 +25,14 @@ class BookReaderFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+    }
 
 }

@@ -146,6 +146,14 @@ dependencies {
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
     implementation 'androidx.hilt:hilt-work:1.0.0'
+
+    // EPUB reader
+    def readium_version = "2.3.0"
+    implementation "org.readium.kotlin-toolkit:readium-shared:$readium_version"
+    implementation "org.readium.kotlin-toolkit:readium-streamer:$readium_version"
+    implementation "org.readium.kotlin-toolkit:readium-navigator:$readium_version"
+    implementation "org.readium.kotlin-toolkit:readium-opds:$readium_version"
+    implementation "org.readium.kotlin-toolkit:readium-lcp:$readium_version"
 }
 
 // Allow references to generated code

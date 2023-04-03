@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-
+// By default, the top-level build file uses the plugins block to define the Gradle dependencies that are common to all modules in the project.
 buildscript {
     // For Android projects that include multiple modules, it might be useful to define certain properties at the project level and share them across all the modules. Having consistent versions between modules can avoid conflicts with behavior.
     ext {
@@ -16,17 +16,21 @@ buildscript {
         firebase_version = "4.3.14"
         work_version = "2.7.1"
     }
+
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
+
     dependencies {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         //classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "com.google.gms:google-services:$firebase_version"
     }
 }
-// By default, the top-level build file uses the plugins block to define the Gradle dependencies that are common to all modules in the project.
+
+
 plugins {
     id 'com.android.application' version '7.4.0' apply false
     id 'com.android.library' version '7.4.0' apply false
