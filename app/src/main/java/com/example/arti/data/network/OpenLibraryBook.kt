@@ -14,6 +14,7 @@ data class OpenLibraryBook(
     val key: String = "",
     val language: List<String> = listOf(),
     val title: String = "",
-    val type: String = ""
+    val type: String = "",
+    val ia: List<String> = listOf()
 )
 

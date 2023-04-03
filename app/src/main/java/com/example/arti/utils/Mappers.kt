@@ -16,7 +16,8 @@ fun List<BooksEntity>.asDomainModel(): List<Book> {
             coverI = it.coverI,
             language = it.language,
             title = it.title,
-            type = it.type
+            type = it.type,
+            ia = it.ia
         )
     }
 }
@@ -32,7 +33,8 @@ fun List<OpenLibraryBook>.asDatabaseModel(): List<BooksEntity> {
             coverI = it.coverI,
             language = it.language,
             title = it.title,
-            type = it.type
+            type = it.type,
+            ia = it.ia[0]
         )
     }
 }

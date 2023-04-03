@@ -23,6 +23,9 @@ data class BooksEntity(
     val title: String,
 
     @ColumnInfo(name = "type")
-    val type: String
+    val type: String,
+
+    @ColumnInfo(name = "ia")
+    val ia: String
 )
 

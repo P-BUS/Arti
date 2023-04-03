@@ -6,5 +6,6 @@ data class Book(
     val key: String = "",
     val language: List<String> = listOf(),
     val title: String = "",
-    val type: String = ""
+    val type: String = "",
+    val ia: String = ""
 )
