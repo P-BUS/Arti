@@ -154,6 +154,9 @@ dependencies {
     implementation "org.readium.kotlin-toolkit:readium-navigator:$readium_version"
     implementation "org.readium.kotlin-toolkit:readium-opds:$readium_version"
     implementation "org.readium.kotlin-toolkit:readium-lcp:$readium_version"
+
+    // Splash screen
+    implementation "androidx.core:core-splashscreen:1.0.1"
 }
 
 // Allow references to generated code
