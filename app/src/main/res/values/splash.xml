@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Arti.AppSplash" parent="Theme.SplashScreen">
+        <!-- Splash screen. -->
+        <item name="android:windowSplashScreenBackground">@color/md_theme_light_primary</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_book_24</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+        <!-- Switch to application Theme. -->
+        <item name="postSplashScreenTheme">@style/Theme.Arti</item>
+    </style>
+</resources>
