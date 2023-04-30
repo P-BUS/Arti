@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         installSplashScreen()
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Retrieve NavController from the NavHostFragment
